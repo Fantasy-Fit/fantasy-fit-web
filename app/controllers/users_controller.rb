@@ -3,8 +3,7 @@ class UsersController < ApplicationController
     before_action :set_user, only: [:show, :destroy]
 
     def index
-        user = User.all
-        render json: user, status: :ok
+        render json: User.all, status: :ok
     end
 
     def create
@@ -22,6 +21,4 @@ class UsersController < ApplicationController
     def set_user
         user = User.find(params[:id])
     end
-
-
 end
