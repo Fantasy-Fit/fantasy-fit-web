@@ -1,5 +1,3 @@
-# require 'jwt'
-
 module JsonWebToken
     extend ActiveSupport::Concern
     SECRET_KEY = Rails.application.secret_key_base
