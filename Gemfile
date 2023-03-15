@@ -51,3 +51,5 @@ end
 
 
 gem "active_model_serializers", "~> 0.10.13"
+
+gem 'byebug', '~> 11.1', '>= 11.1.3'
