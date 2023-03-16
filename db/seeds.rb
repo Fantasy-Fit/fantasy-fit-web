@@ -18,10 +18,10 @@
 
 # print "Seeding Participants..."
 
-# Participant.create(user_id: 1, competition_id: 2)
-# Participant.create(user_id: 2, competition_id: 2)
-# Participant.create(user_id: 3, competition_id: 2)
-# Participant.create(user_id: 4, competition_id: 2)
+Participant.create(user_id: 1, competition_id: 2, username: "chrisli", user_total_points: 180)
+Participant.create(user_id: 2, competition_id: 2, username: "coco", user_total_points: 405)
+Participant.create(user_id: 3, competition_id: 2, username: "dulatK", user_total_points: 1200)
+Participant.create(user_id: 4, competition_id: 2, username: "alexisT", user_total_points: 450)
 
 print "Seeing workouts..."
 
