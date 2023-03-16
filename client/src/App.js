@@ -1,27 +1,29 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
+import Layout from "./components/Layout";
+import RequireAuth from "./pages/auth/RequireAuth";
 import Main from "./components/Main";
 import Authorization from "./pages/auth/Authorization";
 import NewCompetition from "./pages/newcompetition/NewCompetition";
+import Profile from "./pages/account/Profile";
+import TournamentPage from "./pages/tournaments/TournamentPage";
 
 function App() {
-  useEffect(() => {
-    const request = async () => {
-      let req = await fetch('/users')
-      let res = await req.json();
-      if (req.ok) {
-        console.log(res);
-      }
-    }
-    request();
-  }, [])
-
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/authorization" element={<Authorization />} />
-        <Route path="/new-competition" element={<NewCompetition />} />
+        <Route path="/" element={<Layout />}>
+          {/* public routes */}
+          <Route index element={<Main />} />
+          <Route path="auth" element={<Authorization />} />
+
+          {/* protected routes */}
+          <Route element={<RequireAuth />}>
+            <Route path="profile" element={<Profile />} />
+            <Route path="new-competition" element={<NewCompetition />} />
+            <Route path="tournament" element={<TournamentPage />} />
+          </Route>
+        </Route>
       </Routes>
     </div>
   );
