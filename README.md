@@ -1,5 +1,16 @@
 # README
 
+Welcome to Fantasy Fit! 
+
+Instructions:
+```
+rails s
+npm install --prefix client
+npm start --prefix client
+
+```
+
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
