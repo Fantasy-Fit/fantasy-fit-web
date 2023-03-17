@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :participants
   resources :comments
   resources :workouts
-  resources :competitions
+  # resources :competitions, only: [:show]
   resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   post "/auth/login", to: "authentication#login"
+  get "/competition/leaderboard/:id", to: "competitions#leaderboard"
   
 end
