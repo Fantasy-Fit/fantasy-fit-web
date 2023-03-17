@@ -6,6 +6,8 @@ class UsersController < ApplicationController
         render json: User.all, status: :ok
     end
 
+    
+
     def create
         user = User.create!(user_params)
         render json: user, status: :created

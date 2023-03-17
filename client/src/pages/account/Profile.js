@@ -1,20 +1,46 @@
-import React from 'react'
+import { useSelector } from "react-redux";
+import {
+  selectCurrentUser,
+  selectCurrentToken,
+} from "../../store/auth/authSlice";
+import { Link, useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 function Profile() {
-  return (
-    <div className='profile'>
-        <p>This is the Profile</p>
-        <p>Avatar</p>
-        <p>Username</p>
-        <p>Email</p>
-        <p>Notification/Profile Settings</p>
-        <p>Badges / Achievements</p>
-        <p>Current Competitions</p>
-        <p>Past Competitions</p>
-        <p>Recent Workouts</p>
-        <p>Friends & Followers</p>
-    </div>
-  )
+  const user = useSelector(selectCurrentUser);
+  console.log("User from profile:", user);
+
+  const [cookie, removeCookie] = useCookies([]);
+  const navigate = useNavigate();
+
+  const content = (
+    <section className="profile">
+      <img src={user.avatar} alt={user.username} />
+      <h1>{user.username}</h1>
+      <p>{user.email}</p>
+      <p>Notification/Profile Settings</p>
+      <p>Badges / Achievements</p>
+      <p>
+        <Link to="/new-competition">New Competition</Link>
+      </p>
+      <h3>Current Competitions</h3>
+      <p>
+        <Link to="/tournament">Flatiron Tournament</Link>
+      </p>
+      <h3>Past Competitions</h3>
+      <p>Recent Workouts</p>
+      <p>Friends & Followers</p>
+      <button
+        onClick={() => {
+          removeCookie("token");
+          navigate("/");
+        }}
+      >
+        Log out
+      </button>
+    </section>
+  );
+  return content;
 }
 
-export default Profile
+export default Profile;
