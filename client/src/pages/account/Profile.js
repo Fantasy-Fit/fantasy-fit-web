@@ -2,9 +2,11 @@ import { useSelector } from "react-redux";
 import {
   selectCurrentUser,
   selectCurrentToken,
+  logOut,
 } from "../../store/auth/authSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { useDispatch } from "react-redux";
 
 function Profile() {
   const user = useSelector(selectCurrentUser);
@@ -12,6 +14,7 @@ function Profile() {
 
   const [cookie, removeCookie] = useCookies([]);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const content = (
     <section className="profile">
@@ -32,7 +35,9 @@ function Profile() {
       <p>Friends & Followers</p>
       <button
         onClick={() => {
+          dispatch(logOut());
           removeCookie("token");
+          localStorage.clear();
           navigate("/");
         }}
       >

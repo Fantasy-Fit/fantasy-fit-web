@@ -34,6 +34,7 @@ function Login() {
       const userData = await login({ email, password }).unwrap();
       dispatch(setCredentials({ ...userData }));
       setCookie("token", userData.token);
+      localStorage.setItem("user", JSON.stringify(userData.user))
       setEmail("");
       setPassword("");
       navigate("/profile");
