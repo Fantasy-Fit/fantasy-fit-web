@@ -17,7 +17,7 @@ function Login() {
   const [login, { isLoading }] = useLoginMutation();
   const dispatch = useDispatch();
 
-  const [cookie, setCookie] = useCookies(null);
+  const [, setCookie] = useCookies(null);
 
   useEffect(() => {
     userRef.current.focus();

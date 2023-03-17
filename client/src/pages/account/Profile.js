@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import {
   selectCurrentUser,
-  selectCurrentToken,
+  // selectCurrentToken,
   logOut,
 } from "../../store/auth/authSlice";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,11 +10,11 @@ import { useDispatch } from "react-redux";
 
 function Profile() {
   const user = useSelector(selectCurrentUser);
-  console.log("User from profile:", user);
-
-  const [cookie, removeCookie] = useCookies([]);
+  const [, removeCookie] = useCookies([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  // console.log("User from profile:", user, cookie);
 
   const content = (
     <section className="profile">
