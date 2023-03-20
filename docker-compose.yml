@@ -7,6 +7,7 @@ services:
       POSTGRES_PASSWORD: password
     working_dir: /api
   api:
+    image: rails-api-backend
     build: api
     command: bash -c "bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
@@ -18,7 +19,7 @@ services:
       - db
   client:
     build: client
-    image: node:18-alpine
+    image: react-client-frontend
     command: sh -c "npm install --prefix client && npm start --prefix client"
     ports:
       - "4000:4000"
