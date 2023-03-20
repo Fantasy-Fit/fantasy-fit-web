@@ -9,6 +9,8 @@
 api/.bundle
 
 # Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
 api/log/*
 api/tmp/*
 !/api/log/.keep
