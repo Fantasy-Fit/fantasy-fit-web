@@ -9,9 +9,10 @@ install docker (https://docs.docker.com/get-docker/) then run following commands
 docker compose up --build
 ```
 
-For first-time installation - creating database
+For first-time installation - creating database, migrations and seeds.
+In a new terminal run the following command:
 ```
-docker compose run rails-api rails db:create db:migrate db:seed
+docker compose run api rails db:create db:migrate db:seed
 ```
 
 Verify application works

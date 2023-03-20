@@ -10,7 +10,7 @@ COPY . .
 # install app dependencies
 COPY package.json ./client/package.json
 COPY package-lock.json ./client/package-lock.json
-RUN npm install --preflix react-app
+RUN npm install --preflix client
 
 # add app
 COPY . ./

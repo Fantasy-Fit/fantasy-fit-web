@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_PASSWORD: password
     working_dir: /api
-  rails-api:
+  api:
     build: api
     command: bash -c "bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
@@ -16,7 +16,7 @@ services:
     working_dir: /api
     depends_on:
       - db
-  react-app:
+  client:
     build: client
     image: node:18-alpine
     command: sh -c "npm install --prefix client && npm start --prefix client"
