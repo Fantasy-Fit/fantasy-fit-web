@@ -1,0 +1,6 @@
+.git
+.dockerignore
+.byebug_history
+.env
+api/Gemfile.lock
+client/node_modules
