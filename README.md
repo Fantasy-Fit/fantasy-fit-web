@@ -28,3 +28,14 @@ For regular Rails command (i.e. rails console, generate, etc), prefix "docker co
 docker compose run api rails c
 docker compose run api rails g resource
 ```
+
+To terminate the Docker processes:
+```
+docker compose down
+```
+
+To remove all stopped containers networks, build cache
+```
+docker system prune --all
+```
+
