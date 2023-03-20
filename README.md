@@ -21,3 +21,10 @@ For frontend:
 
 For backend:
     http://localhost:3000/users
+
+For regular Rails command (i.e. rails console, generate, etc), prefix "docker compose run api" in front:
+
+```
+docker compose run api rails c
+docker compose run api rails g resource
+```
