@@ -5,7 +5,6 @@ class ApplicationController < ActionController::API
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
 
     before_action :authenticate_request
-    before_action :cors_set_access_control_headers
 
     private
 
