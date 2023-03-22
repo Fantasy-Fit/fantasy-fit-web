@@ -6,6 +6,7 @@ import Authorization from "./pages/auth/Authorization";
 import NewCompetition from "./pages/newcompetition/NewCompetition";
 import Profile from "./pages/account/Profile";
 import TournamentPage from "./pages/tournaments/TournamentPage";
+import "./App.css"
 
 function App() {
   return (

@@ -1,23 +1,21 @@
 import React from "react";
+import "./Signup.css";
 
 function Signup() {
   return (
-    <div className="signup">
-      <p>I am the Signup</p>
+    <div className="signupScreen">
       <form>
-        <label>Username</label>
-        <input />
-        <br></br>
-        <label>Email</label>
-        <input />
-        <br></br>
-        <label>Password</label>
-        <input />
-        <br></br>
-        <label>Password Confirmation</label>
-        <input />
-        <br></br>
-        <button>Signup</button>
+        <h1>Sign Up</h1>
+        <input
+        placeholder="email"
+        type="email" />
+        <input
+        placeholder="password"
+        type="password" />
+        <input
+        placeholder="password confirmation"
+        type="password" />
+        <button type="submit">Sign Up</button>
       </form>
     </div>
   );
