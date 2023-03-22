@@ -11,7 +11,10 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   post "/auth/login", to: "authentication#login"
+  post "/auth/signup", to: "authentication#signup"
+  
   get "/competition/leaderboard/:id", to: "competitions#leaderboard"
   match '/auth/login', controller: 'authentication', action: 'cors_preflight_check', via: [:options]
+  match '/auth/signup', controller: 'authentication', action: 'cors_preflight_check', via: [:options]
   
 end

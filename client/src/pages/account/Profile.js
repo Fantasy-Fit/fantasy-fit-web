@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 
 function Profile() {
   const user = useSelector(selectCurrentUser);
-  const [, removeCookie] = useCookies([]);
+  const [, removeCookie] = useCookies(["token"]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

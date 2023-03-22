@@ -4,7 +4,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState: {
     user: JSON.parse(localStorage.getItem("user")) || null,
-    token: document.cookie.slice(6) || null
+    token: document.cookie.slice(6) || null,
   },
   reducers: {
     setCredentials: (state, action) => {

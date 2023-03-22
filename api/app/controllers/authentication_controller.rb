@@ -14,6 +14,17 @@ class AuthenticationController < ApplicationController
         end
     end
 
+    def signup
+        byebug
+        user = User.create!(user_params)
+        if user
+            token = jwt_encode(user_id: user.id)
+            render json: {token: token, user: user}, status: :created
+        else
+            render json: {error: "invalid"}, status: :unprocessable_entity
+        end
+    end
+
 
     def cors_preflight_check
         if request.method == 'OPTIONS'
@@ -30,5 +41,11 @@ class AuthenticationController < ApplicationController
         response.headers['Access-Control-Allow-Methods'] = 'POST, GET, PUT, PATCH, DELETE, OPTIONS'
         response.headers['Access-Control-Allow-Headers'] = 'Origin, Content-Type, Accept, Authorization, Token, Auth-Token, Email, X-User-Token, X-User-Email'
         response.headers['Access-Control-Max-Age'] = '1728000'
+    end
+
+    private 
+
+    def user_params
+        params.permit(:username, :email, :password)
     end
 end
