@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::API
     include ActionController::Cookies
     include JsonWebToken
+    rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+    rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
 
     before_action :authenticate_request
 
@@ -13,10 +15,7 @@ class ApplicationController < ActionController::API
         current_user = User.find(decoded[:user_id])
     end
 
-    rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-    rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
 
-    private
 
     def record_not_found(error)
         render json: { error: "#{error.model} not found"}, status: :not_found

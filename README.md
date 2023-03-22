@@ -2,34 +2,40 @@
 
 Welcome to Fantasy Fit! 
 
-Instructions:
+Setup Instructions:
+
+install docker (https://docs.docker.com/get-docker/) then run following commands
 ```
-rails s
-npm install --prefix client
-npm start --prefix client
-
+docker compose up --build
 ```
 
+For first-time installation - creating database, migrations and seeds.
+In a new terminal run the following command:
+```
+docker compose run api rails db:create db:migrate db:seed
+```
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Verify application works
+For frontend:
+    http://localhost:4000
 
-Things you may want to cover:
+For backend:
+    http://localhost:3000/users
 
-* Ruby version
+For regular Rails command (i.e. rails console, generate, etc), prefix "docker compose run api" in front:
 
-* System dependencies
+```
+docker compose run api rails c
+docker compose run api rails g resource
+```
 
-* Configuration
+To terminate the Docker processes:
+```
+docker compose down
+```
 
-* Database creation
+To remove all stopped containers networks, build cache
+```
+docker system prune --all
+```
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

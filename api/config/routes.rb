@@ -12,5 +12,6 @@ Rails.application.routes.draw do
 
   post "/auth/login", to: "authentication#login"
   get "/competition/leaderboard/:id", to: "competitions#leaderboard"
+  match '/auth/login', controller: 'authentication', action: 'cors_preflight_check', via: [:options]
   
 end
