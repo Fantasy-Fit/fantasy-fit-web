@@ -5,9 +5,9 @@ import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../../store/auth/authSlice";
 import { useLoginMutation } from "../../store/auth/authApiSlice";
-import './Login.css';
-import Signup from "./Signup";
 
+import "./Login.css";
+import Signup from "./Signup";
 
 function Login() {
   const userRef = useRef();
@@ -22,7 +22,7 @@ function Login() {
 
   const [, setCookie] = useCookies(null);
 
-  const [signIn, setSignIn] = useState(false)
+  const [signIn, setSignIn] = useState(false);
 
   useEffect(() => {
     userRef.current.focus();
@@ -39,7 +39,7 @@ function Login() {
       const userData = await login({ email, password }).unwrap();
       dispatch(setCredentials({ ...userData }));
       setCookie("token", userData.token);
-      localStorage.setItem("user", JSON.stringify(userData.user))
+      localStorage.setItem("user", JSON.stringify(userData.user));
       setEmail("");
       setPassword("");
       navigate("/profile");
@@ -48,10 +48,10 @@ function Login() {
         setErrMsg("No Server Response");
       } else if (err.response?.status === 400) {
         setErrMsg("Missing Email or Password");
-      } else if (err.response?.status === 401) {
+      } else if (err.response?.status === 'Unauthorized') {
         setErrMsg("Unauthorized");
       } else {
-        setErrMsg("Login Filed");
+        setErrMsg("Login Failed");
       }
       errRef.current.focus();
     }
@@ -66,13 +66,12 @@ function Login() {
   ) : (
     <div className="loginScreen">
       <div className="loginScreen__background">
-        <img 
+        <img
           className="loginScreen__logo"
           src="https://www.kadencewp.com/wp-content/uploads/2020/10/alogo-1.png"
           alt="logo"
         />
-        <button onClick={() => setSignIn(true)}
-        className="loginScreen__button">
+        <button onClick={() => setSignIn(true)} className="loginScreen__button">
           Sign Up
         </button>
         <div className="loginScreen__gradient" />
@@ -82,39 +81,43 @@ function Login() {
           <Signup />
         ) : (
           <div className="loginScreen__body">
-          <p
-            ref={errRef}
-            className={errMsg ? "errmsg" : "offscreen"}
-            aria-live="assertive"
-          >
-            {errMsg}
-          </p>
-          <h1>Login</h1>
-          <form onSubmit={handleSubmit}>
-            <input
-              placeholder="Email Address"
-              type="email"
-              id="email"
-              ref={userRef}
-              value={email}
-              onChange={handleUserInput}
-              autoComplete="off"
-              required
-            />
+            <p
+              ref={errRef}
+              className={errMsg ? "errmsg" : "offscreen"}
+              aria-live="assertive"
+            >
+              {errMsg}
+            </p>
+            <h1>Login</h1>
+            <form onSubmit={handleSubmit}>
               <input
-              type="password"
-              id="password"
-              onChange={handlePasswordInput}
-              value={password}
-              required
-            />
-            <button type="submit">Log In</button>
-           <h4>
-             <span className="loginScreen__gray">New to FitLeague?</span>
-             <span on clclassName="loginScreen__link">  Sign Up Now.</span>
-           </h4>
-          </form>
-        </div>
+                placeholder="Email Address"
+                type="email"
+                id="email"
+                ref={userRef}
+                value={email}
+                onChange={handleUserInput}
+                autoComplete="off"
+                required
+              />
+              <input
+                placeholder="Password"
+                type="password"
+                id="password"
+                onChange={handlePasswordInput}
+                value={password}
+                required
+              />
+              <button type="submit">Log In</button>
+              <h4>
+                <span className="loginScreen__gray">New to FitLeague?</span>
+                <span on="true" className="loginScreen__link">
+                  {" "}
+                  Sign Up Now.
+                </span>
+              </h4>
+            </form>
+          </div>
         )}
       </div>
     </div>
