@@ -5,6 +5,9 @@ import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../../store/auth/authSlice";
 import { useLoginMutation } from "../../store/auth/authApiSlice";
+import './Login.css';
+import Signup from "./Signup";
+
 
 function Login() {
   const userRef = useRef();
@@ -18,6 +21,8 @@ function Login() {
   const dispatch = useDispatch();
 
   const [, setCookie] = useCookies(null);
+
+  const [signIn, setSignIn] = useState(false)
 
   useEffect(() => {
     userRef.current.focus();
@@ -59,38 +64,60 @@ function Login() {
   const content = isLoading ? (
     <h1>Loading...</h1>
   ) : (
-    <section className="login">
-      <p
-        ref={errRef}
-        className={errMsg ? "errmsg" : "offscreen"}
-        aria-live="assertive"
-      >
-        {errMsg}
-      </p>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Email:</label>
-        <input
-          type="text"
-          id="email"
-          ref={userRef}
-          value={email}
-          onChange={handleUserInput}
-          autoComplete="off"
-          required
+    <div className="loginScreen">
+      <div className="loginScreen__background">
+        <img 
+          className="loginScreen__logo"
+          src="https://www.kadencewp.com/wp-content/uploads/2020/10/alogo-1.png"
+          alt="logo"
         />
-
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          onChange={handlePasswordInput}
-          value={password}
-          required
-        />
-        <button>Sign In</button>
-      </form>
-    </section>
+        <button onClick={() => setSignIn(true)}
+        className="loginScreen__button">
+          Sign Up
+        </button>
+        <div className="loginScreen__gradient" />
+      </div>
+      <div className="loginScreen__body">
+        {signIn ? (
+          <Signup />
+        ) : (
+          <div className="loginScreen__body">
+          <p
+            ref={errRef}
+            className={errMsg ? "errmsg" : "offscreen"}
+            aria-live="assertive"
+          >
+            {errMsg}
+          </p>
+          <h1>Login</h1>
+          <form onSubmit={handleSubmit}>
+            <input
+              placeholder="Email Address"
+              type="email"
+              id="email"
+              ref={userRef}
+              value={email}
+              onChange={handleUserInput}
+              autoComplete="off"
+              required
+            />
+              <input
+              type="password"
+              id="password"
+              onChange={handlePasswordInput}
+              value={password}
+              required
+            />
+            <button type="submit">Log In</button>
+           <h4>
+             <span className="loginScreen__gray">New to FitLeague?</span>
+             <span on clclassName="loginScreen__link">  Sign Up Now.</span>
+           </h4>
+          </form>
+        </div>
+        )}
+      </div>
+    </div>
   );
 
   return content;
