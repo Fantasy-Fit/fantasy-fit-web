@@ -15,6 +15,13 @@ In a new terminal run the following command:
 docker compose run api rails db:create db:migrate db:seed
 ```
 
+For frontend
+```
+cd client
+npm install
+npm run dev
+```
+
 Verify application works
 For frontend:
     http://localhost:4000
