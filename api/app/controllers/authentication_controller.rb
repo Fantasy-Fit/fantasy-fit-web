@@ -4,7 +4,6 @@ class AuthenticationController < ApplicationController
     before_action :cors_set_access_control_headers
 
     def login 
-        # byebug
         user = User.find_by_email(params[:email])
         if user&.authenticate(params[:password])
             token = jwt_encode(user_id: user.id)
@@ -14,8 +13,18 @@ class AuthenticationController < ApplicationController
         end
     end
 
+    def logout
+        token = request.headers["Authorization"]
+        user_token = BlacklistedToken.find_by(token: token)
+        if user_token && user_token.user == current_user
+            user_token.update_attribute(:expires_at, Time.current)
+            render json: { message: "Logged out successfully"}, status: :ok
+        else
+            render json: { error: "Invalid token", status: :unprocessable_entity}
+        end
+    end
+
     def signup
-        byebug
         user = User.create!(user_params)
         if user
             token = jwt_encode(user_id: user.id)

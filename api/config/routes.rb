@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   post "/auth/login", to: "authentication#login"
   post "/auth/signup", to: "authentication#signup"
+  delete "/logout", to: "authentication#logout"
   
   get "/competition/leaderboard/:id", to: "competitions#leaderboard"
   match '/auth/login', controller: 'authentication', action: 'cors_preflight_check', via: [:options]
