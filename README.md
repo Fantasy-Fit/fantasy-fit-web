@@ -36,6 +36,13 @@ docker compose run api rails c
 docker compose run api rails g resource
 ```
 
+For debugging purposes and to run byebug with Docker, after building the containers, run:
+```
+docker compose up -d
+docker container ls
+docker attach [container_id obtained from prev cmd]
+```
+
 To terminate the Docker processes:
 ```
 docker compose down
