@@ -1,8 +1,8 @@
-FROM node:16-alpine 
+FROM node
 
 WORKDIR /client
 # # Copy app files
-COPY . .
+COPY package.json .
 
 # add `/app/node_modules/.bin` to $PATH
 # ENV PATH /client/node_modules/.bin:$PATH
@@ -18,4 +18,4 @@ ENV NODE_ENV development
 EXPOSE 4000
 
 # start app
-CMD ["npm", "install"] 
+CMD ["npm", "run", "dev"] 

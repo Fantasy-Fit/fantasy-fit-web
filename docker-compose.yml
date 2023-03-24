@@ -13,20 +13,20 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - .:/fit-league/api
+      - ./api:/api
     ports:
       - "3000:3000"
     working_dir: /api
     depends_on:
       - db
-  # client:
-  #   build: client
-  #   image: react-client-frontend
-  #   command: sh -c "npm install --prefix client && npm start --prefix client"
-  #   ports:
-  #     - "4000:4000"
-  #   working_dir: /client
-  #   volumes:
-  #     - ./:/client
-  #   environment:
-  #     POSTGRES_PASSWORD: password
+  client:
+    build: client
+    image: react-client-frontend
+    command: sh -c "npm install && npm run dev"
+    ports:
+      - "4000:4000"
+    working_dir: /client
+    volumes:
+      - ./client:/client
+    environment:
+      POSTGRES_PASSWORD: password
