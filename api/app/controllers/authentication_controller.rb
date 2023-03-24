@@ -45,7 +45,7 @@ class AuthenticationController < ApplicationController
     protected
       
     def cors_set_access_control_headers
-        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4000'
+        response.headers['Access-Control-Allow-Origin'] = check_origin
         response.headers['Access-Control-Allow-Credentials'] = "true"
         response.headers['Access-Control-Allow-Methods'] = 'POST, GET, PUT, PATCH, DELETE, OPTIONS'
         response.headers['Access-Control-Allow-Headers'] = 'Origin, Content-Type, Accept, Authorization, Token, Auth-Token, Email, X-User-Token, X-User-Email'
@@ -56,5 +56,20 @@ class AuthenticationController < ApplicationController
 
     def user_params
         params.permit(:username, :email, :password)
+    end
+
+    def check_origin
+        permitted_origins = Set[
+            "http://localhost:4000", 
+            "http://127.0.0.1:4000"
+        ]
+
+        origin = request.origin
+
+        if permitted_origins.include?(origin)
+            origin
+        else
+            render json: { error: "Origin not permitted" }
+        end
     end
 end
