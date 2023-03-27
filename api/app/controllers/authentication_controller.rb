@@ -14,6 +14,7 @@ class AuthenticationController < ApplicationController
     end
 
     def logout
+        # byebug
         token = request.headers["Authorization"]
         user_token = BlacklistedToken.find_by(token: token)
         if user_token && user_token.user == current_user

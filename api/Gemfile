@@ -13,7 +13,7 @@ gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
 
 # Use Json Web Token (JWT) for token based authentication
-gem "jwt"
+gem "jwt", "~> 2.2"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
