@@ -14,16 +14,21 @@ class AuthenticationController < ApplicationController
     end
 
     def logout
-        # byebug
         token = request.headers["Authorization"]
-        user_token = BlacklistedToken.find_by(token: token)
-        if user_token && user_token.user == current_user
-            user_token.update_attribute(:expires_at, Time.current)
-            render json: { message: "Logged out successfully"}, status: :ok
-        else
-            render json: { error: "Invalid token", status: :unprocessable_entity}
+        token = token.split(" ").last if token.present?
+        begin
+            decoded = jwt_decode(token)
+            if decoded.is_a?(Hash)
+                BlacklistedToken.create!(token: token, user_id: decoded[:user_id], expires_at: Time.current)
+                render json: { message: "Logged out successfully"}, status: :ok
+            else
+                render json: {error: "Invalid token"}, status: :unprocessable_entity
+            end
+        rescue JWT::DecodeError, ActiveRecord::RecordNotFound
+            render json: {error: "Invalid token"}, status: :unprocessable_entity
         end
     end
+    
 
     def signup
         user = User.create!(user_params)
