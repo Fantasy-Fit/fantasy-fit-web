@@ -3,7 +3,7 @@ class ApplicationController < ActionController::API
     include JsonWebToken
     rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
-
+    @@current_user = nil
 
     before_action :authenticate_request
 
