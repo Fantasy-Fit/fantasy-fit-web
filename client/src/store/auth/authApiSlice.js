@@ -16,7 +16,13 @@ export const authApiSlice = apiSlice.injectEndpoints({
         body: { ...credentials },
       }),
     }),
+    logout: builder.mutation({
+      query: () => ({
+        url: "http://localhost:3000/logout",
+        method: "DELETE",
+      })
+    })
   }),
 });
 
-export const { useLoginMutation, useSignupMutation } = authApiSlice;
+export const { useLoginMutation, useSignupMutation, useLogoutMutation } = authApiSlice;

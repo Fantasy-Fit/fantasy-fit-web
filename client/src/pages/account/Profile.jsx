@@ -8,15 +8,18 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
+import { useLogoutMutation } from "../../store/auth/authApiSlice";
 
 
 function Profile() {
   const user = useSelector(selectCurrentUser);
   const workouts = useSelector(selectUserWorkouts);
   const competitions = useSelector(selectUserCompetitions);
+  const token = user.token;
   const [, removeCookie] = useCookies(["token"]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [logout] = useLogoutMutation();
 
   const mapComps = competitions?.map(comp => {
     return (
@@ -35,6 +38,19 @@ function Profile() {
       </li>
     )
   })
+
+
+  // console.log("User from profile:", user, cookie);
+  async function handleLogout(){
+      try{
+        await logout({ headers: { Authorization: `Bearer  ${token}`}})
+        removeCookie("token")
+        localStorage.clear();
+        navigate("/")
+      } catch(error){
+        console.error("Error logging out", error)
+      }
+  }
 
   const content = (
     <section className="profile">
@@ -55,13 +71,7 @@ function Profile() {
       <p>Recent Workouts</p>
       {mapWorkouts}
       <p>Friends & Followers</p>
-      <button
-        onClick={() => {
-          dispatch(logOut());
-          removeCookie("token");
-          localStorage.clear();
-          navigate("/");
-        }}
+      <button onClick={handleLogout}
       >
         Log out
       </button>
