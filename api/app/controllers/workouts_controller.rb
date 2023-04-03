@@ -1,7 +1,8 @@
 class WorkoutsController < ApplicationController
     
     def index
-        render json: Workout.all
+        workouts = Workout.where(user: @current_user)
+        render json: workouts.all
     end
 
     def create
