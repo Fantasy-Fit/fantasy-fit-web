@@ -13,11 +13,6 @@ class UsersController < ApplicationController
         render json: user, status: :created
     end
 
-    def as_json(options = {})
-        super(options.merge(except: [:password_digest, :created_at, :updated_at]))
-    end
-
-
     private 
 
     def user_params
