@@ -17,5 +17,6 @@ Rails.application.routes.draw do
   get "/competition/leaderboard/:id", to: "competitions#leaderboard"
   match '/auth/login', controller: 'authentication', action: 'cors_preflight_check', via: [:options]
   match '/auth/signup', controller: 'authentication', action: 'cors_preflight_check', via: [:options]
+  match '/logout', controller: 'authentication', action: 'cors_preflight_check', via: [:options]
   
 end
