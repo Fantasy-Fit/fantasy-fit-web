@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useCookies } from "react-cookie";
 
 import { useDispatch } from "react-redux";
-import { setCredentials } from "../../store/auth/authSlice";
+// import { setCredentials } from "../../store/auth/userSlice";
 import { useSignupMutation } from "../../store/auth/authApiSlice";
 
 import "./Signup.css";

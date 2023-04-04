@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import {
   selectCurrentToken,
   selectCurrentUser,
-} from "../../store/auth/authSlice";
+} from "../../store/auth/userSlice";
 
 function RequireAuth() {
   const token = useSelector(selectCurrentToken);

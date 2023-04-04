@@ -1,21 +1,44 @@
 import { useSelector } from "react-redux";
 import {
   selectCurrentUser,
-  // selectCurrentToken,
   logOut,
-} from "../../store/auth/authSlice";
+  selectUserWorkouts,
+  selectUserCompetitions,
+} from "../../store/auth/userSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import { useLogoutMutation } from "../../store/auth/authApiSlice";
 
+
 function Profile() {
   const user = useSelector(selectCurrentUser);
+  const workouts = useSelector(selectUserWorkouts);
+  const competitions = useSelector(selectUserCompetitions);
   const token = user.token;
   const [, removeCookie] = useCookies(["token"]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [logout] = useLogoutMutation();
+
+  const mapComps = competitions?.map(comp => {
+    return (
+      <li key={comp.identifier}>{comp.name}</li>
+    )
+  })
+
+  const mapWorkouts = workouts?.map(workout => {
+    return (
+      <li key={workout.id}>
+        {workout.id}.
+        {workout.activity} -
+        {workout.duration}mins,
+        {workout.calories}cals,
+        {workout.points}pts
+      </li>
+    )
+  })
+
 
   // console.log("User from profile:", user, cookie);
   async function handleLogout(){
@@ -28,6 +51,7 @@ function Profile() {
         console.error("Error logging out", error)
       }
   }
+
   const content = (
     <section className="profile">
       <img src={user.avatar} alt={user.username} />
@@ -39,11 +63,13 @@ function Profile() {
         <Link to="/new-competition">New Competition</Link>
       </p>
       <h3>Current Competitions</h3>
+      {mapComps}
       <p>
         <Link to="/tournament">Flatiron Tournament</Link>
       </p>
       <h3>Past Competitions</h3>
       <p>Recent Workouts</p>
+      {mapWorkouts}
       <p>Friends & Followers</p>
       <button onClick={handleLogout}
       >

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
 import { useDispatch } from "react-redux";
-import { setCredentials } from "../../store/auth/authSlice";
+import { setUserInfo } from "../../store/auth/userSlice";
 import { useLoginMutation } from "../../store/auth/authApiSlice";
 
 import "./Login.css";
@@ -37,7 +37,8 @@ function Login() {
 
     try {
       const userData = await login({ email, password }).unwrap();
-      dispatch(setCredentials({ ...userData }));
+      console.log(userData)
+      dispatch(setUserInfo({ ...userData }));
       setCookie("token", userData.token);
       localStorage.setItem("user", JSON.stringify(userData.user));
       setEmail("");
