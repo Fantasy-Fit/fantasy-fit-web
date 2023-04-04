@@ -13,7 +13,6 @@ class UsersController < ApplicationController
         render json: user, status: :created
     end
 
-
     private 
 
     def user_params
