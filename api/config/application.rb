@@ -14,6 +14,7 @@ require "action_view/railtie"
 require "action_cable/engine"
 require "byebug"
 require "jwt"
+require "securerandom"
 # require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
