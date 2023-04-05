@@ -2,8 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentUser } from "../../store/auth/userSlice";
 import { useAddWorkoutMutation } from "../../store/game/workoutApiSlice";
-import { useGetLeaderboardQuery } from "../../store/game/leaderboardApiSlice";
-import { setLeaderboard } from "../../store/game/leaderboardSlice";
+import { selectLeaderboard, setLeaderboard } from "../../store/game/leaderboardSlice";
 
 const activities = ["Run", "Cycle", "Indoor Cycle", "Mountain Biking", "Swimming",
   "Open Water Swimming", "Walking", "Strength Training", "Cardio", "HIIT", "Hiking", "Skiing", "Snowboarding", "Ice Skating", "Treadmill", "Track Run", "Rowing", "Canoe",
@@ -31,8 +30,9 @@ const activities = ["Run", "Cycle", "Indoor Cycle", "Mountain Biking", "Swimming
 
 function Record() {
   const dispatch = useDispatch();
-
   const user = useSelector(selectCurrentUser);
+  const leaderboard = useSelector(selectLeaderboard);
+  console.log(leaderboard)
   const [message, setMessage] = useState("");
   const [workoutData, setWorkoutData] = useState({
     activity: "", duration: 0, intensity: "", date: ""
@@ -51,10 +51,10 @@ function Record() {
         user_id: user.id,
         competition_id: 1 // will need to update this after client side routing is done for tournament page
       })
-      setMessage("Workout successfully added!")
-      // const { data: leaderboard } = useGetLeaderboardQuery();
-      // dispatch(setLeaderboard(leaderboard))
 
+      setMessage("Workout successfully added!")
+      const updatedBoard = req.data.leaderboard
+      dispatch(setLeaderboard([...updatedBoard]))
       console.log(req.data)
     } catch (error) {
       console.error(error.message);

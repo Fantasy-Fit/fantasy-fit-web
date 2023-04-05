@@ -5,7 +5,7 @@ class ApplicationController < ActionController::API
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
     @@current_user = nil
 
-    before_action :cors_set_access_control_headers, :authenticate_request
+    before_action :cors_set_access_control_headers
     # skip_before_action :authenticate_request, only: [:cors_preflight_check]
 
     def cors_preflight_check
