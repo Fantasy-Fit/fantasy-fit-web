@@ -1,7 +1,4 @@
 class UsersController < ApplicationController
-    skip_before_action :authenticate_request, only: [:index, :create]
-    # before_action :set_user, only: [:show, :destroy]
-    before_action :cors_set_access_control_headers
 
     def index
         render json: User.all, status: :ok

@@ -1,21 +1,27 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useGetLeaderboardQuery } from "../../store/game/leaderboardApiSlice";
-import { setLeaderboard } from '../../store/game/leaderboardSlice';
-
+import { setLeaderboard, selectLeaderboard } from '../../store/game/leaderboardSlice';
 
 function Leaderboard() {
   const dispatch = useDispatch();
-  const competitionID = 1 // change to competition ID 
+  const competitionID = 1 // change to dynamic competition ID with nested routing (useParams)
   const { data: leaderboard, isLoading } = useGetLeaderboardQuery(competitionID);
+  const leaders = useSelector(selectLeaderboard)
+  console.log(leaders)
 
   useEffect(() => {
     if (isLoading) {
       return
     } else {
-      dispatch(setLeaderboard(leaderboard))
+      dispatch(setLeaderboard([...leaderboard]))
     }
   }, [leaderboard])
+
+  // useEffect(() => {
+  //   dispatch(setLeaderboard([...leaders]))
+  // }, [leaders])
+
   const mapLeaderboard = leaderboard?.map((position, index) => {
     return (<tr key={position.id}>
       <td>{index + 1}</td>
@@ -23,7 +29,6 @@ function Leaderboard() {
       <td>{position["user_total_points"]}</td>
     </tr>)
   })
-  console.log(useGetLeaderboardQuery)
 
   return (
     <div>

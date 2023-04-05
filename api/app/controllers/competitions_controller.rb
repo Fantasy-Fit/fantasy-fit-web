@@ -1,5 +1,4 @@
 class CompetitionsController < ApplicationController
-    before_action :cors_set_access_control_headers
 
     def leaderboard
         competition = Competition.find(params[:id])
