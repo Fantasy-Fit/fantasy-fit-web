@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :participants
   resources :comments
   resources :workouts, only: [:index, :show]
-  resources :competitions
+  resources :competitions, only: [:index, :show, :create]
   resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -15,9 +15,12 @@ Rails.application.routes.draw do
   delete "/logout", to: "authentication#logout"
   
   get "/competition/leaderboard/:id", to: "competitions#leaderboard"
-  match '/auth/login', controller: 'authentication', action: 'cors_preflight_check', via: [:options]
-  match '/auth/signup', controller: 'authentication', action: 'cors_preflight_check', via: [:options]
-  match '/logout', controller: 'authentication', action: 'cors_preflight_check', via: [:options]
-  match '/users', controller: 'authentication', action: 'cors_preflight_check', via: [:options]
+
+  # match '/auth/login', controller: 'application', action: 'cors_preflight_check', via: [:options]
+  # match '/auth/signup', controller: 'application', action: 'cors_preflight_check', via: [:options]
+  # match '/logout', controller: 'application', action: 'cors_preflight_check', via: [:options]
+  # match '/users', controller: 'application', action: 'cors_preflight_check', via: [:options]
+
+  match '/auth/login' || '/auth/signup' || '/logout' || '/users', controller: 'application', action: 'cors_preflight_check', via: [:options]
   
 end
