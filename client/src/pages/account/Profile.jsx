@@ -22,34 +22,36 @@ function Profile() {
   const dispatch = useDispatch();
   const [logout] = useLogoutMutation();
 
-  const mapComps = competitions?.map(comp => {
-    return (
-      <li key={comp.identifier}>{comp.name}</li>
-    )
-  })
 
-  const mapWorkouts = workouts?.map(workout => {
+  const mapComps = competitions?.map((comp) => {
+    return (
+      <p key={comp.identifier}>
+        <Link to={`/tournament/${comp.id}`} state={comp}>
+          {comp.name}
+        </Link>
+      </p>
+    );
+  });
+
+  const mapWorkouts = workouts?.map((workout) => {
     return (
       <li key={workout.id}>
-        {workout.id}.
-        {workout.activity} -
-        {workout.duration}mins,
+        {workout.id}.{workout.activity} -{workout.duration}mins,
         {workout.calories}cals,
         {workout.points}pts
       </li>
-    )
-  })
-
+    );
+  });
 
   // console.log("User from profile:", user, cookie);
   async function handleLogout() {
     try {
-      await logout({ headers: { Authorization: `Bearer  ${token}` } })
-      removeCookie("token")
+      await logout({ headers: { Authorization: `Bearer  ${token}` } });
+      removeCookie("token");
       localStorage.clear();
-      navigate("/")
+      navigate("/");
     } catch (error) {
-      console.error("Error logging out", error)
+      console.error("Error logging out", error);
     }
   }
 
@@ -65,17 +67,11 @@ function Profile() {
       </p>
       <h3>Current Competitions</h3>
       {mapComps}
-      <p>
-        <Link to="/tournament">Flatiron Tournament</Link>
-      </p>
       <h3>Past Competitions</h3>
       <p>Recent Workouts</p>
       {mapWorkouts}
       <p>Friends & Followers</p>
-      <button onClick={handleLogout}
-      >
-        Log out
-      </button>
+      <button onClick={handleLogout}>Log out</button>
     </section>
   );
   return content;

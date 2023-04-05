@@ -6,7 +6,7 @@ class ApplicationController < ActionController::API
     @@current_user = nil
 
     before_action :cors_set_access_control_headers, :authenticate_request
-    # skip_before_action :authenticate_request, only: [:cors_preflight_check]
+    skip_before_action :authenticate_request, only: [:cors_preflight_check]
 
     def cors_preflight_check
         if request.method == 'OPTIONS'

@@ -6,7 +6,7 @@ import Authorization from "./pages/auth/Authorization";
 import NewCompetition from "./pages/newcompetition/NewCompetition";
 import Profile from "./pages/account/Profile";
 import TournamentPage from "./pages/tournaments/TournamentPage";
-import "./App.css"
+import "./App.css";
 
 function App() {
   return (
@@ -20,8 +20,8 @@ function App() {
           {/* protected routes */}
           <Route element={<RequireAuth />}>
             <Route path="profile" element={<Profile />} />
+            <Route path="tournament/:id" element={<TournamentPage />} />
             <Route path="new-competition" element={<NewCompetition />} />
-            <Route path="tournament" element={<TournamentPage />} />
           </Route>
         </Route>
       </Routes>
