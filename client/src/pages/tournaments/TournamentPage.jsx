@@ -6,7 +6,7 @@ import Record from "./Record";
 function TournamentPage() {
   return (
     <div className="tournament-page">
-      <p>Tournament Page</p>
+      <h1>Tournament Page</h1>
       <Feed />
       <Leaderboard />
       <Record />

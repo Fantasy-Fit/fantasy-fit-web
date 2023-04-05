@@ -4,8 +4,7 @@ import Posts from "./Posts";
 function Feed() {
   return (
     <div className="feed">
-      <p>I am the Feed</p>
-      <p>Posts</p>
+      <h2>Competition Feed</h2>
       <Posts />
       <p>Notifications (new participant update/new workout)</p>
       <p>Updates</p>
