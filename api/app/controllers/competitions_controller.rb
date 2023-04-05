@@ -19,7 +19,7 @@ class CompetitionsController < ApplicationController
     private
 
     def comp_params
-        params.permit(:name, :public)
+        params.permit(:name, :public, :participants)
     end
 
     def generate_identifier

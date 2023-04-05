@@ -1,28 +1,57 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useGetParticipantsQuery } from "../../store/game/participantsApiSlice";
+import { participantsApiSlice, useGetParticipantsQuery } from "../../store/game/participantsApiSlice";
+import { useCreateCompetitionMutation } from "../../store/game/competitionApiSlice";
 import GameRules from "./GameRules";
 import { setParticipantList } from "../../store/game/participantSlice";
 
 function Create() {
   const dispatch = useDispatch();
+  const [createCompetition] = useCreateCompetitionMutation();
   const [newCompData, setNewCompData] = useState({
-    compName: "", isPublic: false
+    name: "", public: false, participants: []
   });
 
   const handleInput = (e) => {
-    setNewCompData({ ...newCompData, [e.target.name]: e.target.value });
+    const getCompValue = (input) => {
+      switch (input) {
+        case "name":
+          return e.target.value;
+        case "public":
+          return e.target.checked;
+        case "participants":
+          let participantArray = newCompData.participants;
+          if (e.target.checked && !participantArray.includes(e.target.value)) {
+            participantArray.push(Number(e.target.value));
+          } else if (e.target.checked === false) {
+            participantArray = participantArray.filter(id => id !== Number(e.target.value));
+          }
+          return participantArray;
+      }
+    }
+
+    setNewCompData({
+      ...newCompData,
+      [e.target.name]: getCompValue(e.target.name)
+    });
+
   };
 
-  const handleCreateCompetition = () => {
+  const handleCreateCompetition = async (e) => {
+    e.preventDefault();
+    try {
+      const request = await createCompetition(newCompData).unwrap();
+      console.log(request);
+
+    } catch (err) {
+      console.error(err.message);
+    }
 
   }
 
   const { data: participants, isError, isLoading } = useGetParticipantsQuery();
 
-
   useEffect(() => {
-    console.log(participants, isError, isLoading)
     if (isLoading) {
       return
     } else {
@@ -30,37 +59,36 @@ function Create() {
     }
   }, [participants]);
 
+  const mapParticipants = participants?.map(participant => {
+    return (<div key={participant.id}>
+      <input name="participants" type="checkbox" onChange={handleInput} value={participant.id}></input>
+      <label htmlFor="participants">{participant.username}</label>
+    </div>)
+  })
+
   return (
     <div>
-      <form>
+      <form onSubmit={handleCreateCompetition}>
         <input
           type="text"
-          name="compName"
+          name="name"
           placeholder="Name of Competition"
           onChange={handleInput}
           required
           value={newCompData.name}
         />
-        <label htmlFor="isPublic">Public</label>
+        <label htmlFor="public">Public</label>
         <input
           type="checkbox"
-          name="isPublic"
+          name="public"
           onChange={handleInput}
-          value={newCompData.isPublic}
+          value={newCompData.public}
         />
-        <select name="participants" onChange={handleInput} multiple>
-          <option
-            value="none"
-            defaultValue
-            disabled
-            hidden
-          >Select Participants
-          </option>
-          {participants?.map(participant => {
-            return (<option key={participant.id}>{participant.username}</option>)
-          })}
-        </select>
-        <button onClick={handleCreateCompetition}>Create Competition</button>
+        {mapParticipants}
+        <input
+          type="submit"
+          value="Create Competition"
+        />
       </form>
 
       <h3>Game Rules</h3>
