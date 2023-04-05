@@ -1,0 +1,14 @@
+import { apiSlice } from "../../app/api/apiSlice";
+
+export const participantsApiSlice = apiSlice.injectEndpoints({
+    endpoints: (builder) => ({
+        getParticipants: builder.query({
+            query: () => ({
+                url: "http://localhost:3000/users",
+                method: "GET"
+            })
+        }),
+    }),
+});
+
+export const { useGetParticipantsQuery } = participantsApiSlice;

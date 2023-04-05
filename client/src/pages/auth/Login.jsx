@@ -40,6 +40,8 @@ function Login() {
       console.log(userData)
       dispatch(setUserInfo({ ...userData }));
       setCookie("token", userData.token);
+      localStorage.setItem("workouts", JSON.stringify(userData.workouts));
+      localStorage.setItem("competitions", JSON.stringify(userData.competitions));
       localStorage.setItem("user", JSON.stringify(userData.user));
       setEmail("");
       setPassword("");

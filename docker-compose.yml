@@ -2,7 +2,7 @@ services:
   db:
     image: postgres
     volumes:
-      - ./tmp/db:/var/lib/postgresql/data
+      - ./api/tmp/db:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: password
     working_dir: /api
