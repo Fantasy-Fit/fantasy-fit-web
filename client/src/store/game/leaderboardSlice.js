@@ -5,8 +5,8 @@ const leaderboardSlice = createSlice({
     initialState: [],
     reducers: {
         setLeaderboard: (state, action) => {
-            const { leaderboard } = action.payload;
-            state.leaderboard = leaderboard;
+            console.log("In leaderboardslice:", action.payload);
+            state = action.payload;
         }
     }
 });

@@ -20,8 +20,9 @@ Rails.application.routes.draw do
   match '/auth/login', controller: 'application', action: 'cors_preflight_check', via: [:options]
   match '/auth/signup', controller: 'application', action: 'cors_preflight_check', via: [:options]
   match '/logout', controller: 'application', action: 'cors_preflight_check', via: [:options]
-  match '/users', controller: 'authentication', action: 'cors_preflight_check', via: [:options]
-  match '/competition/leaderboard/:id', controller: 'authentication', action: 'cors_preflight_check', via: [:options]
+  match '/users', controller: 'application', action: 'cors_preflight_check', via: [:options]
+  match '/competition/leaderboard/:id', controller: 'application', action: 'cors_preflight_check', via: [:options]
+  match '/competitions', controller: 'application', action: 'cors_preflight_check', via: [:options]
 
   # match '/auth/login' || '/auth/signup' || '/logout' || '/users', controller: 'application', action: 'cors_preflight_check', via: [:options]
   

@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useGetLeaderboardQuery } from "../../store/game/leaderboardApiSlice";
@@ -9,10 +10,14 @@ function Leaderboard({ comp }) {
   const { data: leaderboard, isLoading } =
     useGetLeaderboardQuery(competitionID);
 
+  const leaders = useSelector(selectLeaderboard)
+  console.log("In Leaderboard component:", leaders)
+
   useEffect(() => {
     if (isLoading) {
       return;
     } else {
+
       dispatch(setLeaderboard(leaderboard));
     }
   }, [leaderboard]);
@@ -25,6 +30,7 @@ function Leaderboard({ comp }) {
       </tr>
     );
   });
+
 
   return (
     <div>

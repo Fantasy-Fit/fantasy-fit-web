@@ -9,7 +9,6 @@ export const leaderboardApiSlice = apiSlice.injectEndpoints({
             })
         })
     }),
-    refetchOnMountOrArgChange: true,
 })
 
 export const { useGetLeaderboardQuery } = leaderboardApiSlice;
