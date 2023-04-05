@@ -5,6 +5,7 @@ import {
   selectUserWorkouts,
   selectUserCompetitions,
 } from "../../store/auth/userSlice";
+import "./Profile.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
@@ -41,15 +42,15 @@ function Profile() {
 
 
   // console.log("User from profile:", user, cookie);
-  async function handleLogout(){
-      try{
-        await logout({ headers: { Authorization: `Bearer  ${token}`}})
-        removeCookie("token")
-        localStorage.clear();
-        navigate("/")
-      } catch(error){
-        console.error("Error logging out", error)
-      }
+  async function handleLogout() {
+    try {
+      await logout({ headers: { Authorization: `Bearer  ${token}` } })
+      removeCookie("token")
+      localStorage.clear();
+      navigate("/")
+    } catch (error) {
+      console.error("Error logging out", error)
+    }
   }
 
   const content = (
