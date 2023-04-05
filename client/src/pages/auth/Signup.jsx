@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useCookies } from "react-cookie";
 
 import { useDispatch } from "react-redux";
-// import { setCredentials } from "../../store/auth/userSlice";
+import { setUserInfo } from "../../store/auth/userSlice";
 import { useSignupMutation } from "../../store/auth/authApiSlice";
 
 import "./Signup.css";
@@ -43,7 +43,7 @@ function Signup() {
     const email = data.email;
     const password = data.password;
     const regData = await signup({ username, email, password }).unwrap();
-    dispatch(setCredentials({ ...regData }));
+    dispatch(setUserInfo({ ...regData }));
     setCookie("token", regData?.token);
     localStorage.setItem("user", JSON.stringify(regData?.user));
     navigate("/profile");
