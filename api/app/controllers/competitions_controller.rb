@@ -1,4 +1,6 @@
 class CompetitionsController < ApplicationController
+    before_action :cors_set_access_control_headers
+
     def leaderboard
         competition = Competition.find(params[:id])
         participants = competition.participants.sort_by {|p| -p.user_total_points}
@@ -13,6 +15,12 @@ class CompetitionsController < ApplicationController
         competition = Competition.new(comp_params)
         competition.identifier = generate_identifier
         competition.save!
+        params[:participants].map {|id| 
+            Participant.create(
+                competition_id: competition.id, 
+                user_id: id,
+                username: User.find(id).username    
+            )}
         render json: competition, status: :created
     end
 
