@@ -28,7 +28,7 @@ const activities = ["Run", "Cycle", "Indoor Cycle", "Mountain Biking", "Swimming
   "Golf",
   "Crossfit"]
 
-function Record() {
+function Record({comp}) {
   const dispatch = useDispatch();
   const user = useSelector(selectCurrentUser);
   const leaderboard = useSelector(selectLeaderboard);
@@ -49,7 +49,7 @@ function Record() {
       let req = await addWorkout({
         ...workoutData,
         user_id: user.id,
-        competition_id: 1 // will need to update this after client side routing is done for tournament page
+        competition_id: comp.id // will need to update this after client side routing is done for tournament page
       })
 
       setMessage("Workout successfully added!")
