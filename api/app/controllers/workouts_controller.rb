@@ -13,7 +13,6 @@ class WorkoutsController < ApplicationController
         total_points = participant[0].user_total_points == nil ? 0 : participant[0].user_total_points + workout_points
         participant.update!(user_total_points: total_points)
         leaderboard = update_leaderboard(params[:competition_id])
-        byebug
         render json: {
             workout: workout,
             leaderboard: leaderboard,
