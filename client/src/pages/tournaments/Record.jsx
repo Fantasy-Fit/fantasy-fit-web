@@ -53,8 +53,8 @@ function Record({comp}) {
       })
 
       setMessage("Workout successfully added!")
-      const updatedBoard = req.data.leaderboard
-      dispatch(setLeaderboard([...updatedBoard]))
+      // const updatedBoard = req.data.leaderboard
+      dispatch(setLeaderboard(req.data.leaderboard))
       console.log(req.data)
     } catch (error) {
       console.error(error.message);
