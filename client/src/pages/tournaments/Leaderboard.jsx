@@ -6,21 +6,18 @@ import { setLeaderboard } from "../../store/game/leaderboardSlice";
 
 function Leaderboard({ comp }) {
   const dispatch = useDispatch();
-  const competitionID = comp.id; // change to competition ID
+  const competitionID = comp.id;
   const { data: leaderboard, isLoading } =
     useGetLeaderboardQuery(competitionID);
-
-  const leaders = useSelector(selectLeaderboard)
-  console.log("In Leaderboard component:", leaders)
 
   useEffect(() => {
     if (isLoading) {
       return;
     } else {
-
-      dispatch(setLeaderboard(leaderboard));
+      dispatch(setLeaderboard([...leaderboard]));
     }
   }, [leaderboard]);
+
   const mapLeaderboard = leaderboard?.map((position, index) => {
     return (
       <tr key={position.id}>
@@ -35,7 +32,6 @@ function Leaderboard({ comp }) {
   return (
     <div>
       <p>Leaderboard</p>
-      <p>TABLE OF PARTICIPANTS WITH POINT RANKING</p>
       <table>
         <thead>
           <tr>

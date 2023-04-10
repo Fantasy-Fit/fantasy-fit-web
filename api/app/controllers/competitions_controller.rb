@@ -18,7 +18,8 @@ class CompetitionsController < ApplicationController
             Participant.create(
                 competition_id: competition.id, 
                 user_id: id,
-                username: User.find(id).username    
+                username: User.find(id).username,
+                user_total_points: 0  
             )}
         render json: competition, status: :created
     end

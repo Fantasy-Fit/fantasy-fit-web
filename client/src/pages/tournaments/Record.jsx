@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentUser } from "../../store/auth/userSlice";
 import { useAddWorkoutMutation } from "../../store/game/workoutApiSlice";
-import { selectLeaderboard, setLeaderboard } from "../../store/game/leaderboardSlice";
+import { setLeaderboard } from "../../store/game/leaderboardSlice";
+import { useGetLeaderboardQuery } from "../../store/game/leaderboardApiSlice";
 
 const activities = ["Run", "Cycle", "Indoor Cycle", "Mountain Biking", "Swimming",
   "Open Water Swimming", "Walking", "Strength Training", "Cardio", "HIIT", "Hiking", "Skiing", "Snowboarding", "Ice Skating", "Treadmill", "Track Run", "Rowing", "Canoe",
@@ -28,11 +29,10 @@ const activities = ["Run", "Cycle", "Indoor Cycle", "Mountain Biking", "Swimming
   "Golf",
   "Crossfit"]
 
-function Record({comp}) {
+function Record({ comp }) {
   const dispatch = useDispatch();
   const user = useSelector(selectCurrentUser);
-  const leaderboard = useSelector(selectLeaderboard);
-  console.log(leaderboard)
+  const { refetch } = useGetLeaderboardQuery(comp.id);
   const [message, setMessage] = useState("");
   const [workoutData, setWorkoutData] = useState({
     activity: "", duration: 0, intensity: "", date: ""
@@ -49,24 +49,40 @@ function Record({comp}) {
       let req = await addWorkout({
         ...workoutData,
         user_id: user.id,
-        competition_id: comp.id // will need to update this after client side routing is done for tournament page
+        competition_id: comp.id
       })
+      const updatedLeaderboard = [...req.data.leaderboard];
 
+      dispatch(setLeaderboard([...updatedLeaderboard]))
       setMessage("Workout successfully added!")
-      const updatedBoard = req.data.leaderboard
-      dispatch(setLeaderboard([...updatedBoard]))
-      console.log(req.data)
+      setWorkoutData({
+        activity: "", duration: 0, intensity: "", date: ""
+      })
+      refetch();
+
     } catch (error) {
       console.error(error.message);
-    }
-  }
+    };
+  };
+
+  useEffect(() => {
+    const timer = () => setTimeout(() => {
+      setMessage("");
+    }, 3000);
+
+    return () => timer();
+  }, [message])
 
   return (
     <div>
       <h3>Record Workout</h3>
       <form onSubmit={createWorkout}>
-        <select onChange={handleInput} name="activity">
-          <option defaultValue disabled hidden>Select Activity</option>
+        <select
+          onChange={handleInput}
+          name="activity"
+          defaultValue="activity"
+        >
+          <option value="activity" disabled hidden>Select Activity</option>
           {activities.map(activity => {
             return (<option key={activity}>{activity}</option>)
           })}
@@ -81,8 +97,9 @@ function Record({comp}) {
         <select
           onChange={handleInput}
           name="intensity"
+          defaultValue="default"
         >
-          <option defaultValue disabled hidden>Select Intensity</option>
+          <option value="default" hidden disabled>Select Intensity</option>
           <option>Low</option>
           <option>Medium</option>
           <option>High</option>
