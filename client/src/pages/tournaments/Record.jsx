@@ -54,6 +54,7 @@ function Record({comp}) {
 
       setMessage("Workout successfully added!")
       // const updatedBoard = req.data.leaderboard
+      // req.data.leader is undefined
       dispatch(setLeaderboard(req.data.leaderboard))
       console.log(req.data)
     } catch (error) {
