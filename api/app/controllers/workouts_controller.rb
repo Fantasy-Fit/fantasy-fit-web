@@ -6,7 +6,6 @@ class WorkoutsController < ApplicationController
     end
 
     def create
-        
         workout_points = calculate_points(workout_params)
         workout = Workout.create!(workout_params.merge(:points => workout_points))
         participant = Participant.where(user_id: params[:user_id], competition_id: params[:competition_id])
@@ -17,12 +16,13 @@ class WorkoutsController < ApplicationController
             workout: workout,
             leaderboard: leaderboard,
         }, status: :created
+        render json: workout, status: :created
     end
 
     private
 
     def workout_params
-        params.permit(:activity, :duration, :intensity, :date, :avg_HR, :calories, :claps, :points, :user_id, :competition_id)
+        params.require(:workout).permit(:activity, :duration, :intensity, :date, :avg_HR, :calories, :claps, :points, :user_id, :competition_id)
     end
 
     def calculate_points(params)
