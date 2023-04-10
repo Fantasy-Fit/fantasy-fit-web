@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useGetLeaderboardQuery } from "../../store/game/leaderboardApiSlice";
 import { setLeaderboard } from "../../store/game/leaderboardSlice";
+import { useSelector } from "react-redux";
+import { selectLeaderboard } from "../../store/game/leaderboardSlice";
 
 function Leaderboard({ comp }) {
   const dispatch = useDispatch();
