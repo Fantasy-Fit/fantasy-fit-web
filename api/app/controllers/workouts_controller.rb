@@ -16,7 +16,6 @@ class WorkoutsController < ApplicationController
             workout: workout,
             leaderboard: leaderboard,
         }, status: :created
-        render json: workout, status: :created
     end
 
     private
