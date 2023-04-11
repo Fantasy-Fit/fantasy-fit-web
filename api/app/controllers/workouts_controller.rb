@@ -34,7 +34,7 @@ class WorkoutsController < ApplicationController
             "Run" => 8,
             "Cycle" => 7,
             "Indoor Cycle" => 6.6,
-            "Mountain Biking" => 6.5
+            "Mountain Biking" => 6.5,
             "Swimming" => 6.5,
             "Open Water Swimming" => 6.5,
             "Walking"=> 3,
@@ -54,7 +54,7 @@ class WorkoutsController < ApplicationController
             "Skateboarding" => 4, 
             "Surfing" => 5.5,
             "Indoor Row" => 6,
-            "Standup Paddle Boarding" => 3
+            "Standup Paddle Boarding" => 3,
             "Yoga" => 5,
             "Pilates" => 5,
             "Dance" => 6,
