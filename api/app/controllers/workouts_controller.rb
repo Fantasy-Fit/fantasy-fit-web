@@ -16,7 +16,6 @@ class WorkoutsController < ApplicationController
             workout: workout,
             leaderboard: leaderboard,
         }, status: :created
-        render json: workout, status: :created
     end
 
     private
@@ -26,12 +25,52 @@ class WorkoutsController < ApplicationController
     end
 
     def calculate_points(params)
-        intensity_points = { "Low"=> 1.0, "Medium"=> 1.5, "High"=> 2.0 }
+        intensity_points = { 
+            "Low"=> 1.0, 
+            "Medium"=> 1.5, 
+            "High"=> 2.0 
+        }
         activity_points = {
+            "Run" => 8,
+            "Cycle" => 7,
+            "Indoor Cycle" => 6.6,
+            "Mountain Biking" => 6.5
+            "Swimming" => 6.5,
+            "Open Water Swimming" => 6.5,
             "Walking"=> 3,
-            "Strength Training"=> 6, 
+            "Strength Training"=> 6.5, 
             "Cardio"=> 7, 
-            "HIIT"=> 10
+            "HIIT"=> 9.5,
+            "Hiking" => 5,
+            "Skiing" => 6,
+            "Snowboarding" => 6,
+            "Ice Skating" => 5.5,
+            "Treadmill" => 7.5,
+            "Track Run" => 7,
+            "Rowing" => 6,
+            "Canoe" => 5,
+            "Kayak" => 5,
+            "Sailing" => 4,
+            "Skateboarding" => 4, 
+            "Surfing" => 5.5,
+            "Indoor Row" => 6,
+            "Standup Paddle Boarding" => 3
+            "Yoga" => 5,
+            "Pilates" => 5,
+            "Dance" => 6,
+            "Tai Chi" => 3,
+            "Core Training" => 4,
+            "Floor Climb" => 6,
+            "Elliptical" => 5.5,
+            "Indoor Climbing" => 6,
+            "Chess" => 2.5,
+            "Tennis" => 6, 
+            "Squash" => 6.5,
+            "Basketball" => 7,
+            "Soccer" => 7,
+            "American Football" => 7,
+            "Golf" => 4,
+            "Crossfit" => 9.5,
         }
         points = intensity_points[params[:intensity]] * activity_points[params[:activity]].to_f * params[:duration].to_f
         points.to_i

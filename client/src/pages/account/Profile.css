@@ -1,5 +1,80 @@
-.profile {
+section.profile {
     border: 1px solid rgb(221, 221, 221);
-    width: 35%;
+    width: 100%;
+}
 
+.profile div.profile-top {
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid gray;
+}
+
+.profile div.profile-top button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: gray;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid gray;
+    border-radius: 8px;
+}
+
+.profile div.profile-top button:hover {
+    background-color: rgb(75, 75, 75);
+    border: 1px solid rgb(255, 255, 255);
+    transition-duration: 0.75s;
+}
+
+.profile div.my-profile {
+    justify-content: center;
+    margin: 2em 0;
+    display: inline-block;
+}
+
+.profile div img {
+    margin: 1em;
+    width: 10em;
+    height: 10em;
+    border-radius: 50%;
+}
+
+.profile div h1 {
+    margin: 0.5em 0;
+}
+
+.profile div div.profile-row {
+    display: flex;
+    margin: 0.5em;
+}
+
+.profile div div.profile-row div.profile-label {
+    width: 10em;
+}
+
+.profile div.my-profile-competitions {
+    display: block;
+    margin: 3em;
+}
+
+.profile div.my-profile-competitions button a {
+    text-decoration: none;
+    color: white;
+}
+
+.profile div.my-profile-competitions button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: gray;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid gray;
+    border-radius: 8px;
+}
+
+.profile div.my-profile-competitions button:hover {
+    background-color: rgb(75, 75, 75);
+    border: 1px solid rgb(255, 255, 255);
+    transition-duration: 0.75s;
 }

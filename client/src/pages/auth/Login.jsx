@@ -1,13 +1,12 @@
 import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-
 import { useDispatch } from "react-redux";
 import { setUserInfo } from "../../store/auth/userSlice";
 import { useLoginMutation } from "../../store/auth/authApiSlice";
-
 import "./Login.css";
 import Signup from "./Signup";
+import LoadingSpinner from "./LoadingSpinner";
 
 function Login() {
   const userRef = useRef();
@@ -15,14 +14,11 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
+  const [signIn, setSignIn] = useState(false);
   const navigate = useNavigate();
-
   const [login, { isLoading }] = useLoginMutation();
   const dispatch = useDispatch();
-
   const [, setCookie] = useCookies(null);
-
-  const [signIn, setSignIn] = useState(false);
 
   useEffect(() => {
     userRef.current.focus();
@@ -64,7 +60,7 @@ function Login() {
   const handlePasswordInput = (e) => setPassword(e.target.value);
 
   const content = isLoading ? (
-    <h1>Loading...</h1>
+    <LoadingSpinner />
   ) : (
     <div className="loginScreen">
       <div className="loginScreen__background">
@@ -73,8 +69,8 @@ function Login() {
           src="https://www.kadencewp.com/wp-content/uploads/2020/10/alogo-1.png"
           alt="logo"
         />
-        <button onClick={() => setSignIn(true)} className="loginScreen__button">
-          Sign Up
+        <button onClick={() => setSignIn(state => !state)} className="loginScreen__button">
+          {signIn ? "Login" : "Sign Up"}
         </button>
         <div className="loginScreen__gradient" />
       </div>

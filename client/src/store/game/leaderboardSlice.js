@@ -2,11 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const leaderboardSlice = createSlice({
     name: "leaderboard",
-    initialState: [],
+    initialState: { leaderboard: [] },
     reducers: {
         setLeaderboard: (state, action) => {
-            console.log("In leaderboardslice:", action.payload);
-            state = action.payload;
+            // console.log("In leaderboardslice:", action.payload);
+            state.leaderboard = action.payload;
+
         }
     }
 });

@@ -1,124 +1,129 @@
 .loginScreen {
-    position: relative;
-    height: 100%;
-    background: url("https://media.istockphoto.com/id/1151850199/photo/sports-equipment-and-accessories-shoes-dumbbells-on-green-background.jpg?s=612x612&w=0&k=20&c=OStHn9MFqxyvOPVbo8qr_MHaivayxrs1mnL2APzRAis=")
-      center no-repeat;
-    background-size: cover;
-  }
-  
-  .loginScreen__body > h1 {
-    font-size: 3.125rem;
-    margin-bottom: 20px;
-  }
-  
-  /* .loginScreen__body > h2 {
+  position: relative;
+  height: 100%;
+  background: url("https://media.istockphoto.com/id/1151850199/photo/sports-equipment-and-accessories-shoes-dumbbells-on-green-background.jpg?s=612x612&w=0&k=20&c=OStHn9MFqxyvOPVbo8qr_MHaivayxrs1mnL2APzRAis=") center no-repeat;
+  background-size: cover;
+}
+
+.loginScreen__body>h1 {
+  font-size: 3.125rem;
+  margin-bottom: 20px;
+}
+
+/* .loginScreen__body > h2 {
     font-size: 2rem;
     font-weight: 400;
     margin-bottom: 30px;
   }
    */
-  /* .loginScreen__body > h3 {
+/* .loginScreen__body > h3 {
     font-size: 1.3rem;
     font-weight: 400;
   } */
-  
-  .loginScreen__body {
-    position: absolute;
-    top: 30%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    z-index: 1;
-    color: #fff;
-    padding: 20px;
-    left: 0;
-    right: 0;
-  }
-  
-  .loginScreen__gradient {
-    width: 100%;
-    z-index: 1;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.4);
-    background-image: linear-gradient(
-      to top,
+
+.loginScreen__body {
+  position: absolute;
+  top: 30%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  z-index: 1;
+  color: #fff;
+  padding: 20px;
+  left: 0;
+  right: 0;
+  border-radius: 8px;
+}
+
+.loginScreen__gradient {
+  width: 100%;
+  z-index: 1;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  background-image: linear-gradient(to top,
       rgba(0, 0, 0, 0.8) 0,
       rgba(0, 0, 0, 0) 60%,
-      rgba(0, 0, 0, 0.8) 100%
-    );
-  }
-  
-  .loginScreen__button {
-    position: fixed;
-    right: 20px;
-    top: 20px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    color: #fff;
-    background-color: gray;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .loginScreen__logo {
-    position: fixed;
-    left: 0;
-    width: 150px;
-    object-fit: contain;
-    padding-left: 20px;
-  }
-
-  img {
-    filter: invert(100%);
-    -webkit-filter: invert(100%)
-  }
-
-  .loginScreen__body {
-    max-width: 300px;
-    padding: 70px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: rgba(0, 0, 0, 0.85);
+      rgba(0, 0, 0, 0.8) 100%);
 }
-  
-  .loginScreen__body > h1 {
-    text-align: left;
-    margin-bottom: 25px;
-  }
-  
-  .loginScreen__body > form {
-    display: flex;
-    flex-direction: column;
-  }
 
-  .loginScreen__body > form > input {
-    outline-width: 0;
-    height: 40px;
-    margin-bottom: 14px;
-    border-radius: 5px;
-    border: none;
-    padding: 5px 15px;
-  }
+.loginScreen__button {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: gray;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid gray;
+  border-radius: 8px;
+}
 
-  .loginScreen__body > form > button {
-    padding: 16px 20px;
-    font-size: 1rem;
-    color: #fff;
-    border-radius: 5px;
-    background-color: gray;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    margin-top: 20px;
+.loginScreen__button:hover {
+  background-color: rgb(75, 75, 75);
+  border: 1px solid rgb(255, 255, 255);
+  transition-duration: 0.75s;
+}
+
+.loginScreen__logo {
+  position: fixed;
+  left: 0;
+  width: 150px;
+  object-fit: contain;
+  padding-left: 20px;
+}
+
+img {
+  filter: invert(100%);
+  -webkit-filter: invert(100%)
+}
+
+.loginScreen__body {
+  max-width: 300px;
+  padding: 70px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+.loginScreen__body>h1 {
+  text-align: left;
+  margin-bottom: 25px;
+}
+
+.loginScreen__body>form {
+  display: flex;
+  flex-direction: column;
+}
+
+.loginScreen__body>form>input {
+  outline-width: 0;
+  height: 40px;
+  margin-bottom: 14px;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 15px;
+}
+
+.loginScreen__body>form>button {
+  padding: 16px 20px;
+  font-size: 1rem;
+  color: #fff;
+  border-radius: 5px;
+  background-color: gray;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
 }
 
 .loginScreen__gray {
-    color: gray;
+  color: gray;
 
 }
 
 .loginScreen__link:hover {
-    cursor: pointer;
-    text-decoration: underline;
+  cursor: pointer;
+  text-decoration: underline;
 }
