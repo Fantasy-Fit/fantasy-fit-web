@@ -19,12 +19,11 @@ function Profile() {
   const mapComps = competitions?.map((comp) => {
     return (
       <div className="competition-card" key={comp.identifier}>
-        <img style={{ width: "5em", height: "5em" }} src={comp.icon} />
-        <p >
-          <Link to={`/tournament/${comp.id}`} state={comp}>
-            {comp.name}
-          </Link>
-        </p>
+
+        <Link to={`/tournament/${comp.id}`} state={comp}>
+          <img src={comp.icon} />
+          {comp.name}
+        </Link>
       </div>
     );
   });
@@ -65,13 +64,14 @@ function Profile() {
             <div><p>{user.location}</p></div>
           </div>
           <button>Edit Profile</button>
+          <button onClick={handleLogout}>Log out</button>
         </div>
       </div>
       <div className="new-competition-container">
         {/* <p>Notification/Profile Settings</p> */}
         {/* <p>Badges / Achievements</p> */}
         <div className="new-competition">
-          <img src="https://cdn-icons-png.flaticon.com/512/4959/4959925.png" />
+          <Link to="/new-competition"><img src="https://cdn-icons-png.flaticon.com/512/4959/4959925.png" /></Link>
           <button>
             <Link to="/new-competition">New Competition</Link>
           </button>
@@ -92,13 +92,13 @@ function Profile() {
           {/* <h3>Past Competitions</h3> */}
           <h3>Recent Workouts</h3>
           <RecentWorkouts />
-          <p>Friends & Followers [To be Built]</p>
-          <button onClick={handleLogout}>Log out</button>
+          {/* <p>Friends & Followers [To be Built]</p> */}
+
         </div>
       </div>
     </section>
   );
   return content;
-}
+};
 
 export default Profile;
