@@ -107,12 +107,17 @@ section.profile {
 }
 
 .profile div.new-competition-container button:hover {
-    background-color: rgb(75, 75, 75);
+    background-color: rgb(65, 82, 104);
     border: 1px solid rgb(255, 255, 255);
     transition-duration: 0.75s;
-    visibility: visible;
-    opacity: 0.7;
+    opacity: 0.5;
 }
+
+
+
+
+
+
 
 .profile div.current-competition-container {
     display: flex;
@@ -144,10 +149,22 @@ section.profile {
     margin: auto;
 }
 
+.profile div.current-competition-container div.current-competition-container-inner div {
+    display: flex;
+    border: none;
+}
+
 .profile div.current-competition-container div div.competition-card {
+    display: block;
+    border: 1px solid lightgray;
     width: 6em;
     border-radius: 50%;
     justify-content: center;
+}
+
+.profile div.current-competition-container div div.competition-card p a {
+    text-decoration: none;
+    color: black;
 }
 
 tr:hover {

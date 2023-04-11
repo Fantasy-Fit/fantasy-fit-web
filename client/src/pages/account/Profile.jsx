@@ -84,7 +84,7 @@ function Profile() {
         </div>
       </div>
       <div className="current-competition-container">
-        <div>
+        <div className="current-competition-container-inner">
           <h2>Current Competitions</h2>
           <div>
             {mapComps}
