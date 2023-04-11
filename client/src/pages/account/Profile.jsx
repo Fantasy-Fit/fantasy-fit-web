@@ -1,26 +1,18 @@
 import { useSelector } from "react-redux";
-import {
-  selectCurrentUser,
-  logOut,
-  selectUserWorkouts,
-  selectUserCompetitions,
-} from "../../store/auth/userSlice";
+import { selectCurrentUser, selectUserCompetitions } from "../../store/auth/userSlice";
 import "./Profile.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { useDispatch } from "react-redux";
 import { useLogoutMutation } from "../../store/auth/authApiSlice";
-import LoadingSpinner from "../auth/LoadingSpinner";
+import RecentWorkouts from "./RecentWorkouts";
 
 
 function Profile() {
   const user = useSelector(selectCurrentUser);
-  const workouts = useSelector(selectUserWorkouts);
   const competitions = useSelector(selectUserCompetitions);
   const token = user.token;
   const [, removeCookie] = useCookies(["token"]);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [logout] = useLogoutMutation();
 
 
@@ -34,16 +26,6 @@ function Profile() {
     );
   });
 
-  const mapWorkouts = workouts?.map((workout) => {
-    return (
-      <li key={workout.id}>
-        {workout.id}.{workout.activity} -{workout.duration}mins,
-        {workout.calories}cals,
-        {workout.points}pts
-      </li>
-    );
-  });
-
   async function handleLogout() {
     try {
       await logout({ headers: { Authorization: `Bearer  ${token}` } });
@@ -52,13 +34,15 @@ function Profile() {
       navigate("/");
     } catch (error) {
       console.error("Error logging out", error);
-    }
-  }
+    };
+  };
 
   const content = (
     <section className="profile">
       <div className="profile-top">
-        <img src={user.avatar} alt={user.username} />
+        <div className="profile-img-container">
+          <img src={user.avatar} alt={user.username} />
+        </div>
         <div className="my-profile">
           <h1>My Profile</h1>
           <div className="profile-row">
@@ -80,19 +64,32 @@ function Profile() {
           <button>Edit Profile</button>
         </div>
       </div>
-      <div className="my-profile-competitions">
-        <p>Notification/Profile Settings</p>
-        <p>Badges / Achievements</p>
-        <button>
-          <Link to="/new-competition">New Competition</Link>
-        </button>
-        <h3>Current Competitions</h3>
-        {mapComps}
-        {/* <h3>Past Competitions</h3> */}
-        <p>Recent Workouts</p>
-        {mapWorkouts}
-        <p>Friends & Followers</p>
-        <button onClick={handleLogout}>Log out</button>
+      <div className="new-competition-container">
+        {/* <p>Notification/Profile Settings</p> */}
+        {/* <p>Badges / Achievements</p> */}
+        <div className="new-competition">
+          <img src="https://cdn-icons-png.flaticon.com/512/4959/4959925.png" />
+          <button>
+            <Link to="/new-competition">New Competition</Link>
+          </button>
+        </div>
+        <div className="new-competition">
+          <img src="https://cdn-icons-png.flaticon.com/512/6679/6679633.png" />
+          <button>
+            <Link to="/join">Join</Link>
+          </button>
+        </div>
+      </div>
+      <div className="current-competition-container">
+        <div >
+          <h2>Current Competitions</h2>
+          {mapComps}
+          {/* <h3>Past Competitions</h3> */}
+          <h3>Recent Workouts</h3>
+          <RecentWorkouts />
+          <p>Friends & Followers [To be Built]</p>
+          <button onClick={handleLogout}>Log out</button>
+        </div>
       </div>
     </section>
   );

@@ -1,10 +1,32 @@
-import React from "react";
+import { useState } from 'react';
 
-function Join() {
+const Join = () => {
+  const [search, setSearch] = useState("");
+
+  const handleSearchInput = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    setSearch("");
+  };
+
   return (
     <div>
-      <p>Join</p>
-      <p>Search Bar</p>
+      <form onSubmit={handleSearch}>
+        <input
+          name="search"
+          placeholder="Find a Competition"
+          onChange={handleSearchInput}
+          value={search}
+        />
+        <input
+          type="submit"
+          value="Search"
+        />
+      </form>
     </div>
   );
 }
