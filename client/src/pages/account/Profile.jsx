@@ -18,11 +18,14 @@ function Profile() {
 
   const mapComps = competitions?.map((comp) => {
     return (
-      <p key={comp.identifier}>
-        <Link to={`/tournament/${comp.id}`} state={comp}>
-          {comp.name}
-        </Link>
-      </p>
+      <div className="competition-card" key={comp.identifier}>
+        <img style={{ width: "5em", height: "5em" }} src={comp.icon} />
+        <p >
+          <Link to={`/tournament/${comp.id}`} state={comp}>
+            {comp.name}
+          </Link>
+        </p>
+      </div>
     );
   });
 
@@ -81,9 +84,11 @@ function Profile() {
         </div>
       </div>
       <div className="current-competition-container">
-        <div >
+        <div>
           <h2>Current Competitions</h2>
-          {mapComps}
+          <div>
+            {mapComps}
+          </div>
           {/* <h3>Past Competitions</h3> */}
           <h3>Recent Workouts</h3>
           <RecentWorkouts />

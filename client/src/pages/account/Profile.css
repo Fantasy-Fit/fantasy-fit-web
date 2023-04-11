@@ -140,6 +140,16 @@ section.profile {
     border-radius: 8px;
 }
 
+.profile div.current-competition-container div {
+    margin: auto;
+}
+
+.profile div.current-competition-container div div.competition-card {
+    width: 6em;
+    border-radius: 50%;
+    justify-content: center;
+}
+
 tr:hover {
     background-color: rgb(221, 221, 221);
 }
