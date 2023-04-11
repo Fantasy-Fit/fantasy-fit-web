@@ -4,9 +4,8 @@ section.profile {
 }
 
 .profile div.profile-top {
-    display: block;
-    width: 100%;
-    border-bottom: 1px solid gray;
+    display: flex;
+    justify-content: center;
 }
 
 .profile div.profile-top button {
@@ -18,6 +17,7 @@ section.profile {
     cursor: pointer;
     border: 1px solid gray;
     border-radius: 8px;
+    margin: 0 0.5em;
 }
 
 .profile div.profile-top button:hover {
@@ -32,11 +32,23 @@ section.profile {
     display: inline-block;
 }
 
-.profile div img {
-    margin: 1em;
+.profile div.profile-top div.profile-img-container {
+    display: flex;
+    align-items: center;
+}
+
+.profile div.profile-top div img {
+    margin: 2em;
     width: 10em;
     height: 10em;
     border-radius: 50%;
+    filter: invert(0);
+}
+
+.profile div img {
+    width: 10em;
+    height: 10em;
+    filter: invert(0);
 }
 
 .profile div h1 {
@@ -52,18 +64,32 @@ section.profile {
     width: 10em;
 }
 
-.profile div.my-profile-competitions {
+.profile div.new-competition-container img:hover {
+    filter: invert(0.4);
+    transition-duration: 0.5s;
+    border-radius: 10%;
+    cursor: pointer;
+}
+
+.profile div.new-competition-container {
+    display: flex;
+    justify-content: center;
+    padding: 0 3em;
+}
+
+.profile div.new-competition-container div.new-competition {
+    width: 10em;
     display: block;
-    margin: 3em;
+    border: 1px solid lightgray;
+    padding: 2em;
+    border-radius: 10px;
+    margin: 1em 0.5em;
 }
 
-.profile div.my-profile-competitions button a {
-    text-decoration: none;
-    color: white;
-}
-
-.profile div.my-profile-competitions button {
-    padding: 10px 20px;
+.profile div.new-competition-container button {
+    width: 10em;
+    height: 3.25em;
+    padding: auto 20px;
     font-size: 1rem;
     color: #fff;
     background-color: gray;
@@ -73,8 +99,85 @@ section.profile {
     border-radius: 8px;
 }
 
-.profile div.my-profile-competitions button:hover {
-    background-color: rgb(75, 75, 75);
+.profile div.new-competition-container button a {
+    text-decoration: none;
+    color: white;
+}
+
+.profile div.new-competition-container button:hover {
+    background-color: rgb(65, 82, 104);
     border: 1px solid rgb(255, 255, 255);
     transition-duration: 0.75s;
+    opacity: 0.5;
+}
+
+.profile div.current-competition-container {
+    display: flex;
+    justify-content: center;
+
+}
+
+.profile div.current-competition-container div {
+    border: 1px solid lightgray;
+    border-radius: 8px;
+    margin: 3em;
+    padding: 2em 2em;
+}
+
+.profile div.current-competition-container button {
+    width: 10em;
+    height: 3.25em;
+    padding: auto 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: gray;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid gray;
+    border-radius: 8px;
+}
+
+.profile div.current-competition-container div {
+    margin: auto;
+}
+
+.profile div.current-competition-container div.current-competition-container-inner div {
+    display: flex;
+    border: none;
+}
+
+.profile div.current-competition-container div div.competition-card {
+    display: inline-block;
+    border: 1px solid lightgray;
+    width: 6em;
+    border-radius: 50%;
+    justify-content: center;
+    justify-items: center;
+    margin: 0.2em;
+}
+
+.profile div.current-competition-container div div.competition-card:hover {
+    background-color: rgb(209, 249, 235);
+}
+
+.profile div.current-competition-container div div.competition-card img {
+    width: 5em;
+    height: 5em;
+    padding: 0 0.5em;
+}
+
+.profile div.current-competition-container div div.competition-card img:hover {
+    filter: invert(0.3);
+    transition-duration: 0.5s;
+    cursor: pointer;
+}
+
+.profile div.current-competition-container div div.competition-card a {
+    text-decoration: none;
+
+    color: black;
+}
+
+tr:hover {
+    background-color: rgb(221, 221, 221);
 }

@@ -1,0 +1,14 @@
+div.choose-icon {
+    display: flex;
+    width: 20em;
+}
+
+img {
+    width: 5em;
+    height: 5em;
+    filter: invert(0);
+}
+
+img:hover {
+    filter: invert(0.4);
+}

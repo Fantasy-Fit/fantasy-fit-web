@@ -4,6 +4,8 @@ import { participantsApiSlice, useGetParticipantsQuery } from "../../store/game/
 import { useCreateCompetitionMutation } from "../../store/game/competitionApiSlice";
 import GameRules from "./GameRules";
 import { setParticipantList } from "../../store/game/participantSlice";
+import fitnessIcons from "../../data/fitnessIcons";
+import './NewCompetition.css'
 
 function Create() {
   const dispatch = useDispatch();
@@ -29,13 +31,15 @@ function Create() {
           return participantArray;
       }
     }
-
     setNewCompData({
       ...newCompData,
       [e.target.name]: getCompValue(e.target.name)
     });
-
   };
+
+  const mapFitnessIcons = Object.values(fitnessIcons).map(icon => {
+    return <img key={icon} src={icon} />
+  })
 
   const handleCreateCompetition = async (e) => {
     e.preventDefault();
@@ -69,6 +73,11 @@ function Create() {
   return (
     <div>
       <form onSubmit={handleCreateCompetition}>
+
+        <label>Choose Competition Icon</label>
+        <div className="choose-icon">
+          {mapFitnessIcons}
+        </div>
         <input
           type="text"
           name="name"
