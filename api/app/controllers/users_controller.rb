@@ -13,7 +13,7 @@ class UsersController < ApplicationController
         user = set_user
         user.update(user_params)
         if user
-            render json: {user: user}, status: :accepted
+            render json: user, status: :accepted
         else
             render json: {error: "unable to update profile"}, status: :unprocessable_entity
         end

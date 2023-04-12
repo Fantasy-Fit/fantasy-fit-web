@@ -25,10 +25,9 @@ const EditProfileModal = () => {
 
     const onSubmit = async (data) => {
         const { id, username, email, location, avatar, gender } = data;
-        console.log({ user: data })
         const regData = await updateProfile({ id, username, email, location, avatar, gender }).unwrap();
-        console.log(regData)
-        dispatch(setUserInfo({ user: data }))
+        dispatch(setUserInfo({ user: regData }));
+        localStorage.setItem("user", JSON.stringify(regData));
     };
     const closeEditProfileModal = () => {
         const modal = document.getElementById("edit-profile-modal");
