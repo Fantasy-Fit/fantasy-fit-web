@@ -74,7 +74,7 @@ function Login() {
         </button>
         <div className="loginScreen__gradient" />
       </div>
-      <div className="loginScreen__body">
+      <div className="loginScreen__body" style={{ top: signIn ? "7%" : "24%" }}>
         {signIn ? (
           <Signup />
         ) : (

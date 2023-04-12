@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   post "/auth/login", to: "authentication#login"
   post "/auth/signup", to: "authentication#signup"
+  patch "/auth/update_profile", to: "users#update"
   delete "/logout", to: "authentication#logout"
   
   get "/competition/leaderboard/:id", to: "competitions#leaderboard"
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
   match '/workouts', controller: 'application', action: 'cors_preflight_check', via: [:options]
   match '/auth/login', controller: 'application', action: 'cors_preflight_check', via: [:options]
   match '/auth/signup', controller: 'application', action: 'cors_preflight_check', via: [:options]
+  match '/auth/update_profile', controller: 'application', action: 'cors_preflight_check', via: [:options]
   match '/logout', controller: 'application', action: 'cors_preflight_check', via: [:options]
   match '/users', controller: 'application', action: 'cors_preflight_check', via: [:options]
   match '/competition/leaderboard/:id', controller: 'application', action: 'cors_preflight_check', via: [:options]

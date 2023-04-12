@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useCookies } from "react-cookie";
-
 import { useDispatch } from "react-redux";
 import { setUserInfo } from "../../store/auth/userSlice";
 import { useSignupMutation } from "../../store/auth/authApiSlice";
@@ -11,10 +10,14 @@ import { useSignupMutation } from "../../store/auth/authApiSlice";
 import "./Signup.css";
 
 function Signup() {
+  const [signup, { isLoading }] = useSignupMutation();
+  const dispatch = useDispatch();
+  const [, setCookie] = useCookies();
   const navigate = useNavigate();
   const schema = yup.object().shape({
     username: yup.string().required(),
     email: yup.string().email().required(`Email can't be blank`),
+    location: yup.string().required('Location is required'),
     password: yup
       .string()
       .min(4)
@@ -33,16 +36,9 @@ function Signup() {
     resolver: yupResolver(schema),
   });
 
-  const [signup, { isLoading }] = useSignupMutation();
-  const dispatch = useDispatch();
-
-  const [, setCookie] = useCookies();
-
   const onSubmit = async (data) => {
-    const username = data.username;
-    const email = data.email;
-    const password = data.password;
-    const regData = await signup({ username, email, password }).unwrap();
+    const { username, email, password, location, avatar, gender } = data;
+    const regData = await signup({ username, email, password, location, avatar, gender }).unwrap();
     dispatch(setUserInfo({ ...regData }));
     setCookie("token", regData?.token);
     localStorage.setItem("user", JSON.stringify(regData?.user));
@@ -55,6 +51,9 @@ function Signup() {
         <h1>Sign Up</h1>
         <input placeholder="username" type="text" {...register("username")} />
         <input placeholder="email" type="email" {...register("email")} />
+        <input placeholder="location" type="text" {...register("location")} />
+        <input placeholder="avatar" type="text" {...register("avatar")} />
+        <input placeholder="gender" type="text" {...register("gender")} />
         <input
           placeholder="password"
           type="password"
@@ -74,6 +73,6 @@ function Signup() {
       </form>
     </div>
   );
-}
+};
 
 export default Signup;
