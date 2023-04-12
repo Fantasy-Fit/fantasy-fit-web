@@ -1,9 +1,10 @@
-import { useSelector } from 'react-redux';
-import { selectCurrentUser } from '../../store/auth/userSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectCurrentUser, setUserInfo } from '../../store/auth/userSlice';
 import { useForm } from 'react-hook-form';
 import { useUpdateProfileMutation } from '../../store/auth/authApiSlice';
 
 const EditProfileModal = () => {
+    const dispatch = useDispatch();
     const { id, username, email, location, avatar, gender } = useSelector(selectCurrentUser);
     const [updateProfile, { isLoading }] = useUpdateProfileMutation();
 
@@ -24,8 +25,10 @@ const EditProfileModal = () => {
 
     const onSubmit = async (data) => {
         const { id, username, email, location, avatar, gender } = data;
-        console.log(data)
+        console.log({ user: data })
         const regData = await updateProfile({ id, username, email, location, avatar, gender }).unwrap();
+        console.log(regData)
+        dispatch(setUserInfo({ user: data }))
     };
     const closeEditProfileModal = () => {
         const modal = document.getElementById("edit-profile-modal");
