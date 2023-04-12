@@ -21,8 +21,15 @@ export const authApiSlice = apiSlice.injectEndpoints({
         url: "http://localhost:3000/logout",
         method: "DELETE",
       })
+    }),
+    updateProfile: builder.mutation({
+      query: (credentials) => ({
+        url: "http://localhost:3000/auth/update_profile",
+        method: "PATCH",
+        body: { ...credentials },
+      })
     })
   }),
 });
 
-export const { useLoginMutation, useSignupMutation, useLogoutMutation } = authApiSlice;
+export const { useLoginMutation, useSignupMutation, useLogoutMutation, useUpdateProfileMutation } = authApiSlice;

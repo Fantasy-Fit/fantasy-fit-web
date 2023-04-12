@@ -10,17 +10,18 @@
     right: 0;
 }
 
-.signupScreen > form {
+.signupScreen>form {
     display: flex;
     flex-direction: column;
 }
 
-.signupScreen > form > h1 {
+.signupScreen>form>h1 {
+    font-size: 3.125rem;
     text-align: left;
     margin-bottom: 25px;
 }
 
-.signupScreen > form > h4 {
+.signupScreen>form>h4 {
     text-align: left;
     margin-bottom: 30px;
 }
@@ -34,7 +35,7 @@
     text-decoration: underline;
 }
 
-.signupScreen > form > input {
+.signupScreen>form>input {
     outline-width: 0;
     height: 40px;
     margin-bottom: 14px;
@@ -43,7 +44,8 @@
     padding: 5px 15px;
 }
 
-.signupScreen > form > button {
+.signupScreen>form>button,
+.signupScreen button {
     padding: 16px 20px;
     font-size: 1rem;
     color: #fff;

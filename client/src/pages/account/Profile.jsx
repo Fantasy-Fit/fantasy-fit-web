@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useLogoutMutation } from "../../store/auth/authApiSlice";
 import RecentWorkouts from "./RecentWorkouts";
-
+import EditProfileModal from "./EditProfileModal";
 
 function Profile() {
   const user = useSelector(selectCurrentUser);
@@ -14,7 +14,6 @@ function Profile() {
   const [, removeCookie] = useCookies(["token"]);
   const navigate = useNavigate();
   const [logout] = useLogoutMutation();
-
 
   const mapComps = competitions?.map((comp) => {
     return (
@@ -37,6 +36,11 @@ function Profile() {
     } catch (error) {
       console.error("Error logging out", error);
     };
+  };
+
+  const openEditProfileModal = () => {
+    const modal = document.getElementById("edit-profile-modal");
+    modal.style.display = "block";
   };
 
   const content = (
@@ -63,7 +67,7 @@ function Profile() {
             <div className="profile-label"><h4>Location:</h4></div>
             <div><p>{user.location}</p></div>
           </div>
-          <button>Edit Profile</button>
+          <button onClick={openEditProfileModal}>Edit Profile</button>
           <button onClick={handleLogout}>Log out</button>
         </div>
       </div>
@@ -83,6 +87,7 @@ function Profile() {
           </button>
         </div>
       </div>
+
       <div className="current-competition-container">
         <div className="current-competition-container-inner">
           <h2>Current Competitions</h2>
@@ -96,6 +101,7 @@ function Profile() {
 
         </div>
       </div>
+      <EditProfileModal />
     </section>
   );
   return content;

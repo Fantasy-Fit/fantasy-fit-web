@@ -10,6 +10,9 @@ import { useSignupMutation } from "../../store/auth/authApiSlice";
 import "./Signup.css";
 
 function Signup() {
+  const [signup, { isLoading }] = useSignupMutation();
+  const dispatch = useDispatch();
+  const [, setCookie] = useCookies();
   const navigate = useNavigate();
   const schema = yup.object().shape({
     username: yup.string().required(),
@@ -32,11 +35,6 @@ function Signup() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-
-  const [signup, { isLoading }] = useSignupMutation();
-  const dispatch = useDispatch();
-
-  const [, setCookie] = useCookies();
 
   const onSubmit = async (data) => {
     const { username, email, password, location, avatar, gender } = data;
@@ -75,6 +73,6 @@ function Signup() {
       </form>
     </div>
   );
-}
+};
 
 export default Signup;
