@@ -29,4 +29,12 @@ Workout.create(activity: "Strength Training", duration: 60, intensity: "H", date
 Workout.create(activity: "Cardio", duration: 75, intensity: "H", date: "3/07/2023", calories: 750, avg_HR: 140, user_id: 3, competition_id: 1, points: 1200)
 Workout.create(activity: "HIIT", duration: 60, intensity: "M", date: "3/08/2023", calories: 800, avg_HR: 145, user_id: 4, competition_id: 1, points: 450)
 
+puts "Seeding posts..."
+
+Post.create(user_id: 3, competition_id: 1, description: "Lets get Started!")
+Post.create(user_id: 1, competition_id: 1, description: "Go Go Go!")
+Post.create(user_id: 2, competition_id: 1, description: "I'm ready!!")
+Post.create(user_id: 4, competition_id: 1, description: "Loosers!")
+
+
 puts "Complete!"
