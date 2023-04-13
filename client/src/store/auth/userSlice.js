@@ -10,11 +10,9 @@ const userSlice = createSlice({
   },
   reducers: {
     setUserInfo: (state, action) => {
-      const { user, token, workouts, competitions } = action.payload;
-      state.user = user;
-      state.token = token;
-      state.workouts = workouts;
-      state.competitions = competitions;
+      Object.keys(action.payload).forEach(key => {
+        state[key] = action.payload[key];
+      });
     },
     logOut: (state) => {
       state.user = null;

@@ -1,0 +1,86 @@
+div.choose-icon {
+    display: flex;
+    width: 20em;
+}
+
+img {
+    width: 5em;
+    height: 5em;
+    filter: invert(0);
+}
+
+img:hover {
+    filter: invert(0.4);
+}
+
+div.create-competition-container {
+    display: flex;
+    justify-content: center;
+}
+
+div.create-competition-container-inner {
+    border: 1px solid lightgray;
+    padding: 1em 3em;
+    margin: 1em 0;
+}
+
+div.create-competition-container div h1 {
+    margin: 0.5em 0;
+}
+
+
+div.choose-icon {
+    width: 20em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 1em auto;
+
+}
+
+div.choose-icon img {
+    padding: 0.5em;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+
+div.create-competition-container-inner form input {
+    background-color: rgb(208, 196, 196);
+    outline-width: 0;
+    height: 30px;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: none;
+    padding: 5px 15px;
+    display: inline-block;
+}
+
+div.create-competition-container-inner form div.is-public-checkbox {
+    display: flex;
+}
+
+div.create-competition-container-inner form div label {
+    margin: 0 0.5em 0 0;
+    width: 150px;
+}
+
+div.select-participants div {
+    height: 2em;
+    width: 10em;
+    display: block;
+    margin-left: 10em;
+}
+
+div.select-participants div div {
+    display: flex;
+    align-items: center;
+    margin: 0.25em 0;
+}
+
+div.select-participants div div input {
+    margin: 0 1em;
+}
+
+div.select-participants div input {
+    display: block;
+}

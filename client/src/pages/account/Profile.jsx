@@ -1,46 +1,29 @@
 import { useSelector } from "react-redux";
-import {
-  selectCurrentUser,
-  logOut,
-  selectUserWorkouts,
-  selectUserCompetitions,
-} from "../../store/auth/userSlice";
+import { selectCurrentUser, selectUserCompetitions } from "../../store/auth/userSlice";
 import "./Profile.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { useDispatch } from "react-redux";
 import { useLogoutMutation } from "../../store/auth/authApiSlice";
-import LoadingSpinner from "../auth/LoadingSpinner";
-
+import RecentWorkouts from "./RecentWorkouts";
+import EditProfileModal from "./EditProfileModal";
 
 function Profile() {
   const user = useSelector(selectCurrentUser);
-  const workouts = useSelector(selectUserWorkouts);
   const competitions = useSelector(selectUserCompetitions);
   const token = user.token;
   const [, removeCookie] = useCookies(["token"]);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [logout] = useLogoutMutation();
-
 
   const mapComps = competitions?.map((comp) => {
     return (
-      <p key={comp.identifier}>
+      <div className="competition-card" key={comp.identifier}>
+
         <Link to={`/tournament/${comp.id}`} state={comp}>
+          <img src={comp.icon} />
           {comp.name}
         </Link>
-      </p>
-    );
-  });
-
-  const mapWorkouts = workouts?.map((workout) => {
-    return (
-      <li key={workout.id}>
-        {workout.id}.{workout.activity} -{workout.duration}mins,
-        {workout.calories}cals,
-        {workout.points}pts
-      </li>
+      </div>
     );
   });
 
@@ -52,13 +35,20 @@ function Profile() {
       navigate("/");
     } catch (error) {
       console.error("Error logging out", error);
-    }
-  }
+    };
+  };
+
+  const openEditProfileModal = () => {
+    const modal = document.getElementById("edit-profile-modal");
+    modal.style.display = "block";
+  };
 
   const content = (
     <section className="profile">
       <div className="profile-top">
-        <img src={user.avatar} alt={user.username} />
+        <div className="profile-img-container">
+          <img src={user.avatar} alt={user.username} />
+        </div>
         <div className="my-profile">
           <h1>My Profile</h1>
           <div className="profile-row">
@@ -77,26 +67,44 @@ function Profile() {
             <div className="profile-label"><h4>Location:</h4></div>
             <div><p>{user.location}</p></div>
           </div>
-          <button>Edit Profile</button>
+          <button onClick={openEditProfileModal}>Edit Profile</button>
+          <button onClick={handleLogout}>Log out</button>
         </div>
       </div>
-      <div className="my-profile-competitions">
-        <p>Notification/Profile Settings</p>
-        <p>Badges / Achievements</p>
-        <button>
-          <Link to="/new-competition">New Competition</Link>
-        </button>
-        <h3>Current Competitions</h3>
-        {mapComps}
-        {/* <h3>Past Competitions</h3> */}
-        <p>Recent Workouts</p>
-        {mapWorkouts}
-        <p>Friends & Followers</p>
-        <button onClick={handleLogout}>Log out</button>
+      <div className="new-competition-container">
+        {/* <p>Notification/Profile Settings</p> */}
+        {/* <p>Badges / Achievements</p> */}
+        <div className="new-competition">
+          <Link to="/new-competition"><img src="https://cdn-icons-png.flaticon.com/512/4959/4959925.png" /></Link>
+          <button>
+            <Link to="/new-competition">New Competition</Link>
+          </button>
+        </div>
+        <div className="new-competition">
+          <img src="https://cdn-icons-png.flaticon.com/512/6679/6679633.png" />
+          <button>
+            <Link to="/join">Join</Link>
+          </button>
+        </div>
       </div>
+
+      <div className="current-competition-container">
+        <div className="current-competition-container-inner">
+          <h2>Current Competitions</h2>
+          <div>
+            {mapComps}
+          </div>
+          {/* <h3>Past Competitions</h3> */}
+          <h3>Recent Workouts</h3>
+          <RecentWorkouts />
+          {/* <p>Friends & Followers [To be Built]</p> */}
+
+        </div>
+      </div>
+      <EditProfileModal />
     </section>
   );
   return content;
-}
+};
 
 export default Profile;
