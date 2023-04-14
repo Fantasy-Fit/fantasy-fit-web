@@ -15,7 +15,7 @@ In a new terminal run the following command:
 docker compose run api rails db:create db:migrate db:seed
 ```
 
-For frontend
+For frontend (if running outside of Docker)
 ```
 cd client
 npm install
