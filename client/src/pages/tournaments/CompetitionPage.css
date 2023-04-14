@@ -1,0 +1,107 @@
+div.tournament-page {
+    display: flex;
+    justify-content: center;
+    margin: 1em;
+}
+
+div.tournament-page>div {
+    border: 1px solid lightgray;
+    border-radius: 10px;
+}
+
+div.tournament-page div h1 {
+    margin: 0.5em 0;
+}
+
+div.tournament-page-header {
+    display: flex;
+    justify-content: center;
+    margin: 0.5em;
+    padding: 0.5em;
+    background-color: burlywood;
+    background-image: linear-gradient(to bottom, beige, rgb(220, 220, 215))
+}
+
+div.leaderboard-container {
+    display: flex;
+    justify-content: center;
+    margin: 0.5em 2em;
+
+}
+
+div.leaderboard-container div {
+    padding: 1em;
+    border: 0.5px solid rgb(124, 118, 118);
+    border-radius: 10px;
+}
+
+div.leaderboard-container div h2 {
+    text-align: center;
+    margin-bottom: 0.5em;
+}
+
+th,
+td {
+    padding: 0.2em 1em;
+}
+
+tr.table-row-1 {
+    background-color: gold;
+}
+
+tr.table-row-2 {
+    background-color: silver;
+}
+
+tr.table-row-3 {
+    background-color: orange;
+}
+
+div.record-workout-container {
+    display: flex;
+    justify-content: center;
+}
+
+div.record-workout-container div {
+    border: 1px solid lightgray;
+    padding: 1.25em;
+    margin: 0.5em;
+    border-radius: 8px;
+}
+
+div.record-workout-container div h2 {
+    margin: 0.5em 0;
+}
+
+form.record-workout-form * {
+    display: block;
+    width: 170px;
+    margin: 0.5em;
+}
+
+form.record-workout-form select,
+form.record-workout-form input,
+form.record-workout-form label {
+    width: 170px;
+}
+
+
+input.add-workout-submit {
+    height: 30px;
+    background-color: beige;
+    border: 1px solid gray;
+    border-radius: 8px;
+}
+
+div.feed {
+    display: flex;
+    justify-content: center;
+    margin: 0.5em;
+}
+
+div.feed>div {
+    border: 1px solid lightgray;
+    margin: 0.5em;
+    padding: 1em;
+    border-radius: 8px;
+}

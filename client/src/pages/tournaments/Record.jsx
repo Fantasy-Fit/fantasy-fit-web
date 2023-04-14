@@ -74,48 +74,54 @@ function Record({ comp }) {
   }, [message])
 
   return (
-    <div>
-      <h3>Record Workout</h3>
-      <form onSubmit={createWorkout}>
-        <select
-          onChange={handleInput}
-          name="activity"
-          defaultValue="activity"
-        >
-          <option value="activity" disabled hidden>Select Activity</option>
-          {activities.map(activity => {
-            return (<option key={activity}>{activity}</option>)
-          })}
-        </select>
-        <input
-          type="number"
-          placeholder="Duration in minutes"
-          name="duration"
-          value={workoutData.duration}
-          onChange={handleInput}
-        />
-        <select
-          onChange={handleInput}
-          name="intensity"
-          defaultValue="default"
-        >
-          <option value="default" hidden disabled>Select Intensity</option>
-          <option>Low</option>
-          <option>Medium</option>
-          <option>High</option>
-        </select>
-        <input
-          type="date"
-          placeholder="MM/DD/YYYY"
-          name="date"
-          value={workoutData.date}
-          onChange={handleInput}
-        />
-        <input
-          type="submit"
-          value="Add Workout"
-        />
-      </form>
+    <div className="record-workout-container">
+
+      <div>
+        <h2>Record Workout</h2>
+        <form onSubmit={createWorkout} className="record-workout-form">
+          <select
+            onChange={handleInput}
+            name="activity"
+            defaultValue="activity"
+          >
+            <option value="activity" disabled hidden>Select Activity</option>
+            {activities.map(activity => {
+              return (<option key={activity}>{activity}</option>)
+            })}
+          </select>
+          <label htmlFor="duration">Duration (mins):</label>
+          <input
+            type="number"
+            placeholder="Duration in minutes"
+            name="duration"
+            value={workoutData.duration}
+            onChange={handleInput}
+          />
+          <select
+            onChange={handleInput}
+            name="intensity"
+            defaultValue="default"
+          >
+            <option value="default" hidden disabled>Select Intensity</option>
+            <option>Low</option>
+            <option>Medium</option>
+            <option>High</option>
+          </select>
+          <label htmlFor="date">Date:</label>
+          <input
+            type="date"
+            placeholder="MM/DD/YYYY"
+            name="date"
+            value={workoutData.date}
+            onChange={handleInput}
+          />
+          <input
+            type="submit"
+            value="Add Workout"
+            className="add-workout-submit"
+          />
+        </form>
+      </div>
       {message && <p>{message}</p>}
     </div>
   );
