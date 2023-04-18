@@ -7,7 +7,8 @@ class CompetitionsController < ApplicationController
     end
 
     def index
-        render json: Competition.all, status: :ok
+        user = User.find(params[:user_id])
+        render json: user.competitions, status: :ok
     end
 
     def create
