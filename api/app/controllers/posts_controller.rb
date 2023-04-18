@@ -5,6 +5,13 @@ class PostsController < ApplicationController
         render json: competition.posts, status: :ok
     end
 
+    def create
+        user = User.find(params[:user_id])
+        competition = Competition.find(params[:competition_id])
+        post = Post.create!(post_params)
+        render json: post, status: :created
+    end
+
     private
 
     def post_params

@@ -5,6 +5,7 @@ function PostCard({ post }) {
     <div>
       <h3>{post.user.username}</h3>
       <p>{post.description}</p>
+      <button>delete</button>
     </div>
   );
 }
