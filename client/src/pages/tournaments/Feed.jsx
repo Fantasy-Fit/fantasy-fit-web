@@ -20,12 +20,10 @@ function Feed({ comp }) {
 
   return (
     <div className="feed">
-
-      <h2>Competition Feed</h2>
-      <Posts posts={posts} />
+      <h2>Feed</h2>
+      <Posts posts={posts} comp={comp} />
       <p>Notifications (new participant update/new workout)</p>
       <p>Updates</p>
-
     </div>
   );
 }
