@@ -1,11 +1,11 @@
-import React from "react";
+import PostCard from "./PostCard";
 
-function Posts() {
-  return (
-    <div className="posts">
-      <p>Posts</p>
-    </div>
-  );
+function Posts({ posts }) {
+  const renderedPosts = posts?.map((post) => {
+    return <PostCard key={post.id} post={post} />;
+  });
+
+  return <div className="posts">{renderedPosts}</div>;
 }
 
 export default Posts;

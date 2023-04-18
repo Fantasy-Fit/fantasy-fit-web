@@ -9,6 +9,7 @@ import './CompetitionPage.css';
 function TournamentPage() {
   const location = useLocation();
   const comp = location.state;
+
   const competition = useSelector(selectUserCompetitions).find(competition => competition.id === comp.id)
 
   return (
@@ -18,7 +19,7 @@ function TournamentPage() {
           <img src={competition.icon} alt={competition.name} />
           <h1> {location.state.name} </h1>
         </div>
-        <Feed />
+        <Feed comp={comp} />
         <div>
           <Leaderboard comp={comp} />
         </div>
