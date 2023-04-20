@@ -9,7 +9,7 @@ import { useSignupMutation } from "../../store/auth/authApiSlice";
 
 import "./Signup.css";
 
-function Signup() {
+function Signup({ setSignIn }) {
   const [signup, { isLoading }] = useSignupMutation();
   const dispatch = useDispatch();
   const [, setCookie] = useCookies();
@@ -71,6 +71,13 @@ function Signup() {
           errors.passwordConfirm?.message,
         ]}
       </form>
+      <span className="loginScreen__gray"
+      >Have an existing account?</span>
+      <span on="true" className="loginScreen__link"
+        onClick={() => setSignIn(state => !state)}>
+        {" "}
+        Login here
+      </span>
     </div>
   );
 };
