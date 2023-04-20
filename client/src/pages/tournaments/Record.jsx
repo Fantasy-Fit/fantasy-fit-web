@@ -4,6 +4,7 @@ import { selectCurrentUser } from "../../store/auth/userSlice";
 import { useAddWorkoutMutation } from "../../store/game/workoutApiSlice";
 import { setLeaderboard } from "../../store/game/leaderboardSlice";
 import { useGetLeaderboardQuery } from "../../store/game/leaderboardApiSlice";
+import { useGetPostsQuery } from "../../store/game/feedApiSlice";
 
 const activities = ["Run", "Cycle", "Indoor Cycle", "Mountain Biking", "Swimming",
   "Open Water Swimming", "Walking", "Strength Training", "Cardio", "HIIT", "Hiking", "Skiing", "Snowboarding", "Ice Skating", "Treadmill", "Track Run", "Rowing", "Canoe",
@@ -32,7 +33,8 @@ const activities = ["Run", "Cycle", "Indoor Cycle", "Mountain Biking", "Swimming
 function Record({ comp }) {
   const dispatch = useDispatch();
   const user = useSelector(selectCurrentUser);
-  const { refetch } = useGetLeaderboardQuery(comp.id);
+  const { refetch: refetchLeaderboard } = useGetLeaderboardQuery(comp.id);
+  const { refetch: refetchPosts } = useGetPostsQuery(comp.id);
   const [message, setMessage] = useState("");
   const [workoutData, setWorkoutData] = useState({
     activity: "", duration: 0, intensity: "", date: ""
@@ -42,6 +44,8 @@ function Record({ comp }) {
   const handleInput = (e) => {
     setWorkoutData({ ...workoutData, [e.target.name]: e.target.value })
   }
+  const today = new Date();
+  const comp_created = comp.created_at.substring(0, 10)
 
   const createWorkout = async (e) => {
     e.preventDefault();
@@ -52,13 +56,13 @@ function Record({ comp }) {
         competition_id: comp.id
       })
       const updatedLeaderboard = [...req.data.leaderboard];
-
       dispatch(setLeaderboard([...updatedLeaderboard]))
       setMessage("Workout successfully added!")
       setWorkoutData({
         activity: "", duration: 0, intensity: "", date: ""
       })
-      refetch();
+      refetchLeaderboard();
+      refetchPosts();
 
     } catch (error) {
       console.error(error.message);
@@ -74,48 +78,56 @@ function Record({ comp }) {
   }, [message])
 
   return (
-    <div>
-      <h3>Record Workout</h3>
-      <form onSubmit={createWorkout}>
-        <select
-          onChange={handleInput}
-          name="activity"
-          defaultValue="activity"
-        >
-          <option value="activity" disabled hidden>Select Activity</option>
-          {activities.map(activity => {
-            return (<option key={activity}>{activity}</option>)
-          })}
-        </select>
-        <input
-          type="number"
-          placeholder="Duration in minutes"
-          name="duration"
-          value={workoutData.duration}
-          onChange={handleInput}
-        />
-        <select
-          onChange={handleInput}
-          name="intensity"
-          defaultValue="default"
-        >
-          <option value="default" hidden disabled>Select Intensity</option>
-          <option>Low</option>
-          <option>Medium</option>
-          <option>High</option>
-        </select>
-        <input
-          type="date"
-          placeholder="MM/DD/YYYY"
-          name="date"
-          value={workoutData.date}
-          onChange={handleInput}
-        />
-        <input
-          type="submit"
-          value="Add Workout"
-        />
-      </form>
+    <div className="record-workout-container">
+
+      <div>
+        <h2>Record Workout</h2>
+        <form onSubmit={createWorkout} className="record-workout-form">
+          <select
+            onChange={handleInput}
+            name="activity"
+            defaultValue="activity"
+          >
+            <option value="activity" disabled hidden>Select Activity</option>
+            {activities.map(activity => {
+              return (<option key={activity}>{activity}</option>)
+            })}
+          </select>
+          <label htmlFor="duration">Duration (mins):</label>
+          <input
+            type="number"
+            placeholder="Duration in minutes"
+            name="duration"
+            value={workoutData.duration}
+            onChange={handleInput}
+          />
+          <select
+            onChange={handleInput}
+            name="intensity"
+            defaultValue="default"
+          >
+            <option value="default" hidden disabled>Select Intensity</option>
+            <option>Low</option>
+            <option>Medium</option>
+            <option>High</option>
+          </select>
+          <label htmlFor="date">Date:</label>
+          <input
+            type="date"
+            placeholder="MM/DD/YYYY"
+            name="date"
+            min={comp_created}
+            max={today.toISOString().substring(0, 10)}
+            value={workoutData.date}
+            onChange={handleInput}
+          />
+          <input
+            type="submit"
+            value="Add Workout"
+            className="add-workout-submit"
+          />
+        </form>
+      </div>
       {message && <p>{message}</p>}
     </div>
   );
