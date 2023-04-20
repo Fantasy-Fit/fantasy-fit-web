@@ -6,15 +6,27 @@ class WorkoutsController < ApplicationController
     end
 
     def create
+        user = User.find(params[:user_id])
+
         workout_points = calculate_points(workout_params)
         workout = Workout.create!(workout_params.merge(:points => workout_points))
+
         participant = Participant.where(user_id: params[:user_id], competition_id: params[:competition_id])
         total_points = participant[0].user_total_points == nil ? 0 : participant[0].user_total_points + workout_points
         participant.update!(user_total_points: total_points)
+
         leaderboard = update_leaderboard(params[:competition_id])
+
+        new_workout_post = Post.create(
+            user_id: params[:user_id],
+            competition_id: params[:competition_id],
+            description: "#{user.username} just posted a workout! #{params[:activity]} for #{params[:duration]} mins, earning #{workout_points} points!"
+        )
+
         render json: {
             workout: workout,
             leaderboard: leaderboard,
+            post: new_workout_post
         }, status: :created
     end
 

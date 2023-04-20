@@ -19,14 +19,14 @@ services:
     working_dir: /api
     depends_on:
       - db
-  # client:
-  #   build: client
-  #   image: react-client-frontend
-  #   command: sh -c "npm install && npm run dev"
-  #   ports:
-  #     - "4000:4000"
-  #   working_dir: /client
-  #   volumes:
-  #     - ./client:/client
-  #   environment:
-  #     POSTGRES_PASSWORD: password
+  client:
+    build: client
+    image: react-client-frontend
+    command: sh -c "npm install && npm run dev"
+    ports:
+      - "4000:4000"
+    working_dir: /client
+    volumes:
+      - ./client:/client
+    environment:
+      POSTGRES_PASSWORD: password
