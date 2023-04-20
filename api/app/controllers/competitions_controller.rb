@@ -10,6 +10,10 @@ class CompetitionsController < ApplicationController
         render json: Competition.all, status: :ok
     end
 
+    def show
+        render json: Competition.find_by(identifier: params[:identifier]), status: :ok
+    end
+
     def create
         competition = Competition.new(comp_params)
         competition.identifier = generate_identifier
@@ -25,8 +29,10 @@ class CompetitionsController < ApplicationController
     end
 
     def join
-        competition = Competition.find(params[:id]) || Competition.find_by(identifier: params[:identifier])
+        byebug
+        competition = Competition.find_by(identifier: params[:identifier])
         user = User.find_by(username: params[:username])
+        puts params
 
         if competition.nil?
             render json: { error: "Competition not found"}, status: :not_found
@@ -37,16 +43,15 @@ class CompetitionsController < ApplicationController
         elsif competition.participants.where(user_id: user.id).exists?
             render json: { error: "User is already a participant in this competition"}, status: :unprocessable_entity
             return
+        else
+            participant = competition.participants.create(
+              user_id: user.id,
+              username: user.username,
+              user_total_points: 0
+            )
+
+            render json: participant, status: :created
         end
-
-        participant = competition.participants.create(
-            user_id: user.id,
-            username: user.username,
-            user_total_points: 0
-        )
-
-        render json: participant, status: :created
-
     end
 
     private
