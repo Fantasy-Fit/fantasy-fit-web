@@ -10,10 +10,6 @@ class CompetitionsController < ApplicationController
         render json: Competition.all, status: :ok
     end
 
-    def show
-        render json: Competition.find_by(identifier: params[:identifier]), status: :ok
-    end
-
     def create
         competition = Competition.new(comp_params)
         competition.identifier = generate_identifier
@@ -29,10 +25,8 @@ class CompetitionsController < ApplicationController
     end
 
     def join
-        byebug
         competition = Competition.find_by(identifier: params[:identifier])
-        user = User.find_by(username: params[:username])
-        puts params
+        user = User.find_by(username: params[:user][:username])
 
         if competition.nil?
             render json: { error: "Competition not found"}, status: :not_found

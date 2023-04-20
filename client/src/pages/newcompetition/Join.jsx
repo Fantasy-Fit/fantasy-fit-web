@@ -15,16 +15,24 @@ const Join = () => {
 
   const handleJoin = async (e) => {
     e.preventDefault();
-
     try {
       if (!user) {
         throw new Error("User not found");
       }
-  
-      await joinCompetition({ identifier, user: user.username });
+
+      let req = await joinCompetition({
+        identifier: identifier,
+        user: user
+      });
+
+      console.log(req)
+      if (!!req.error) {
+        throw new Error("err msg")
+      }
       setIdentifier("");
       setErrorMessage("");
-    } catch (err) {
+
+    } catch (error) {
       setErrorMessage("Could not join competition. Please check the identifier and try again.");
     }
   };

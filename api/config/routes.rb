@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   patch "/auth/update_profile", to: "users#update"
   delete "/logout", to: "authentication#logout"
   post "/competition/join", to: "competitions#join"
-  get "competition/join/:identifier", to: "competitions#show" 
   get "/competition/leaderboard/:id", to: "competitions#leaderboard"
 
   match '/workouts', controller: 'application', action: 'cors_preflight_check', via: [:options]
@@ -27,10 +26,6 @@ Rails.application.routes.draw do
   match '/competition/leaderboard/:id', controller: 'application', action: 'cors_preflight_check', via: [:options]
   match '/competitions', controller: 'application', action: 'cors_preflight_check', via: [:options]
   match '/competition/join', controller: 'application', action: 'cors_preflight_check', via: [:options]
-
-  match '/competition/join/:identifier', controller: 'application', action: 'cors_preflight_check', via: [:options]
-
- 
   match '/posts', controller: 'application', action: 'cors_preflight_check', via: [:options]
 
   # match '/auth/login' || '/auth/signup' || '/logout' || '/users', controller: 'application', action: 'cors_preflight_check', via: [:options]
