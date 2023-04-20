@@ -30,6 +30,8 @@ Rails.application.routes.draw do
 
   match '/competition/join/:identifier', controller: 'application', action: 'cors_preflight_check', via: [:options]
 
+ 
+  match '/posts', controller: 'application', action: 'cors_preflight_check', via: [:options]
 
   # match '/auth/login' || '/auth/signup' || '/logout' || '/users', controller: 'application', action: 'cors_preflight_check', via: [:options]
   
