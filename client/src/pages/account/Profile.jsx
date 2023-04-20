@@ -6,6 +6,8 @@ import { useCookies } from "react-cookie";
 import { useLogoutMutation } from "../../store/auth/authApiSlice";
 import RecentWorkouts from "./RecentWorkouts";
 import EditProfileModal from "./EditProfileModal";
+import Header from "../../components/Header";
+import Sidebar from "./Sidebar";
 
 function Profile() {
   const user = useSelector(selectCurrentUser);
@@ -17,6 +19,10 @@ function Profile() {
 
   const mapComps = competitions?.map((comp) => {
     return (
+
+
+
+
       <div className="competition-card" key={comp.identifier}>
 
         <Link to={`/tournament/${comp.id}`} state={comp}>
@@ -44,6 +50,14 @@ function Profile() {
   };
 
   const content = (
+    <div className="profile__main"> 
+      <Header />
+      <div className="profile__body">
+        <Sidebar />
+
+      </div>
+    <section className="header">
+      
     <section className="profile">
       <div className="profile-top">
         <div className="profile-img-container">
@@ -103,6 +117,8 @@ function Profile() {
       </div>
       <EditProfileModal />
     </section>
+    </section>
+    </div>
   );
   return content;
 };

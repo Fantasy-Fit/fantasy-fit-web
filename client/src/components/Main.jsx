@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Main.css";
 
+
 function Main() {
   const navigate = useNavigate();
 
@@ -9,7 +10,8 @@ function Main() {
     navigate("/auth");
   }
   return (
-    <header
+    <div className="main">
+      <header
       className="banner"
       style={{
         backgroundSize: 'cover',
@@ -31,6 +33,7 @@ function Main() {
 
       <div className="banner--fadeBottom" />
     </header>
+    </div>
   );
 }
 
