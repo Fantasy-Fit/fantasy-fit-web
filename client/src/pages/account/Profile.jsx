@@ -13,6 +13,8 @@ import { useGetCompetitionsQuery } from "../../store/game/competitionApiSlice";
 import { setUserInfo } from "../../store/auth/userSlice";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import Header from "../../components/Header";
+import Sidebar from "./Sidebar";
 
 function Profile() {
   const user = useSelector(selectCurrentUser);
@@ -36,6 +38,10 @@ function Profile() {
 
   const mapComps = competitions?.map((comp) => {
     return (
+
+
+
+
       <div className="competition-card" key={comp.identifier}>
         <Link to={`/tournament/${comp.id}`} state={comp}>
           <img src={comp.icon} />
@@ -62,6 +68,14 @@ function Profile() {
   };
 
   const content = (
+    <div className="profile__main"> 
+      <Header />
+      <div className="profile__body">
+        <Sidebar />
+
+      </div>
+    <section className="header">
+      
     <section className="profile">
       <div className="profile-top">
         <div className="profile-img-container">
@@ -136,6 +150,8 @@ function Profile() {
       </div>
       <EditProfileModal />
     </section>
+    </section>
+    </div>
   );
   return content;
 }
