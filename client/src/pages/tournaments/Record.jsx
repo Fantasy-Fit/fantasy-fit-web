@@ -4,6 +4,7 @@ import { selectCurrentUser } from "../../store/auth/userSlice";
 import { useAddWorkoutMutation } from "../../store/game/workoutApiSlice";
 import { setLeaderboard } from "../../store/game/leaderboardSlice";
 import { useGetLeaderboardQuery } from "../../store/game/leaderboardApiSlice";
+import { useGetPostsQuery } from "../../store/game/feedApiSlice";
 
 const activities = ["Run", "Cycle", "Indoor Cycle", "Mountain Biking", "Swimming",
   "Open Water Swimming", "Walking", "Strength Training", "Cardio", "HIIT", "Hiking", "Skiing", "Snowboarding", "Ice Skating", "Treadmill", "Track Run", "Rowing", "Canoe",
@@ -32,7 +33,8 @@ const activities = ["Run", "Cycle", "Indoor Cycle", "Mountain Biking", "Swimming
 function Record({ comp }) {
   const dispatch = useDispatch();
   const user = useSelector(selectCurrentUser);
-  const { refetch } = useGetLeaderboardQuery(comp.id);
+  const { refetch: refetchLeaderboard } = useGetLeaderboardQuery(comp.id);
+  const { refetch: refetchPosts } = useGetPostsQuery(comp.id);
   const [message, setMessage] = useState("");
   const [workoutData, setWorkoutData] = useState({
     activity: "", duration: 0, intensity: "", date: ""
@@ -53,12 +55,16 @@ function Record({ comp }) {
       })
       const updatedLeaderboard = [...req.data.leaderboard];
 
+      // const newPost = req.data.post
+
+      // dispatch(setPosts({ newPost }))
       dispatch(setLeaderboard([...updatedLeaderboard]))
       setMessage("Workout successfully added!")
       setWorkoutData({
         activity: "", duration: 0, intensity: "", date: ""
       })
-      refetch();
+      refetchLeaderboard();
+      refetchPosts();
 
     } catch (error) {
       console.error(error.message);

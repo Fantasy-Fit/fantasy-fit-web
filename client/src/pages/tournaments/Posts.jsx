@@ -46,11 +46,11 @@ function Posts({ posts, comp }) {
 
   return (
     <div className="posts">
-      {renderedPosts}
       <form onSubmit={handleSubmit(onSubmit)}>
         <input type="text" {...register("description")} />
         <button type="submit">Post</button>
       </form>
+      {renderedPosts}
     </div>
   );
 }

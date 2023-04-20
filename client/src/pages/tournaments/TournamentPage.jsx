@@ -4,6 +4,7 @@ import Leaderboard from "./Leaderboard";
 import Record from "./Record";
 import { useLocation } from "react-router-dom";
 import { selectUserCompetitions } from "../../store/auth/userSlice";
+import { useGetPostsQuery } from "../../store/game/feedApiSlice";
 import "./CompetitionPage.css";
 
 function TournamentPage() {
@@ -21,10 +22,10 @@ function TournamentPage() {
           <img src={competition.icon} alt={competition.name} />
           <h1> {location.state.name} </h1>
         </div>
-        <Feed comp={comp} />
         <div>
           <Leaderboard comp={comp} />
         </div>
+        <Feed comp={comp} />
         <Record comp={comp} />
       </div>
     </div>
