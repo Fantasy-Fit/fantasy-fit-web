@@ -29,6 +29,11 @@ For frontend:
 For backend:
     http://localhost:3000/users
 
+To install additional node packages, in a separate terminal, run:
+```
+docker compose exec client npm install <name of package>
+```
+
 For regular Rails command (i.e. rails console, generate, etc), prefix "docker compose run api" in front:
 
 ```
