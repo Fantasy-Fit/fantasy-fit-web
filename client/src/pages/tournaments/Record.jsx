@@ -44,6 +44,8 @@ function Record({ comp }) {
   const handleInput = (e) => {
     setWorkoutData({ ...workoutData, [e.target.name]: e.target.value })
   }
+  const today = new Date();
+  const comp_created = comp.created_at.substring(0, 10)
 
   const createWorkout = async (e) => {
     e.preventDefault();
@@ -54,10 +56,6 @@ function Record({ comp }) {
         competition_id: comp.id
       })
       const updatedLeaderboard = [...req.data.leaderboard];
-
-      // const newPost = req.data.post
-
-      // dispatch(setPosts({ newPost }))
       dispatch(setLeaderboard([...updatedLeaderboard]))
       setMessage("Workout successfully added!")
       setWorkoutData({
@@ -118,6 +116,8 @@ function Record({ comp }) {
             type="date"
             placeholder="MM/DD/YYYY"
             name="date"
+            min={comp_created}
+            max={today.toISOString().substring(0, 10)}
             value={workoutData.date}
             onChange={handleInput}
           />

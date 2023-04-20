@@ -76,7 +76,7 @@ function Login() {
       </div>
       <div className="loginScreen__body" style={{ top: signIn ? "7%" : "24%" }}>
         {signIn ? (
-          <Signup />
+          <Signup setSignIn={setSignIn} />
         ) : (
           <div className="loginScreen__body">
             <p
@@ -108,10 +108,12 @@ function Login() {
               />
               <button type="submit">Log In</button>
               <h4>
-                <span className="loginScreen__gray">New to FitLeague?</span>
-                <span on="true" className="loginScreen__link">
+                <span className="loginScreen__gray"
+                >New to FitLeague?</span>
+                <span on="true" className="loginScreen__link"
+                  onClick={() => setSignIn(state => !state)}>
                   {" "}
-                  Sign Up Now.
+                  Sign Up Now
                 </span>
               </h4>
             </form>
