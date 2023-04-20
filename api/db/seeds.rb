@@ -7,8 +7,8 @@ User.create(username: "alexisT", email: "alexis@mail.com", gender: "M", year_of_
 
 puts "Seeding Competitions..."
 
-Competition.create(name: "thisFitisLitt", identifier: "ABCDE12345", public: 1)
-Competition.create(name: "Friends Race", identifier: "ABCDE12341", public: 1)
+Competition.create(name: "thisFitisLitt", identifier: "ABCDE12345", public: 1, created_at: "2023-03-01")
+Competition.create(name: "Friends Race", identifier: "ABCDE12341", public: 1, created_at: "2023-02-15")
 
 puts "Seeding Participants..."
 
