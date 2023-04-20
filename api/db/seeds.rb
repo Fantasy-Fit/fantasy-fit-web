@@ -7,8 +7,8 @@ User.create(username: "alexisT", email: "alexis@mail.com", gender: "M", year_of_
 
 puts "Seeding Competitions..."
 
-Competition.create(name: "thisFitisLitt", identifier: "ABCDE12345", public: 1, created_at: "2023-03-01")
-Competition.create(name: "Friends Race", identifier: "ABCDE12341", public: 1, created_at: "2023-02-15")
+Competition.create(name: "thisFitisLitt", identifier: "ABCDE12345", public: 1, created_at: "2023-03-01", icon: "https://cdn-icons-png.flaticon.com/512/5971/5971776.png")
+Competition.create(name: "Friends Race", identifier: "ABCDE12341", public: 1, created_at: "2023-02-15", icon: "https://cdn-icons-png.flaticon.com/512/6061/6061435.png")
 
 puts "Seeding Participants..."
 
