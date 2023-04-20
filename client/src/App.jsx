@@ -7,6 +7,7 @@ import CreateCompetition from "./pages/newcompetition/CreateCompetition";
 import Profile from "./pages/account/Profile";
 import TournamentPage from "./pages/tournaments/TournamentPage";
 import "./App.css";
+import JoinCompetition from "./pages/newcompetition/JoinCompetition";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="profile" element={<Profile />} />
             <Route path="tournament/:id" element={<TournamentPage />} />
             <Route path="new-competition" element={<CreateCompetition />} />
+            <Route path="join" element={<JoinCompetition/>} />
           </Route>
         </Route>
       </Routes>
