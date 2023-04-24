@@ -27,7 +27,6 @@ function Profile() {
   const dispatch = useDispatch();
 
   const { data: competitions, isLoading } = useGetCompetitionsQuery(user.id);
-  // console.log(competitions);
 
   useEffect(() => {
     if (isLoading) {
