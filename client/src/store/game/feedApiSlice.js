@@ -15,7 +15,14 @@ export const feedApiSlice = apiSlice.injectEndpoints({
         body: { ...credentials },
       }),
     }),
+    deletePost: builder.mutation({
+      query: (id) => ({
+        url: `/posts/${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
-export const { useGetPostsQuery, useAddPostMutation } = feedApiSlice;
+export const { useGetPostsQuery, useAddPostMutation, useDeletePostMutation } =
+  feedApiSlice;
