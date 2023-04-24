@@ -26,7 +26,6 @@ function Profile() {
   const dispatch = useDispatch();
 
   const { data: competitions, isLoading } = useGetCompetitionsQuery(user.id);
-  // console.log(competitions);
 
   useEffect(() => {
     if (isLoading) {
@@ -38,10 +37,6 @@ function Profile() {
 
   const mapComps = competitions?.map((comp) => {
     return (
-
-
-
-
       <div className="competition-card" key={comp.identifier}>
         <Link to={`/tournament/${comp.id}`} state={comp}>
           <img src={comp.icon} />
@@ -71,7 +66,7 @@ function Profile() {
     <div className="profile__main">
       <Header />
       <div className="profile__body">
-        <Sidebar />
+        {/* <Sidebar /> */}
 
       </div>
       <section className="header">

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCurrentUser, setUserInfo } from '../../store/auth/userSlice';
 import { useForm } from 'react-hook-form';
@@ -28,11 +29,22 @@ const EditProfileModal = () => {
         const regData = await updateProfile({ id, username, email, location, avatar, gender }).unwrap();
         dispatch(setUserInfo({ user: regData }));
         localStorage.setItem("user", JSON.stringify(regData));
+        closeEditProfileModal();
     };
+
     const closeEditProfileModal = () => {
         const modal = document.getElementById("edit-profile-modal");
         modal.style.display = "none";
     };
+
+    useEffect(() => {
+        const modal = document.getElementById("edit-profile-modal");
+        window.onclick = (e) => {
+            if (e.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    }, []);
 
     return (
         <div id="edit-profile-modal">
