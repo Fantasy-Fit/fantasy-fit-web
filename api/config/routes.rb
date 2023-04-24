@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   delete "/logout", to: "authentication#logout"
   post "/competition/join", to: "competitions#join"
   get "/competition/leaderboard/:id", to: "competitions#leaderboard"
+  get "/search_competitions", to: "competitions#search"
 
   match '/workouts', controller: 'application', action: 'cors_preflight_check', via: [:options]
   match '/auth/login', controller: 'application', action: 'cors_preflight_check', via: [:options]
@@ -28,7 +29,8 @@ Rails.application.routes.draw do
   match '/competition/join', controller: 'application', action: 'cors_preflight_check', via: [:options]
   match '/posts', controller: 'application', action: 'cors_preflight_check', via: [:options]
 
+  match '/search_competitions', controller: 'application', action: 'cors_preflight_check', via: [:options]
+
   # match '/auth/login' || '/auth/signup' || '/logout' || '/users', controller: 'application', action: 'cors_preflight_check', via: [:options]
-  
 
 end

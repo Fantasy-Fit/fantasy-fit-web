@@ -8,14 +8,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useLogoutMutation } from "../../store/auth/authApiSlice";
 import { logOut } from "../../store/auth/userSlice";
+import Header from "../../components/Header";
 import RecentWorkouts from "./RecentWorkouts";
 import EditProfileModal from "./EditProfileModal";
+import JoinCompetitionModal from "../newcompetition/JoinCompetitionModal";
+// import Sidebar from "./Sidebar";
 import { useGetCompetitionsQuery } from "../../store/game/competitionApiSlice";
 import { setUserInfo } from "../../store/auth/userSlice";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import Header from "../../components/Header";
-// import Sidebar from "./Sidebar";
 
 function Profile() {
   const user = useSelector(selectCurrentUser);
@@ -61,6 +62,11 @@ function Profile() {
 
   const openEditProfileModal = () => {
     const modal = document.getElementById("edit-profile-modal");
+    modal.style.display = "block";
+  };
+
+  const openJoinCompModal = () => {
+    const modal = document.getElementById("join-comp-modal");
     modal.style.display = "block";
   };
 
@@ -118,16 +124,15 @@ function Profile() {
             <div className="new-competition">
               <Link to="/new-competition">
                 <img src="https://cdn-icons-png.flaticon.com/512/4959/4959925.png" />
+                <button>New Competition</button>
               </Link>
-              <button>
-                <Link to="/new-competition">New Competition</Link>
-              </button>
             </div>
-            <div className="new-competition">
+            <div className="new-competition" onClick={openJoinCompModal}>
+              {/* <Link to="/join"> */}
               <img src="https://cdn-icons-png.flaticon.com/512/6679/6679633.png" />
-              <button>
-                <Link to="/join">Join</Link>
-              </button>
+              <button>Join</button>
+              {/* </Link> */}
+              <JoinCompetitionModal />
             </div>
           </div>
 
