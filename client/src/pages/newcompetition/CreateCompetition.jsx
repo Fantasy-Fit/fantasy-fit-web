@@ -11,15 +11,22 @@ function Create() {
   const dispatch = useDispatch();
   const [createCompetition] = useCreateCompetitionMutation();
   const [newCompData, setNewCompData] = useState({
-    name: "", public: false, participants: [], icon: ""
+    name: "", public: false, participants: [], icon: "", startDate: "", endDate: ""
   });
   const [selectedIcon, setSelectedIcon] = useState(null);
   const [validationMessages, setValidationMessages] = useState("");
+  const today = new Date();
+  const maxStartDate = new Date(Date.parse(today) + 3_600_000 * 24 * 30);
+  const maxEndDate = new Date((Date.parse(newCompData.startDate) || Date.parse(today)) + 3_600_000 * 24 * 365);
 
   const handleInput = (e) => {
     const getCompValue = (input) => {
       switch (input) {
         case "name":
+          return e.target.value;
+        case "startDate":
+          return e.target.value;
+        case "endDate":
           return e.target.value;
         case "public":
           return e.target.checked;
@@ -141,7 +148,25 @@ function Create() {
             />
           </div>
 
+          <label htmlFor="startDate">Start Date:</label>
+          <input
+            type="date"
+            name="startDate"
+            onChange={handleInput}
+            min={today.toISOString().substring(0, 10)}
+            max={maxStartDate.toISOString().substring(0, 10)}
+            value={newCompData.startDate}
+          />
+          <label htmlFor="endDate">End Date:</label>
+          <input
+            type="date"
+            name="endDate"
+            min={newCompData.startDate}
+            max={maxEndDate?.toISOString().substring(0, 10)}
 
+            onChange={handleInput}
+            value={newCompData.endDate}
+          />
           <div className="select-participants">
             <label>Select Participants:</label>
             {mapParticipants}
