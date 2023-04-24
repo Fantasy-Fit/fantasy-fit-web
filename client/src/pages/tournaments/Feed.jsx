@@ -7,6 +7,10 @@ import { selectFeedState } from "../../store/game/feedSlice";
 
 function Feed({ comp }) {
   const feed = useSelector(selectFeedState);
+  // console.log(feed)
+  // console.log(posts)
+
+
   const { data: posts, isLoading } = useGetPostsQuery(comp.id);
   const dispatch = useDispatch();
 
@@ -14,7 +18,7 @@ function Feed({ comp }) {
     if (isLoading) {
       return;
     } else {
-      dispatch(setPosts({ ...posts }));
+      dispatch(setPosts([ ...posts ]));
     }
   }, [posts]);
 
@@ -24,7 +28,7 @@ function Feed({ comp }) {
         <h2>Feed</h2>
         <p>Notifications (new participant update/new workout)</p>
         <p>Updates</p>
-        <Posts posts={posts} comp={comp} />
+        <Posts posts={feed} comp={comp} />
       </div>
     </div>
   );
