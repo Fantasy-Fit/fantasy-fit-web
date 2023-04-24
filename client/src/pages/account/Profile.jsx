@@ -7,6 +7,7 @@ import "./Profile.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useLogoutMutation } from "../../store/auth/authApiSlice";
+import { logOut } from "../../store/auth/userSlice";
 import RecentWorkouts from "./RecentWorkouts";
 import EditProfileModal from "./EditProfileModal";
 import { useGetCompetitionsQuery } from "../../store/game/competitionApiSlice";
@@ -14,7 +15,7 @@ import { setUserInfo } from "../../store/auth/userSlice";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Header from "../../components/Header";
-import Sidebar from "./Sidebar";
+// import Sidebar from "./Sidebar";
 
 function Profile() {
   const user = useSelector(selectCurrentUser);
@@ -49,6 +50,7 @@ function Profile() {
   async function handleLogout() {
     try {
       await logout({ headers: { Authorization: `Bearer  ${token}` } });
+      dispatch(logOut());
       removeCookie("token");
       localStorage.clear();
       navigate("/");
@@ -64,13 +66,9 @@ function Profile() {
 
   const content = (
     <div className="profile__main">
-      <Header />
-      <div className="profile__body">
-        {/* <Sidebar /> */}
-
-      </div>
-      <section className="header">
-
+      {/* <Header /> */}
+      <div className="profile__body"></div>
+      <section className="">
         <section className="profile">
           <div className="profile-top">
             <div className="profile-img-container">
