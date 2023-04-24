@@ -75,6 +75,12 @@ function Create() {
     if (newCompData.name.length < 5) {
       throw new Error("Competition Name must be at least 5 characters!");
     }
+    if (!newCompData.startDate) {
+      throw new Error("You haven't selected a start date!")
+    }
+    if (!newCompData.endDate) {
+      throw new Error("You haven't selected an end date!")
+    }
   };
 
   const handleCreateCompetition = async (e) => {
