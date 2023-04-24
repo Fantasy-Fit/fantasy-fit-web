@@ -144,6 +144,8 @@ section.profile {
 .profile div.current-competition-container div.current-competition-container-inner div {
     display: flex;
     border: none;
+    width: 22em;
+    flex-wrap: wrap;
 }
 
 .profile div.current-competition-container div div.competition-card {
