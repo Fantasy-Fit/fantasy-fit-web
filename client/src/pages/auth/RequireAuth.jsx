@@ -12,7 +12,7 @@ function RequireAuth() {
   return user ? (
     <Outlet />
   ) : (
-    <Navigate to="/auth" state={{ from: location }} replace />
+    <Navigate to="/auth"  replace />
   );
 }
 

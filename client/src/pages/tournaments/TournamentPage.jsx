@@ -19,8 +19,8 @@ function TournamentPage() {
     <div className="tournament-page">
       <div>
         <div className="tournament-page-header">
-          <img src={competition.icon} alt={competition.name} />
-          <h1> {location.state.name} </h1>
+          <img src={competition?.icon} alt={competition?.name} />
+          <h1> {location?.state.name} </h1>
         </div>
         <div>
           <Leaderboard comp={comp} />
