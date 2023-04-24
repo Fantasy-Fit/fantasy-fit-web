@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { participantsApiSlice, useGetParticipantsQuery } from "../../store/game/participantsApiSlice";
+import { useGetParticipantsQuery } from "../../store/game/participantsApiSlice";
 import { useCreateCompetitionMutation } from "../../store/game/competitionApiSlice";
 import GameRules from "./GameRules";
 import { setParticipantList } from "../../store/game/participantSlice";
@@ -11,14 +11,22 @@ function Create() {
   const dispatch = useDispatch();
   const [createCompetition] = useCreateCompetitionMutation();
   const [newCompData, setNewCompData] = useState({
-    name: "", public: false, participants: [], icon: ""
+    name: "", public: false, participants: [], icon: "", startDate: "", endDate: ""
   });
   const [selectedIcon, setSelectedIcon] = useState(null);
+  const [validationMessages, setValidationMessages] = useState("");
+  const today = new Date();
+  const maxStartDate = new Date(Date.parse(today) + 3_600_000 * 24 * 30);
+  const maxEndDate = new Date((Date.parse(newCompData.startDate) || Date.parse(today)) + 3_600_000 * 24 * 365);
 
   const handleInput = (e) => {
     const getCompValue = (input) => {
       switch (input) {
         case "name":
+          return e.target.value;
+        case "startDate":
+          return e.target.value;
+        case "endDate":
           return e.target.value;
         case "public":
           return e.target.checked;
@@ -55,19 +63,37 @@ function Create() {
 
       }}
     />);
-  })
+  });
+
+  const validateCompetitionData = () => {
+    if (!selectedIcon) {
+      throw new Error("You haven't selected a competition Icon!");
+    }
+    if (newCompData.participants.length <= 1) {
+      throw new Error("You need to select at least 2 participants!");
+    }
+    if (newCompData.name.length < 5) {
+      throw new Error("Competition Name must be at least 5 characters!");
+    }
+  };
 
   const handleCreateCompetition = async (e) => {
     e.preventDefault();
     try {
+      validateCompetitionData();
+    } catch (err) {
+      setValidationMessages(err.message);
+      console.error(err.message);
+      return;
+    }
+
+    try {
       const request = await createCompetition(newCompData).unwrap();
       console.log(request);
-
     } catch (err) {
       console.error(err.message);
     }
-
-  }
+  };
 
   const { data: participants, isError, isLoading } = useGetParticipantsQuery();
 
@@ -122,7 +148,25 @@ function Create() {
             />
           </div>
 
+          <label htmlFor="startDate">Start Date:</label>
+          <input
+            type="date"
+            name="startDate"
+            onChange={handleInput}
+            min={today.toISOString().substring(0, 10)}
+            max={maxStartDate.toISOString().substring(0, 10)}
+            value={newCompData.startDate}
+          />
+          <label htmlFor="endDate">End Date:</label>
+          <input
+            type="date"
+            name="endDate"
+            min={newCompData.startDate}
+            max={maxEndDate?.toISOString().substring(0, 10)}
 
+            onChange={handleInput}
+            value={newCompData.endDate}
+          />
           <div className="select-participants">
             <label>Select Participants:</label>
             {mapParticipants}
@@ -132,6 +176,7 @@ function Create() {
             value="Create Competition"
           />
         </form>
+        {validationMessages && <p style={{ color: "red" }}>{validationMessages}</p>}
 
         <h3>Game Rules</h3>
         <GameRules />
