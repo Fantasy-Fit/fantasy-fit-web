@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { participantsApiSlice, useGetParticipantsQuery } from "../../store/game/participantsApiSlice";
+import { useGetParticipantsQuery } from "../../store/game/participantsApiSlice";
 import { useCreateCompetitionMutation } from "../../store/game/competitionApiSlice";
 import GameRules from "./GameRules";
 import { setParticipantList } from "../../store/game/participantSlice";
@@ -14,6 +14,7 @@ function Create() {
     name: "", public: false, participants: [], icon: ""
   });
   const [selectedIcon, setSelectedIcon] = useState(null);
+  const [validationMessages, setValidationMessages] = useState("");
 
   const handleInput = (e) => {
     const getCompValue = (input) => {
@@ -55,19 +56,37 @@ function Create() {
 
       }}
     />);
-  })
+  });
+
+  const validateCompetitionData = () => {
+    if (!selectedIcon) {
+      throw new Error("You haven't selected a competition Icon!");
+    }
+    if (newCompData.participants.length <= 1) {
+      throw new Error("You need to select at least 2 participants!");
+    }
+    if (newCompData.name.length < 5) {
+      throw new Error("Competition Name must be at least 5 characters!");
+    }
+  };
 
   const handleCreateCompetition = async (e) => {
     e.preventDefault();
     try {
+      validateCompetitionData();
+    } catch (err) {
+      setValidationMessages(err.message);
+      console.error(err.message);
+      return;
+    }
+
+    try {
       const request = await createCompetition(newCompData).unwrap();
       console.log(request);
-
     } catch (err) {
       console.error(err.message);
     }
-
-  }
+  };
 
   const { data: participants, isError, isLoading } = useGetParticipantsQuery();
 
@@ -132,6 +151,7 @@ function Create() {
             value="Create Competition"
           />
         </form>
+        {validationMessages && <p style={{ color: "red" }}>{validationMessages}</p>}
 
         <h3>Game Rules</h3>
         <GameRules />
