@@ -4,15 +4,19 @@ import {
   selectCurrentToken,
   selectCurrentUser,
 } from "../../store/auth/userSlice";
+import Header from "../../components/Header";
 
 function RequireAuth() {
   const token = useSelector(selectCurrentToken);
   const user = useSelector(selectCurrentUser);
   const location = useLocation();
   return user ? (
-    <Outlet />
+    <div>
+      <Header />
+      <Outlet />
+    </div>
   ) : (
-    <Navigate to="/auth"  replace />
+    <Navigate to="/auth" replace />
   );
 }
 
