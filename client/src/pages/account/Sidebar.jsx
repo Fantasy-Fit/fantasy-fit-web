@@ -1,11 +1,5 @@
-import React from 'react';
 import Avatar from '@mui/material/Avatar';
 import './Sidebar.css';
-import userSlice from '../../store/auth/userSlice'
-import { useSelector } from 'react-redux';
-import EditProfileModal from "./EditProfileModal";
-
-
 
 function Sidebar({ handleLogout, image, username, email, gender, location }) {
 
@@ -19,7 +13,7 @@ function Sidebar({ handleLogout, image, username, email, gender, location }) {
       <span className='sidebar__hash'>#</span>
       <p>{topic}</p>
     </div>
-  )
+  );
 
   return (
     <div className="sidebar">
@@ -50,6 +44,10 @@ function Sidebar({ handleLogout, image, username, email, gender, location }) {
           <p>Competitions</p>
           <p className="sidebar__statNumber">15</p>
         </div>
+        <div className="sidebar__stat">
+          <p>Workouts</p>
+          <p className="sidebar__statNumber">15</p>
+        </div>
       </div>
 
       <div className="sidebar__bottom">
@@ -61,7 +59,7 @@ function Sidebar({ handleLogout, image, username, email, gender, location }) {
         {recentItem("musclemania")}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;

@@ -42,7 +42,7 @@ function MainFeed({ current_competitions }) {
                 <RecentWorkouts />
             </div>
 
-            <JoinCompetitionModal />
+
 
             <div className="feed__inputContainer">
                 <h3>Competitions</h3>
@@ -54,6 +54,7 @@ function MainFeed({ current_competitions }) {
                     {current_competitions}
                 </div>
             </div>
+            <JoinCompetitionModal />
         </div>
     )
 }

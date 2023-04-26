@@ -184,12 +184,12 @@ function Create() {
         </form>
         {validationMessages && <p style={{ color: "red" }}>{validationMessages}</p>}
 
-        <h3>Game Rules</h3>
+        {/* <h3>Game Rules</h3>
         <GameRules />
         <p>$$ / ForFun / Chartity</p>
         <p>Duration</p>
         <p>Start Date</p>
-        <p>Invite Participants</p>
+        <p>Invite Participants</p> */}
       </div>
     </div>
   );

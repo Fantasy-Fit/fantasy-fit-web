@@ -5,8 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useLogoutMutation } from "../../store/auth/authApiSlice";
 import { logOut } from "../../store/auth/userSlice";
-import EditProfileModal from "./EditProfileModal";
-
 import { useGetCompetitionsQuery } from "../../store/game/competitionApiSlice";
 import { setUserInfo } from "../../store/auth/userSlice";
 import { useEffect } from "react";
