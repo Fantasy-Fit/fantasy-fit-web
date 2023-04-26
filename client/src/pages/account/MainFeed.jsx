@@ -6,6 +6,7 @@ import ImageIcon from '@mui/icons-material/Image';
 import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import CalendarViewDayIcon from '@mui/icons-material/CalendarViewDay';
+import JoinCompetitionModal from "../newcompetition/JoinCompetitionModal";
 import RecentWorkouts from './RecentWorkouts';
 import AddIcon from '@mui/icons-material/Add';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
@@ -13,6 +14,12 @@ import { Link } from "react-router-dom";
 
 
 function MainFeed({ current_competitions }) {
+    const openJoinCompModal = () => {
+        const modal = document.getElementById("join-comp-modal");
+        modal.style.display = "block";
+    };
+
+
     return (
         <div className='main__feed'>
             <div className="feed__inputContainer">
@@ -35,11 +42,13 @@ function MainFeed({ current_competitions }) {
                 <RecentWorkouts />
             </div>
 
+            <JoinCompetitionModal />
+
             <div className="feed__inputContainer">
                 <h3>Competitions</h3>
                 <div className="feed__competitionOptions">
                     <Link to="/new-competition"><AddIcon alt="Make a new competition" /></Link>
-                    <Link to="/join"><GroupAddIcon alt="Join" /></Link>
+                    <GroupAddIcon alt="Join" onClick={openJoinCompModal} />
                 </div>
                 <div className='current__competitions'>
                     {current_competitions}

@@ -6,7 +6,7 @@ import { useCookies } from "react-cookie";
 import { useLogoutMutation } from "../../store/auth/authApiSlice";
 import { logOut } from "../../store/auth/userSlice";
 import EditProfileModal from "./EditProfileModal";
-import JoinCompetitionModal from "../newcompetition/JoinCompetitionModal";
+
 import { useGetCompetitionsQuery } from "../../store/game/competitionApiSlice";
 import { setUserInfo } from "../../store/auth/userSlice";
 import { useEffect } from "react";
@@ -55,55 +55,26 @@ function Profile() {
     }
   }
 
-  const openJoinCompModal = () => {
-    const modal = document.getElementById("join-comp-modal");
-    modal.style.display = "block";
-  };
-
   const content =
     (<div className="profile__main">
       {/* <Header /> */}
       <div className="profile__body">
-        <section className="">
-          <section className="profile">
-
-            <div className="new-competition-container">
-              <div className="new-competition">
-                <Link to="/new-competition">
-                  <img src="https://cdn-icons-png.flaticon.com/512/4959/4959925.png" />
-                  <button>New Competition</button>
-                </Link>
-              </div>
-              <div className="new-competition" onClick={openJoinCompModal}>
-                <img src="https://cdn-icons-png.flaticon.com/512/6679/6679633.png" />
-                <button>Join</button>
-              </div>
-              <JoinCompetitionModal />
-            </div>
-          </section>
-        </section>
-
-        <div className="profile__main">
-          {/* <Header /> */}
-          <div className="profile__body">
-            <Sidebar
-              image={user.avatar}
-              username={user.username}
-              email={user.email}
-              gender={user.gender}
-              location={user.location}
-              handleLogout={handleLogout}
-            />
-            <MainFeed
-              current_competitions={mapComps}
-            />
-          </div>
-          <div className="profile">
-            <EditProfileModal />
-          </div>
-        </div>;
+        <Sidebar
+          image={user.avatar}
+          username={user.username}
+          email={user.email}
+          gender={user.gender}
+          location={user.location}
+          handleLogout={handleLogout}
+        />
+        <MainFeed
+          current_competitions={mapComps}
+        />
       </div>
-    </div >)
+      <div className="profile">
+        <EditProfileModal />
+      </div>
+    </div>)
   return content;
 }
 
