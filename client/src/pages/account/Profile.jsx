@@ -15,7 +15,8 @@ import { setUserInfo } from "../../store/auth/userSlice";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Header from "../../components/Header";
-// import Sidebar from "./Sidebar";
+import Sidebar from "./Sidebar";
+import MainFeed from "./MainFeed";
 
 function Profile() {
   const user = useSelector(selectCurrentUser);
@@ -64,7 +65,7 @@ function Profile() {
     modal.style.display = "block";
   };
 
-  const content = (
+  const content =
     <div className="profile__main">
       {/* <Header /> */}
       <div className="profile__body"></div>
@@ -144,8 +145,27 @@ function Profile() {
           <EditProfileModal />
         </section>
       </section>
+
+      <div className="profile__main">
+        <Header />
+        <div className="profile__body">
+          <Sidebar
+            image={user.avatar}
+            username={user.username}
+            email={user.email}
+            gender={user.gender}
+            location={user.location}
+            handleLogout={handleLogout}
+          />
+          <MainFeed
+            current_competitions={mapComps}
+          />
+        </div>
+        <div className="profile">
+          <EditProfileModal />
+        </div>
+      </div>;
     </div>
-  );
   return content;
 }
 
