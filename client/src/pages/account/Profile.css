@@ -223,12 +223,12 @@ tr:hover {
 }
 
 .profile div#join-comp-modal div.modal-content {
-    background-color: #2383cf;
+    background-color: #adddbe;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 35%;
-    border-radius: 10px;
+    border-radius: 0;
     height: 60%;
     overflow-y: scroll;
 }

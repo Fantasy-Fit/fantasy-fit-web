@@ -128,12 +128,10 @@ function Profile() {
               </Link>
             </div>
             <div className="new-competition" onClick={openJoinCompModal}>
-              {/* <Link to="/join"> */}
               <img src="https://cdn-icons-png.flaticon.com/512/6679/6679633.png" />
               <button>Join</button>
-              {/* </Link> */}
-              <JoinCompetitionModal />
             </div>
+            <JoinCompetitionModal />
           </div>
 
           <div className="current-competition-container">

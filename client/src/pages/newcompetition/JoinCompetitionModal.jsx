@@ -5,12 +5,12 @@ import "./NewCompetition.css";
 const JoinCompetitionModal = () => {
     const closeJoinCompModal = () => {
         const modal = document.getElementById("join-comp-modal");
-        console.log(modal.style.display);
         modal.style.display = 'none';
     }
 
     useEffect(() => {
         const modal = document.getElementById("join-comp-modal");
+
         window.onclick = (e) => {
             console.log(e.target)
             if (e.target == modal) {
