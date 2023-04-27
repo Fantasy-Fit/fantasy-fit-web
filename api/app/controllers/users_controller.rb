@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
     before_action :authenticate_request, only: [:update]
 
+    def index
+        render json: User.all, status: :ok
+    end
+
     def create
         user = User.create!(user_params)
         render json: user, status: :created
