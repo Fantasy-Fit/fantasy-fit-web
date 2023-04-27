@@ -4,7 +4,12 @@ Rails.application.routes.draw do
   resources :comments
   resources :workouts, only: [:index, :show, :create]
   resources :competitions, only: [:index, :show, :create]
-  resources :users, only: [:index]
+  resources :users, only: [:index] do
+    member do
+      post "accept_friend_request/:friend_id", to: "users#accept_friend_request"
+      post "decline_friend_request/:friend_id", to: "users#decline_friend_request"
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
