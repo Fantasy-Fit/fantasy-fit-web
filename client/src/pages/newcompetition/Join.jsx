@@ -1,19 +1,23 @@
 import { useState } from 'react';
+import { useSearchCompetitionsQuery } from '../../store/game/competitionApiSlice';
 import { useJoinCompetitionMutation } from '../../store/game/competitionApiSlice';
 import { selectCurrentUser } from '../../store/auth/userSlice';
 import { useSelector } from 'react-redux';
+import './Join.css'
 
 const Join = () => {
   const [identifier, setIdentifier] = useState("");
+  const [searchQuery, setSearchQuery] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
-  const user = useSelector(selectCurrentUser)
+  const user = useSelector(selectCurrentUser);
   const [joinCompetition, { isLoading }] = useJoinCompetitionMutation();
+  const { data, refetch } = useSearchCompetitionsQuery(searchQuery);
 
   const handleIdentifierInput = (e) => {
     setIdentifier(e.target.value);
   };
 
-  const handleJoin = async (e) => {
+  const handleJoin = async (e, comp_identifier) => {
     e.preventDefault();
     try {
       if (!user) {
@@ -21,27 +25,43 @@ const Join = () => {
       }
 
       let req = await joinCompetition({
-        identifier: identifier,
+        identifier: comp_identifier,
         user: user
       });
 
+      // console.log(req.error.data.error)
       console.log(req)
       if (!!req.error) {
-        throw new Error("err msg")
+        throw new Error(String(req.error.data.error))
+      } else if (!!req.data) {
+        console.log(req.data)
       }
+
       setIdentifier("");
       setErrorMessage("");
 
     } catch (error) {
-      setErrorMessage("Could not join competition. Please check the identifier and try again.");
+      setErrorMessage(error.message)
     }
   };
 
-  // console.log(user)
+  const handleSearchComp = (e) => {
+    e.preventDefault();
+    setSearchQuery(identifier);
+    refetch();
+  };
+
+  const mapSearchResults = data?.map((result, index) => {
+    return (<ul key={index}>
+      <img src={result.icon} alt="comp icon" />
+      <p>{result.identifier}: {result.name}</p>
+      <button onClick={(e) => handleJoin(e, result.identifier)}>Join Comp</button>
+    </ul>)
+  })
 
   return (
     <div>
-      <form onSubmit={handleJoin}>
+      <form onSubmit={handleSearchComp}>
         <input
           name="identifier"
           placeholder="Competition Identifier"
@@ -50,14 +70,15 @@ const Join = () => {
         />
         <input
           type="submit"
-          value={isLoading ? "Joining..." : "Join"}
+          value={isLoading ? "Joining..." : "Search"}
           disabled={isLoading}
         />
       </form>
-      {errorMessage && <p>{errorMessage}</p>}
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      {mapSearchResults}
     </div>
   );
-}
+};
 
 export default Join;
 

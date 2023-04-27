@@ -1,63 +1,17 @@
-section.profile {
-    /* border: 1px solid rgb(221, 221, 221); */
-    width: 100%;
-}
-
-.profile div.profile-top {
+.profile__main {
+    background-color: #f3f2ef;
     display: flex;
-    justify-content: center;
-}
-
-.profile div.profile-top button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    color: #fff;
-    background-color: rgb(179, 16, 16);
-    font-weight: 600;
-    cursor: pointer;
-    border: 1px solid gray;
-    border-radius: 8px;
-    margin: 0 0.5em;
-}
-
-.profile div.profile-top button:hover {
-    background-color: rgb(75, 75, 75);
-    border: 1px solid rgb(255, 255, 255);
-    transition-duration: 0.75s;
-}
-
-.profile div.my-profile {
-    justify-content: center;
-    margin: 2em 0;
-    display: inline-block;
-}
-
-.profile div.profile-top div.profile-img-container {
-    display: flex;
+    flex-direction: column;
     align-items: center;
 }
 
-.profile div.profile-top div img {
-    margin: 2em;
-    width: 10em;
-    height: 10em;
-    border-radius: 50%;
-    filter: invert(0);
-}
-
-.profile div img {
-    width: 10em;
-    height: 10em;
-    filter: invert(0);
-}
-
-.profile div h1 {
-    margin: 0.5em 0;
-}
-
-.profile div div.profile-row {
+.profile__body {
     display: flex;
     margin: 0.5em;
+    margin-top: 35px;
+    max-width: 1200px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .profile div div.profile-row div.profile-label {
@@ -194,7 +148,6 @@ tr:hover {
     height: 100%;
     background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.4);
-
 }
 
 .modal-content {
@@ -209,5 +162,4 @@ tr:hover {
 .modal-content form input {
     height: 2em;
     margin-bottom: 10px;
-
 }
