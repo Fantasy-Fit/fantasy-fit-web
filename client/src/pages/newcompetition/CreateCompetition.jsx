@@ -1,14 +1,17 @@
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useGetParticipantsQuery } from "../../store/game/participantsApiSlice";
 import { useCreateCompetitionMutation } from "../../store/game/competitionApiSlice";
-import GameRules from "./GameRules";
 import { setParticipantList } from "../../store/game/participantSlice";
 import fitnessIcons from "../../data/fitnessIcons";
 import './NewCompetition.css'
+import { setUserInfo, selectUserCompetitions } from "../../store/auth/userSlice";
 
 function Create() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const userCompetitions = useSelector(selectUserCompetitions);
   const [createCompetition] = useCreateCompetitionMutation();
   const [newCompData, setNewCompData] = useState({
     name: "", public: false, participants: [], icon: "", startDate: "", endDate: ""
@@ -95,7 +98,9 @@ function Create() {
 
     try {
       const request = await createCompetition(newCompData).unwrap();
-      console.log(request);
+      console.log(userCompetitions)
+      dispatch(setUserInfo({ competitions: [...userCompetitions, request] }))
+      navigate('/profile')
     } catch (err) {
       console.error(err.message);
     }

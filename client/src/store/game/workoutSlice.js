@@ -5,6 +5,7 @@ const workoutSlice = createSlice({
     initialState: [],
     reducers: {
         setWorkouts: (state, action) => {
+            console.log(action.payload)
             const { workouts } = action.payload;
             state.workouts = workouts
         },

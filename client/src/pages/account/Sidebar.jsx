@@ -1,7 +1,11 @@
+import { useSelector } from 'react-redux';
+import { selectUserCompetitions, selectUserWorkouts } from '../../store/auth/userSlice';
 import Avatar from '@mui/material/Avatar';
 import './Sidebar.css';
 
 function Sidebar({ handleLogout, image, username, email, gender, location }) {
+  const userCompetitions = useSelector(selectUserCompetitions);
+  const userWorkouts = useSelector(selectUserWorkouts);
 
   const openEditProfileModal = () => {
     const modal = document.getElementById("edit-profile-modal");
@@ -42,11 +46,11 @@ function Sidebar({ handleLogout, image, username, email, gender, location }) {
         </div>
         <div className="sidebar__stat">
           <p>Competitions</p>
-          <p className="sidebar__statNumber">15</p>
+          <p className="sidebar__statNumber">{userCompetitions?.length}</p>
         </div>
         <div className="sidebar__stat">
           <p>Workouts</p>
-          <p className="sidebar__statNumber">15</p>
+          <p className="sidebar__statNumber">{userWorkouts?.length}</p>
         </div>
       </div>
 
