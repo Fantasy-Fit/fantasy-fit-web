@@ -5,8 +5,6 @@ const userSlice = createSlice({
   initialState: {
     user: JSON.parse(localStorage.getItem("user")) || null,
     token: document.cookie.slice(6) || null,
-    workouts: JSON.parse(localStorage.getItem('workouts')),
-    competitions: JSON.parse(localStorage.getItem('competitions')),
   },
   reducers: {
     setUserInfo: (state, action) => {

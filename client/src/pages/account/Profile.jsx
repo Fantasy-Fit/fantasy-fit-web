@@ -1,5 +1,5 @@
-import { useSelector } from "react-redux";
-import { selectCurrentUser } from "../../store/auth/userSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { selectCurrentUser, selectUserCompetitions } from "../../store/auth/userSlice";
 import "./Profile.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
@@ -8,25 +8,33 @@ import { logOut } from "../../store/auth/userSlice";
 import { useGetCompetitionsQuery } from "../../store/game/competitionApiSlice";
 import { setUserInfo } from "../../store/auth/userSlice";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import Sidebar from "./Sidebar";
 import MainFeed from "./MainFeed";
+import EditProfileModal from "./EditProfileModal";
 
 function Profile() {
   const user = useSelector(selectCurrentUser);
   const token = user.token;
+  const userCompetitions = useSelector(selectUserCompetitions);
   const [, removeCookie] = useCookies(["token"]);
   const navigate = useNavigate();
   const [logout] = useLogoutMutation();
   const dispatch = useDispatch();
 
-  const { data: competitions, isLoading } = useGetCompetitionsQuery(user.id);
+  const { data: competitions, isLoading, refetch } = useGetCompetitionsQuery(user.id);
 
   useEffect(() => {
+    refetch();
+  }, [])
+
+  useEffect(() => {
+    if (competitions) {
+      return
+    }
     if (isLoading) {
       return;
     } else {
-      dispatch(setUserInfo([...competitions]));
+      dispatch(setUserInfo({ competitions: userCompetitions || competitions }));
     }
   }, [competitions]);
 

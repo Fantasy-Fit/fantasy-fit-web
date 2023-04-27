@@ -11,15 +11,11 @@ function TournamentPage() {
   const location = useLocation();
   const comp = location.state;
 
-  const competition = useSelector(selectUserCompetitions).find(
-    (competition) => competition.id === comp.id
-  );
-
   return (
     <div className="tournament-page">
       <div>
         <div className="tournament-page-header">
-          <img src={competition?.icon} alt={competition?.name} />
+          <img src={comp.icon} alt={comp.name} />
           <h1> {location?.state.name} </h1>
         </div>
         <div>
