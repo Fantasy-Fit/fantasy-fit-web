@@ -52,7 +52,6 @@ function Record({ comp }) {
     try {
       let req = await addWorkout({
         ...workoutData,
-        user_id: user.id,
         competition_id: comp.id
       })
       const updatedLeaderboard = [...req.data.leaderboard];

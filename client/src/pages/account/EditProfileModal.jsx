@@ -2,10 +2,12 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCurrentUser, setUserInfo } from '../../store/auth/userSlice';
 import { useForm } from 'react-hook-form';
+import { useCookies } from 'react-cookie';
 import { useUpdateProfileMutation } from '../../store/auth/authApiSlice';
 
 const EditProfileModal = () => {
     const dispatch = useDispatch();
+    const [cookies] = useCookies(["token"])
     const { id, username, email, location, avatar, gender } = useSelector(selectCurrentUser);
     const [updateProfile, { isLoading }] = useUpdateProfileMutation();
 
@@ -23,10 +25,16 @@ const EditProfileModal = () => {
             gender: gender
         }
     });
+    // console.log(cookies.token)
 
     const onSubmit = async (data) => {
+        // const authToken = cookies.token
         const { id, username, email, location, avatar, gender } = data;
-        const regData = await updateProfile({ id, username, email, location, avatar, gender }).unwrap();
+
+        const regData = await updateProfile({
+            id, username, email, location, avatar, gender
+        }
+        ).unwrap();
         dispatch(setUserInfo({ user: regData }));
         localStorage.setItem("user", JSON.stringify(regData));
         closeEditProfileModal();

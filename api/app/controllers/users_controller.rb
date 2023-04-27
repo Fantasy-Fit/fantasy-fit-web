@@ -1,8 +1,5 @@
 class UsersController < ApplicationController
-
-    def index
-        render json: User.all, status: :ok
-    end
+    before_action :authenticate_request, only: [:update]
 
     def create
         user = User.create!(user_params)
@@ -10,7 +7,7 @@ class UsersController < ApplicationController
     end
 
     def update
-        user = set_user
+        user = @current_user
         user.update(user_params)
         if user
             render json: user, status: :accepted
