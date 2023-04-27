@@ -1,10 +1,33 @@
-import { useSelector } from 'react-redux';
-import { selectUserWorkouts } from '../../store/auth/userSlice';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCurrentUser } from '../../store/auth/userSlice';
+// import { selectUserWorkouts } from '../../store/auth/userSlice';
+import { useGetWorkoutsQuery } from '../../store/game/workoutApiSlice';
+import { setUserWorkouts } from '../../store/game/workoutSlice';
 
 const RecentWorkouts = () => {
-    const workouts = useSelector(selectUserWorkouts);
+    // const workouts = useSelector(selectUserWorkouts);
+    const user = useSelector(selectCurrentUser);
+    const { data: userWorkouts, isLoading, refetch } = useGetWorkoutsQuery(user.id);
 
-    const mapWorkouts = workouts?.slice(-10).map((workout) => {
+    const dispatch = useDispatch();
+
+    // useEffect(() => {
+    //     refetch();
+    // }, []);
+
+    // useEffect(() => {
+    //     // if (userWorkouts) {
+    //     //     return
+    //     // }
+    //     if (isLoading) {
+    //         return;
+    //     } else {
+    //         dispatch(setUserWorkouts(userWorkouts));
+    //     }
+    // }, [userWorkouts]);
+
+    const mapWorkouts = userWorkouts?.slice(-10).map((workout) => {
         return (
             <tr key={workout.id}>
                 <td>{workout.activity}</td>

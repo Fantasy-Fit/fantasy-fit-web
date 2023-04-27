@@ -28,15 +28,13 @@ function Profile() {
   }, [])
 
   useEffect(() => {
-    if (competitions) {
-      return
-    }
     if (isLoading) {
       return;
     } else {
       dispatch(setUserInfo({ competitions: userCompetitions || competitions }));
     }
   }, [competitions]);
+
 
   const mapComps = competitions?.map((comp) => {
     return (

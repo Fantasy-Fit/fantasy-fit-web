@@ -40,7 +40,6 @@ function Posts({ posts, comp }) {
     }).unwrap();
     dispatch(setPosts([...posts, newPost]));
     setValue("description", "");
-    refetch();
   };
 
   return (

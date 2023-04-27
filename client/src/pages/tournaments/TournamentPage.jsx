@@ -10,6 +10,7 @@ import "./CompetitionPage.css";
 function TournamentPage() {
   const location = useLocation();
   const comp = location.state;
+  console.log(comp)
 
   return (
     <div className="tournament-page">

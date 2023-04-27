@@ -98,6 +98,7 @@ function Create() {
 
     try {
       const request = await createCompetition(newCompData).unwrap();
+      console.log(userCompetitions)
       dispatch(setUserInfo({ competitions: [...userCompetitions, request] }))
       navigate('/profile')
     } catch (err) {
