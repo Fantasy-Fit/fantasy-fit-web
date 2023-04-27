@@ -1,65 +1,33 @@
-import Avatar from '@mui/material/Avatar';
+import React from 'react'; 
+// import { Avatar } from '@material-ui/core';
 import './Sidebar.css';
 
-function Sidebar({ handleLogout, image, username, email, gender, location }) {
-
-  const openEditProfileModal = () => {
-    const modal = document.getElementById("edit-profile-modal");
-    modal.style.display = "block";
-  };
-
-  const recentItem = (topic) => (
-    <div className="sidebar__recentItem">
-      <span className='sidebar__hash'>#</span>
-      <p>{topic}</p>
-    </div>
-  );
-
+function Sidebar() {
   return (
-    <div className="sidebar">
-      <div className="sidebar__top">
-        <img
-          src="https://media.istockphoto.com/id/1151850199/photo/sports-equipment-and-accessories-shoes-dumbbells-on-green-background.jpg?s=612x612&w=0&k=20&c=OStHn9MFqxyvOPVbo8qr_MHaivayxrs1mnL2APzRAis="
-          alt=""
-        />
-        <Avatar
-          onClick={openEditProfileModal}
-          className="sidebar__avatar">
-          <img src={image} alt={username} />
-        </Avatar>
-        <h2>{username}</h2>
-        <h4>{email}</h4>
-        <h4>{gender}</h4>
-        <h4>{location}</h4>
-        <button onClick={openEditProfileModal}>Edit Profile</button>
-        <button onClick={handleLogout}>Log out</button>
-      </div>
-
-      <div className="sidebar__stats">
-        <div className="sidebar__stat">
-          <p>Friends</p>
-          <p className="sidebar__statNumber">100</p>
-        </div>
-        <div className="sidebar__stat">
-          <p>Competitions</p>
-          <p className="sidebar__statNumber">15</p>
-        </div>
-        <div className="sidebar__stat">
-          <p>Workouts</p>
-          <p className="sidebar__statNumber">15</p>
-        </div>
-      </div>
-
-      <div className="sidebar__bottom">
-        <p>Recent</p>
-        {recentItem("mycompetitions")}
-        {recentItem("running")}
-        {recentItem("gymlife")}
-        {recentItem("compwars")}
-        {recentItem("musclemania")}
-      </div>
+    <div className='sidedbar'>Im a sidebar
+    <div className='sidebar__top'>
+        <img src='' alt='' />
+        {/* <Avatar className="sidebar__avatar"/> */}
+        <h2>Chris Li</h2>
+        <h4>chrisli@gmail.com</h4>
     </div>
-  );
-};
 
-export default Sidebar;
+    <div className="sidebar__stats">
+        <div className="sidebar__stat">
+            <p>Who viewed you</p>
+            <p className="sidebar__statNumber">2,543</p>
+        </div>
+        <div className="sidebar__stat">
+            <p>Views on post</p>\
+            <p className='sidebar__statNumber'>2,448</p>
+        </div>
+        </div>
+
+        <div className="sidebar__button">
+            <p>Recent</p>
+        </div>
+    </div>
+  )
+}
+
+export default Sidebar

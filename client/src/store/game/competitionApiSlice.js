@@ -4,7 +4,7 @@ export const competitionApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         createCompetition: builder.mutation({
             query: (credentials) => ({
-                url: "/competitions",
+                url: "http://localhost:3000/competitions",
                 method: "POST",
                 body: {
                     ...credentials,
@@ -16,19 +16,13 @@ export const competitionApiSlice = apiSlice.injectEndpoints({
         }),
         joinCompetition: builder.mutation({
             query: (body_data) => ({
-                url: "/competition/join/",
+                url: "http://localhost:3000/competition/join/",
                 method: "POST",
                 body: { ...body_data },
             })
         }),
-        searchCompetitions: builder.query({
-            query: (searchQuery) => ({
-                url: `/search_competitions?search=${searchQuery}`,
-                method: "GET",
-            }),
-        }),
     })
 })
 
-export const { useCreateCompetitionMutation, useJoinCompetitionMutation, useGetCompetitionsQuery, useSearchCompetitionsQuery } = competitionApiSlice;
+export const { useCreateCompetitionMutation, useJoinCompetitionMutation, useGetCompetitionsQuery } = competitionApiSlice;
 

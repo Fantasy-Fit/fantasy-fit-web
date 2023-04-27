@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes} from "react-router-dom";
 import Layout from "./components/Layout";
 import RequireAuth from "./pages/auth/RequireAuth";
 import Main from "./components/Main";
@@ -7,6 +7,9 @@ import CreateCompetition from "./pages/newcompetition/CreateCompetition";
 import Profile from "./pages/account/Profile";
 import TournamentPage from "./pages/tournaments/TournamentPage";
 import "./App.css";
+import JoinCompetition from "./pages/newcompetition/JoinCompetition";
+import { selectCurrentUser } from "./store/auth/userSlice";
+import { useSelector } from "react-redux";
 
 function App() {
 
@@ -23,6 +26,7 @@ function App() {
             <Route path="profile" element={<Profile />} />
             <Route path="tournament/:id" element={<TournamentPage />} />
             <Route path="new-competition" element={<CreateCompetition />} />
+            <Route path="join" element={<JoinCompetition />} />
           </Route>
         </Route>
       </Routes>

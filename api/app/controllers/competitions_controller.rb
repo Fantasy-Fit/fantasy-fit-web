@@ -25,16 +25,6 @@ class CompetitionsController < ApplicationController
         render json: competition, status: :created
     end
 
-    def search
-        competition = Competition.where("lower(name) LIKE :search OR lower(identifier) LIKE :search ", search: "%#{params[:search].downcase}%")
-        
-        if competition 
-            render json: competition, status: :ok
-        else 
-            render json: { error: "Competition not found" }, status: :not_found
-        end
-    end
-
     def join
         competition = Competition.find_by(identifier: params[:identifier])
         user = User.find_by(username: params[:user][:username])
