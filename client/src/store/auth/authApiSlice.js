@@ -25,6 +25,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     updateProfile: builder.mutation({
       query: (credentials) => ({
         url: "http://localhost:3000/auth/update_profile",
+        // headers: { "Authorization": `Token ${credentials.authToken}` },
         method: "PATCH",
         body: { ...credentials },
       })

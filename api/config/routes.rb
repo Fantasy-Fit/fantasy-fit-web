@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :posts
   resources :participants
   resources :comments
-  resources :workouts, only: [:index, :show, :create]
+  resources :workouts, only: [:index, :create]
   resources :competitions, only: [:index, :show, :create]
   resources :users, only: [:index] do
     member do

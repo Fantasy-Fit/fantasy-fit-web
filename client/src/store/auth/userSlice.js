@@ -8,7 +8,7 @@ const userSlice = createSlice({
   },
   reducers: {
     setUserInfo: (state, action) => {
-      console.log("set user info run")
+      // console.log("set user info run")
       Object.keys(action.payload).forEach(key => {
         state[key] = action.payload[key];
       });
