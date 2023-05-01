@@ -1,39 +1,19 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../store/auth/userSlice';
-// import { selectUserWorkouts } from '../../store/auth/userSlice';
 import { useGetWorkoutsQuery } from '../../store/game/workoutApiSlice';
-import { setUserWorkouts } from '../../store/game/workoutSlice';
 
 const RecentWorkouts = () => {
-    // const workouts = useSelector(selectUserWorkouts);
     const user = useSelector(selectCurrentUser);
-    const { data: userWorkouts, isLoading, refetch } = useGetWorkoutsQuery(user.id);
-
-    const dispatch = useDispatch();
-
-    // useEffect(() => {
-    //     refetch();
-    // }, []);
-
-    // useEffect(() => {
-    //     // if (userWorkouts) {
-    //     //     return
-    //     // }
-    //     if (isLoading) {
-    //         return;
-    //     } else {
-    //         dispatch(setUserWorkouts(userWorkouts));
-    //     }
-    // }, [userWorkouts]);
+    const { data: userWorkouts } = useGetWorkoutsQuery(user.id);
 
     const mapWorkouts = userWorkouts?.slice(-10).map((workout) => {
+        const workoutDate = new Date(workout.date)
         return (
             <tr key={workout.id}>
+                <td>{workoutDate.toUTCString().slice(5, 12)}</td>
                 <td>{workout.activity}</td>
                 <td>{workout.duration}</td>
                 <td>{workout.intensity}</td>
-                <td>{workout.calories}</td>
                 <td>{workout.points}</td>
             </tr>
         );
@@ -43,10 +23,10 @@ const RecentWorkouts = () => {
         <table>
             <thead>
                 <tr>
+                    <th>Date</th>
                     <th>Activity</th>
                     <th>Duration</th>
                     <th>Intensity</th>
-                    <th>Calories</th>
                     <th>Points</th>
                 </tr>
             </thead>
