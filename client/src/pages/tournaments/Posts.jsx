@@ -11,7 +11,7 @@ import { useGetPostsQuery } from "../../store/game/feedApiSlice";
 
 function Posts({ posts, comp }) {
   const { refetch } = useGetPostsQuery(comp.id);
-  const renderedPosts = (posts)?.map((post) => {
+  const renderedPosts = posts?.map((post) => {
     return <PostCard key={post.id} post={post} />;
   });
 
@@ -36,7 +36,6 @@ function Posts({ posts, comp }) {
     const newPost = await addPost({
       description: data.description,
       competition_id: comp.id,
-      user_id: user.id,
     }).unwrap();
     dispatch(setPosts([...posts, newPost]));
     setValue("description", "");
