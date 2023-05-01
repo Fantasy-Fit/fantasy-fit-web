@@ -5,9 +5,7 @@ const leaderboardSlice = createSlice({
     initialState: { leaderboard: [] },
     reducers: {
         setLeaderboard: (state, action) => {
-            // console.log("In leaderboardslice:", action.payload);
             state.leaderboard = action.payload;
-
         }
     }
 });
@@ -16,4 +14,4 @@ export const { setLeaderboard } = leaderboardSlice.actions;
 
 export default leaderboardSlice.reducer;
 
-export const selectLeaderboard = (state) => state.leaderboard;
+export const selectLeaderboard = (state) => state.leaderboard.leaderboard;

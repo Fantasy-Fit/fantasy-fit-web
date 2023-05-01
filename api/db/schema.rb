@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_27_191524) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_01_231038) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_27_191524) do
     t.string "icon"
     t.datetime "start_date"
     t.datetime "end_date"
+    t.boolean "active"
     t.index ["identifier"], name: "index_competitions_on_identifier", unique: true
   end
 
