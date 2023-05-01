@@ -10,14 +10,20 @@ import "./CompetitionPage.css";
 function TournamentPage() {
   const location = useLocation();
   const comp = location.state;
-  console.log(comp)
+  const compEndDate = new Date(comp.end_date)
+  const today = new Date();
+  const daysRemaining = Math.ceil((compEndDate - today) / (3_600_000 * 24))
 
   return (
     <div className="tournament-page">
       <div>
         <div className="tournament-page-header">
           <img src={comp.icon} alt={comp.name} />
-          <h1> {location?.state.name} </h1>
+          <div>
+            <h1> {location?.state.name} </h1>
+            <p>Days remaining: {daysRemaining > 0 && daysRemaining || 0}</p>
+            <p>End Date: {compEndDate.toUTCString().slice(0, 16)}</p>
+          </div>
         </div>
         <div>
           <Leaderboard comp={comp} />
