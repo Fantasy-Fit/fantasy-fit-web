@@ -29,9 +29,10 @@ const RecentWorkouts = () => {
   }, [userWorkouts]);
 
   const mapWorkouts = currentWorkouts?.slice(-10).map((workout) => {
+    const workoutDate = new Date(workout.date)
     return (
       <tr key={workout.id}>
-        <td>{workout.date.slice(0, 10)}</td>
+        <td>{workoutDate.toUTCString().slice(5, 12)}</td>
         <td>{workout.activity}</td>
         <td>{workout.duration}</td>
         <td>{workout.intensity}</td>
