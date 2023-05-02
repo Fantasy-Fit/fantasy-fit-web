@@ -12,8 +12,6 @@ class CompetitionsController < ApplicationController
     end
 
     def create
-        puts("Comp params:")
-        puts(params)
         competition = Competition.new(comp_params)
         competition.identifier = generate_identifier
         competition.save!
