@@ -11,12 +11,14 @@ import {
   setWorkouts,
   selectCurrentWorkouts,
 } from "../../store/game/workoutSlice";
+import { useGetLeaderboardQuery } from "../../store/game/leaderboardApiSlice";
 
 const RecentWorkouts = () => {
   const user = useSelector(selectCurrentUser);
   const currentWorkouts = useSelector(selectCurrentWorkouts);
 
   const { data: userWorkouts, isLoading, refetch } = useGetWorkoutsQuery(user.id);
+  const {refetch: refetchLeaderboard } = useGetLeaderboardQuery()
 
   const dispatch = useDispatch();
   const [deleteWorkout] = useDeleteWorkoutMutation();
@@ -49,6 +51,7 @@ const RecentWorkouts = () => {
                   deleteWorkout(workout.id);
                   dispatch(updateAfteDelete(workout.id));
                   refetch()
+                  refetchLeaderboard(workout.competition_id)
                 }}
               >
                 Delete
