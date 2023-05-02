@@ -33,8 +33,13 @@ class WorkoutsController < ApplicationController
     def destroy
         user = @current_user
         workout = Workout.find(params[:id])
+        participant = Participant.where(user_id: user.id, competition_id: workout.competition_id)
+        total_points = participant[0].user_total_points - workout.points
+
         if (DateTime.now.to_i - workout.created_at.to_i)/(60*60*24) < 2
             workout.destroy
+            participant.update!(user_total_points: total_points)
+            leaderboard = update_leaderboard(competition_id: workout.competition_id)
             head :no_content
         else
             render json: {error: "You can not delete this workout"}, status: :unprocessable_entity
