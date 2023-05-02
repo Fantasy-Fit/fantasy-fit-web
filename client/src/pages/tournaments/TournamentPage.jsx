@@ -10,6 +10,7 @@ import "./CompetitionPage.css";
 function TournamentPage() {
   const location = useLocation();
   const comp = location.state;
+
   const compEndDate = new Date(comp.end_date)
   const today = new Date();
   const daysRemaining = Math.ceil((compEndDate - today) / (3_600_000 * 24))

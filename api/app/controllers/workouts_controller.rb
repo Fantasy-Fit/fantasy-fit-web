@@ -30,6 +30,17 @@ class WorkoutsController < ApplicationController
         }, status: :created
     end
 
+    def destroy
+        user = @current_user
+        workout = Workout.find(params[:id])
+        if (DateTime.now.to_i - workout.created_at.to_i)/(60*60*24) < 2
+            workout.destroy
+            head :no_content
+        else
+            render json: {error: "You can not delete this workout"}, status: :unprocessable_entity
+        end
+    end
+
     private
 
     def workout_params

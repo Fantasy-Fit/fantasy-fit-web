@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :posts
   resources :participants
   resources :comments
-  resources :workouts, only: [:index, :create]
+  resources :workouts, only: [:index, :create, :destroy]
   resources :competitions, only: [:index, :show, :create]
   resources :users, only: [:index] do
     member do
@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   get "/search_competitions", to: "competitions#search"
 
   match '/workouts', controller: 'application', action: 'cors_preflight_check', via: [:options]
+  match '/workouts/:id', controller: 'application', action: 'cors_preflight_check', via: [:options]
   match '/auth/login', controller: 'application', action: 'cors_preflight_check', via: [:options]
   match '/auth/signup', controller: 'application', action: 'cors_preflight_check', via: [:options]
   match '/auth/update_profile', controller: 'application', action: 'cors_preflight_check', via: [:options]
