@@ -8,8 +8,6 @@ function Sidebar({ handleLogout, image, username, email, gender, location }) {
   const currentCompetitions = useSelector(selectCurrentCompetitions);
   const currentWorkouts = useSelector(selectCurrentWorkouts);
 
-  console.log(currentCompetitions)
-
   const openEditProfileModal = () => {
     const modal = document.getElementById("edit-profile-modal");
     modal.style.display = "block";
