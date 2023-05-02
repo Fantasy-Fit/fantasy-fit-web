@@ -18,7 +18,7 @@ class WorkoutsController < ApplicationController
         leaderboard = update_leaderboard(params[:competition_id])
 
         new_workout_post = Post.create(
-            user_id: user.id,
+            user_id: Competition.find(workout.competition_id).users.find_by(user_type:"bot").id,
             competition_id: params[:competition_id],
             description: "#{user.username} just posted a workout! #{params[:activity]} for #{params[:duration]} mins, earning #{workout_points} points!"
         )

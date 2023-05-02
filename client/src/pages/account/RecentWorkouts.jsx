@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentUser } from "../../store/auth/userSlice";
@@ -17,8 +16,12 @@ const RecentWorkouts = () => {
   const user = useSelector(selectCurrentUser);
   const currentWorkouts = useSelector(selectCurrentWorkouts);
 
-  const { data: userWorkouts, isLoading, refetch } = useGetWorkoutsQuery(user.id);
-  const {refetch: refetchLeaderboard } = useGetLeaderboardQuery()
+  const {
+    data: userWorkouts,
+    isLoading,
+    refetch,
+  } = useGetWorkoutsQuery(user.id);
+  const { refetch: refetchLeaderboard } = useGetLeaderboardQuery();
 
   const dispatch = useDispatch();
   const [deleteWorkout] = useDeleteWorkoutMutation();
@@ -31,9 +34,8 @@ const RecentWorkouts = () => {
     }
   }, [userWorkouts]);
 
-
   const mapWorkouts = currentWorkouts?.slice(-10).map((workout) => {
-    const workoutDate = new Date(workout.date)
+    const workoutDate = new Date(workout.date);
     return (
       <tr key={workout.id}>
         <td>{workoutDate.toUTCString().slice(5, 12)}</td>
@@ -46,17 +48,17 @@ const RecentWorkouts = () => {
           {(Date.now() - new Date(workout.created_at).getTime()) /
             (60 * 60 * 24 * 1000) <
             2 && (
-              <button
-                onClick={() => {
-                  deleteWorkout(workout.id);
-                  dispatch(updateAfteDelete(workout.id));
-                  refetch()
-                  refetchLeaderboard(workout.competition_id)
-                }}
-              >
-                Delete
-              </button>
-            )}
+            <button
+              onClick={() => {
+                deleteWorkout(workout.id);
+                dispatch(updateAfteDelete(workout.id));
+                refetch();
+                refetchLeaderboard(workout.competition.id);
+              }}
+            >
+              Delete
+            </button>
+          )}
         </td>
       </tr>
     );
