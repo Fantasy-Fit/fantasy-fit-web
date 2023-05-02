@@ -6,15 +6,16 @@ import { useCreateCompetitionMutation } from "../../store/game/competitionApiSli
 import { setParticipantList } from "../../store/game/participantSlice";
 import fitnessIcons from "../../data/fitnessIcons";
 import './NewCompetition.css'
-import { setUserInfo, selectUserCompetitions } from "../../store/auth/userSlice";
+import { selectCurrentUser } from "../../store/auth/userSlice";
+import { addCompetition } from "../../store/game/competitionSlice";
 
 function Create() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userCompetitions = useSelector(selectUserCompetitions);
+  const currentUser = useSelector(selectCurrentUser);
   const [createCompetition] = useCreateCompetitionMutation();
   const [newCompData, setNewCompData] = useState({
-    name: "", public: false, participants: [], icon: "", startDate: "", endDate: ""
+    name: "", public: false, participants: [currentUser.id], icon: "", startDate: "", endDate: ""
   });
   const [selectedIcon, setSelectedIcon] = useState(null);
   const [validationMessages, setValidationMessages] = useState("");
@@ -72,8 +73,8 @@ function Create() {
     if (!selectedIcon) {
       throw new Error("You haven't selected a competition Icon!");
     }
-    if (newCompData.participants.length <= 1) {
-      throw new Error("You need to select at least 2 participants!");
+    if (newCompData.participants.length < 1) {
+      throw new Error("You need to select at least 1 participants!");
     }
     if (newCompData.name.length < 5) {
       throw new Error("Competition Name must be at least 5 characters!");
@@ -98,9 +99,8 @@ function Create() {
 
     try {
       const request = await createCompetition(newCompData).unwrap();
-      console.log(userCompetitions)
-      dispatch(setUserInfo({ competitions: [...userCompetitions, request] }))
-      navigate('/profile')
+      dispatch(addCompetition(request));
+      navigate('/profile');
     } catch (err) {
       console.error(err.message);
     }
@@ -116,7 +116,19 @@ function Create() {
     }
   }, [participants]);
 
+  // console.log(currentUser)
   const mapParticipants = participants?.map(participant => {
+    // console.log(participant)
+    if (participant.id === currentUser.id) {
+      return (<div key={participant.id}>
+        <div>
+          <input name="participants" type="checkbox" value={participant.id} checked disabled />
+          <label htmlFor="participants">{participant.username}</label>
+        </div>
+      </div>)
+    }
+
+
     return (<div key={participant.id}>
       <div>
         <input name="participants" type="checkbox" onChange={handleInput} value={participant.id}></input>
