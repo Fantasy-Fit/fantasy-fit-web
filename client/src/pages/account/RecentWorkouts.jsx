@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentUser } from "../../store/auth/userSlice";
@@ -27,6 +28,7 @@ const RecentWorkouts = () => {
       dispatch(setWorkouts([...userWorkouts]));
     }
   }, [userWorkouts]);
+
 
   const mapWorkouts = currentWorkouts?.slice(-10).map((workout) => {
     return (
