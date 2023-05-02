@@ -31,7 +31,7 @@ div.leaderboard-container {
 
 div.leaderboard-container div {
     padding: 1em;
-    border: 0.5px solid rgb(124, 118, 118);
+    border: 0.5px solid lightgray;
     border-radius: 10px;
 }
 
@@ -104,4 +104,18 @@ div.feed>div {
     margin: 0.5em;
     padding: 1em;
     border-radius: 8px;
+}
+
+div.tournament-page-top-content {
+    display: flex;
+}
+
+div.tournament-finished {
+    display: block;
+    align-content: center;
+}
+
+div.tournament-finished img {
+    width: 30em;
+    height: 10em;
 }
