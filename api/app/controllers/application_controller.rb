@@ -35,7 +35,7 @@ class ApplicationController < ActionController::API
         if header[0...6] == "token="
             header = header[6...]
         end
-        puts "in auth req, header is: ", header
+        # puts "in auth req, header is: ", header
         begin
             decoded = jwt_decode(header)
             @current_user = User.find(decoded[:user_id])

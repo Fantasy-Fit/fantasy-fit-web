@@ -1,9 +1,9 @@
 puts "Seeding Users..."
 
-User.create(username: "chrisli", email: "chris@mail.com", gender: "M", year_of_birth: "1991", location: "New York", password: "11111")
-User.create(username: "coco", email: "colleen@mail.com", gender: "F", year_of_birth: "1991", location: "New York", password: "11111")
-User.create(username: "dulatK", email: "dulat@mail.com", gender: "M", year_of_birth: "1992", location: "New York", password: "11111")
-User.create(username: "alexisT", email: "alexis@mail.com", gender: "M", year_of_birth: "1999", location: "New York", password: "11111")
+User.create(username: "chrisli", email: "chris@mail.com", gender: "M", year_of_birth: "1991", location: "New York", password: "11111", user_type: "player")
+User.create(username: "coco", email: "colleen@mail.com", gender: "F", year_of_birth: "1991", location: "New York", password: "11111", user_type: "player")
+User.create(username: "dulatK", email: "dulat@mail.com", gender: "M", year_of_birth: "1992", location: "New York", password: "11111", user_type: "player")
+User.create(username: "alexisT", email: "alexis@mail.com", gender: "M", year_of_birth: "1999", location: "New York", password: "11111", user_type: "player")
 
 puts "Seeding Competitions..."
 
@@ -22,7 +22,14 @@ Participant.create(user_id: 2, competition_id: 2, username: "coco", user_total_p
 Participant.create(user_id: 3, competition_id: 2, username: "dulatK", user_total_points: 0)
 Participant.create(user_id: 4, competition_id: 2, username: "alexisT", user_total_points: 0)
 
-puts "Seeing workouts..."
+puts "Seeding Admin bots..."
+firstCompBot = User.create(username: "thisFitisLitt_bot", email: "thisFitisLitt@generic.com", gender: "Undisclosed", year_of_birth: 2023, location: "The Fantasy Cloud", password: "admin", user_type: "bot")
+secondCompBot = User.create(username: "friends_race_bot", email: "friends_race@generic.com", gender: "Undisclosed", year_of_birth: 2023, location: "The Fantasy Cloud", password: "admin", user_type: "bot")
+
+Participant.create(competition_id: 1, user_id: firstCompBot.id, username: firstCompBot.username, user_total_points: 0)
+Participant.create(competition_id: 2, user_id: secondCompBot.id, username: secondCompBot.username, user_total_points: 0)
+
+puts "Seeding workouts..."
 
 Workout.create(activity: "Walking", duration: 60, intensity: "M", date: "3/08/2023", calories: 789, avg_HR: 149, user_id: 1, competition_id: 1, points: 180)
 Workout.create(activity: "Strength Training", duration: 60, intensity: "H", date: "3/08/2023", calories: 600, avg_HR: 140, user_id: 2, competition_id: 1, points: 405)

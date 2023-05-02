@@ -2,7 +2,8 @@ class CompetitionsController < ApplicationController
 
     def leaderboard
         competition = Competition.find(params[:id])
-        participants = competition.participants.sort_by {|p| -p.user_total_points}
+        participants = competition.participants.sort_by {|p| -p.user_total_points}.filter {|p| p.user.user_type != "bot"}
+        filter_participants = participants.filter {|p| p.user.user_type != "bot"}
         render json: participants
     end
 
@@ -21,7 +22,40 @@ class CompetitionsController < ApplicationController
                 user_id: id,
                 username: User.find(id).username,
                 user_total_points: 0  
-            )}
+            )
+        }
+
+        admin_bot = User.create(
+            username: "#{params[:name]}_bot", 
+            email: "#{params[:name]}@generic.com", 
+            gender: "Undisclosed", 
+            year_of_birth: Date.parse(params[:start_date]).year, 
+            location: "The Fantasy Cloud", 
+            password: "admin",
+            user_type: "bot"
+        )
+    
+        Participant.create(
+            competition_id: competition.id,
+            user_id: admin_bot.id,
+            username: admin_bot.username,
+            user_total_points: 0
+        )
+
+        new_comp_post = Post.create(
+            user_id: admin_bot.id,
+            competition_id: competition.id,
+            description: "Welcome to competition: #{competition.name}!"
+        )
+
+        params[:participants].map {|id|
+            Post.create(
+                user_id: admin_bot.id,
+                competition_id: competition.id,
+                description: "#{User.find(id).username} has just been added to this competition. Welcome!"
+            )
+        }
+
         render json: competition, status: :created
     end
 
