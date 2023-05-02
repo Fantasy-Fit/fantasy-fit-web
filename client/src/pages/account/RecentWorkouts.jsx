@@ -44,16 +44,16 @@ const RecentWorkouts = () => {
           {(Date.now() - new Date(workout.created_at).getTime()) /
             (60 * 60 * 24 * 1000) <
             2 && (
-            <button
-              onClick={() => {
-                deleteWorkout(workout.id);
-                dispatch(updateAfteDelete(workout.id));
-                refetch()
-              }}
-            >
-              Delete
-            </button>
-          )}
+              <button
+                onClick={() => {
+                  deleteWorkout(workout.id);
+                  dispatch(updateAfteDelete(workout.id));
+                  refetch()
+                }}
+              >
+                Delete
+              </button>
+            )}
         </td>
       </tr>
     );
