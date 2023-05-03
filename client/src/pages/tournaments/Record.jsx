@@ -83,12 +83,12 @@ function Record({ comp }) {
       const updatedLeaderboard = [...req.data.leaderboard];
       dispatch(setLeaderboard([...updatedLeaderboard]));
       setMessage("Workout successfully added!");
-      setWorkoutData({
-        activity: "",
-        duration: 0,
-        intensity: "",
-        date: "",
-      });
+      // setWorkoutData({
+      //   activity: "",
+      //   duration: 0,
+      //   intensity: "",
+      //   date: "",
+      // });
       refetchLeaderboard();
       refetchPosts();
       refetchWorkouts();
