@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :likes, only: [:create, :destroy]
   resources :posts
   resources :participants
   resources :comments
@@ -22,6 +23,7 @@ Rails.application.routes.draw do
   post "/competition/join", to: "competitions#join"
   get "/competition/leaderboard/:id", to: "competitions#leaderboard"
   get "/search_competitions", to: "competitions#search"
+  delete "/like", to: "likes#destroy"
 
   match '/workouts', controller: 'application', action: 'cors_preflight_check', via: [:options]
   match '/workouts/:id', controller: 'application', action: 'cors_preflight_check', via: [:options]
@@ -35,7 +37,8 @@ Rails.application.routes.draw do
   match '/competition/join', controller: 'application', action: 'cors_preflight_check', via: [:options]
   match '/posts', controller: 'application', action: 'cors_preflight_check', via: [:options]
   match '/posts/:id', controller: 'application', action: 'cors_preflight_check', via: [:options]
-
+  match '/likes', controller: 'application', action: 'cors_preflight_check', via: [:options]
+  match '/like', controller: 'application', action: 'cors_preflight_check', via: [:options]
 
   match '/search_competitions', controller: 'application', action: 'cors_preflight_check', via: [:options]
 

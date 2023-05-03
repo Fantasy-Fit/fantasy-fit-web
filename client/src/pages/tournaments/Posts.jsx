@@ -1,4 +1,10 @@
 import PostCard from "./PostCard";
+import CreateIcon from '@mui/icons-material/Create';
+import InputOption from '../account/InputOption';
+import ImageIcon from '@mui/icons-material/Image';
+import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
+import EventNoteIcon from '@mui/icons-material/EventNote';
+import InsertCommentIcon from '@mui/icons-material/InsertComment';
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -43,10 +49,28 @@ function Posts({ posts, comp }) {
 
   return (
     <div className="posts">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input type="text" {...register("description")} />
-        <button type="submit">Post</button>
-      </form>
+      <div className="feed__inputContainer">
+        <div className="feed__input">
+          <InputOption Icon={CreateIcon} />
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <input type="text" {...register("description")}
+              autoComplete="off" />
+            <button>
+              <InputOption
+                Icon={InsertCommentIcon}
+                title="Post"
+                type="submit"
+                color="rgb(233, 33, 112)"
+              />
+            </button>
+          </form>
+        </div>
+        <div className="feed__inputOptions">
+          <InputOption Icon={ImageIcon} title="Photo" color="#70B5F9" />
+          <InputOption Icon={SubscriptionsIcon} title="Video" color="#E7A33E" />
+          <InputOption Icon={EventNoteIcon} title="Event" color="#C0CBCD" />
+        </div>
+      </div>
       {renderedPosts}
     </div>
   );
