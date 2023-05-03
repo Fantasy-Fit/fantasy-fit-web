@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_27_191524) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_03_024704) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_27_191524) do
     t.string "icon"
     t.datetime "start_date"
     t.datetime "end_date"
+    t.boolean "active"
     t.index ["identifier"], name: "index_competitions_on_identifier", unique: true
   end
 
@@ -53,6 +54,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_27_191524) do
     t.datetime "updated_at", null: false
     t.index ["friend_id"], name: "index_friendships_on_friend_id"
     t.index ["user_id"], name: "index_friendships_on_user_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "post_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_likes_on_post_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "participants", force: :cascade do |t|
@@ -72,6 +82,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_27_191524) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "description"
+    t.integer "num_of_likes"
     t.index ["competition_id"], name: "index_posts_on_competition_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
@@ -86,6 +97,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_27_191524) do
     t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "user_type"
   end
 
   create_table "workouts", force: :cascade do |t|
@@ -110,6 +122,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_27_191524) do
   add_foreign_key "comments", "workouts"
   add_foreign_key "friendships", "users"
   add_foreign_key "friendships", "users", column: "friend_id"
+  add_foreign_key "likes", "posts"
+  add_foreign_key "likes", "users"
   add_foreign_key "participants", "competitions"
   add_foreign_key "participants", "users"
   add_foreign_key "posts", "competitions"

@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
+    before_action :authenticate_request, only: [:update]
 
     def index
-        render json: User.all, status: :ok
+        non_bot_users = User.where(user_type: "player")
+        render json: non_bot_users, status: :ok
     end
 
     def create
@@ -10,7 +12,7 @@ class UsersController < ApplicationController
     end
 
     def update
-        user = set_user
+        user = @current_user
         user.update(user_params)
         if user
             render json: user, status: :accepted

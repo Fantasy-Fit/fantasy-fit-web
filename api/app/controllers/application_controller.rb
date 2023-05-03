@@ -32,6 +32,10 @@ class ApplicationController < ActionController::API
     def authenticate_request
         header = request.headers["Authorization"]
         header = header.split(" ").last if header
+        if header[0...6] == "token="
+            header = header[6...]
+        end
+        # puts "in auth req, header is: ", header
         begin
             decoded = jwt_decode(header)
             @current_user = User.find(decoded[:user_id])
@@ -49,7 +53,7 @@ class ApplicationController < ActionController::API
     end
 
     def render_unprocessable_entity(invalid)
-        render json: { errors: invalid.record.errors.full_messages }, status: :render_unprocessable_entity
+        render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
     end
 
     def check_origin

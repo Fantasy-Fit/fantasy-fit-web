@@ -6,6 +6,9 @@ class User < ApplicationRecord
     has_many :workouts
     has_many :posts
 
+    has_many :likes
+    has_many :liked_posts, through: :likes, source: :post
+
     has_many :friendships, dependent: :destroy
     has_many :friends, through: :friendships
 

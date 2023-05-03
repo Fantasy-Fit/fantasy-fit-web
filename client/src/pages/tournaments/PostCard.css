@@ -1,0 +1,67 @@
+div.post_card__container {
+    display: flex;
+    padding: 5px;
+    border-radius: 10px;
+    border-bottom: 0.5px solid rgb(233, 230, 230)
+        /* border: 0.5px solid lightgray; */
+}
+
+div.post_card_avatar__container {
+    margin-right: 10px;
+}
+
+div.post_card_avatar__container * {
+    width: 50px;
+    height: 50px;
+}
+
+div.post_card_username__container {
+    display: block;
+
+}
+
+div.post_card_username__innerContainer {
+    display: flex;
+    width: 28em;
+    justify-content: space-between;
+}
+
+div.post_card_username__innerContainer>h3 {
+    margin-bottom: 5px;
+}
+
+button.post_card__delete_button {
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+    height: 30px;
+    width: 30px;
+}
+
+button.post_card__delete_button>svg {
+    color: rgb(172, 172, 172)
+}
+
+button.post_card__delete_button>svg:hover {
+    color: rgb(219, 97, 97);
+}
+
+div.post_card__comment_container {
+    display: flex;
+    width: 28em;
+    justify-content: space-between;
+
+}
+
+.post_card__thumbsUpIcon {
+    width: 30px;
+    height: 30px;
+    color: rgb(222, 220, 220);
+    /* border: rgb(172, 172, 172) */
+    /* color: rgb(114, 179, 249); */
+}
+
+.post_card__thumbsUpIcon:hover {
+    color: rgb(114, 179, 249);
+    /* color: rgb(35, 138, 248); */
+}

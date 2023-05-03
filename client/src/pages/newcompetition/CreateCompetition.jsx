@@ -1,32 +1,36 @@
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useGetParticipantsQuery } from "../../store/game/participantsApiSlice";
 import { useCreateCompetitionMutation } from "../../store/game/competitionApiSlice";
-import GameRules from "./GameRules";
 import { setParticipantList } from "../../store/game/participantSlice";
 import fitnessIcons from "../../data/fitnessIcons";
 import './NewCompetition.css'
+import { selectCurrentUser } from "../../store/auth/userSlice";
+import { addCompetition } from "../../store/game/competitionSlice";
 
 function Create() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const currentUser = useSelector(selectCurrentUser);
   const [createCompetition] = useCreateCompetitionMutation();
   const [newCompData, setNewCompData] = useState({
-    name: "", public: false, participants: [], icon: "", startDate: "", endDate: ""
+    name: "", public: false, participants: [currentUser.id], icon: "", start_date: "", end_date: ""
   });
   const [selectedIcon, setSelectedIcon] = useState(null);
   const [validationMessages, setValidationMessages] = useState("");
   const today = new Date();
   const maxStartDate = new Date(Date.parse(today) + 3_600_000 * 24 * 30);
-  const maxEndDate = new Date((Date.parse(newCompData.startDate) || Date.parse(today)) + 3_600_000 * 24 * 365);
+  const maxEndDate = new Date((Date.parse(newCompData.start_date) || Date.parse(today)) + 3_600_000 * 24 * 365);
 
   const handleInput = (e) => {
     const getCompValue = (input) => {
       switch (input) {
         case "name":
           return e.target.value;
-        case "startDate":
+        case "start_date":
           return e.target.value;
-        case "endDate":
+        case "end_date":
           return e.target.value;
         case "public":
           return e.target.checked;
@@ -69,16 +73,16 @@ function Create() {
     if (!selectedIcon) {
       throw new Error("You haven't selected a competition Icon!");
     }
-    if (newCompData.participants.length <= 1) {
-      throw new Error("You need to select at least 2 participants!");
+    if (newCompData.participants.length < 1) {
+      throw new Error("You need to select at least 1 participants!");
     }
     if (newCompData.name.length < 5) {
       throw new Error("Competition Name must be at least 5 characters!");
     }
-    if (!newCompData.startDate) {
+    if (!newCompData.start_date) {
       throw new Error("You haven't selected a start date!")
     }
-    if (!newCompData.endDate) {
+    if (!newCompData.end_date) {
       throw new Error("You haven't selected an end date!")
     }
   };
@@ -95,7 +99,8 @@ function Create() {
 
     try {
       const request = await createCompetition(newCompData).unwrap();
-      console.log(request);
+      dispatch(addCompetition(request));
+      navigate('/profile');
     } catch (err) {
       console.error(err.message);
     }
@@ -111,7 +116,19 @@ function Create() {
     }
   }, [participants]);
 
+  // console.log(currentUser)
   const mapParticipants = participants?.map(participant => {
+    // console.log(participant)
+    if (participant.id === currentUser.id) {
+      return (<div key={participant.id}>
+        <div>
+          <input name="participants" type="checkbox" value={participant.id} checked disabled />
+          <label htmlFor="participants">{participant.username}</label>
+        </div>
+      </div>)
+    }
+
+
     return (<div key={participant.id}>
       <div>
         <input name="participants" type="checkbox" onChange={handleInput} value={participant.id}></input>
@@ -154,24 +171,24 @@ function Create() {
             />
           </div>
 
-          <label htmlFor="startDate">Start Date:</label>
+          <label htmlFor="start_date">Start Date:</label>
           <input
             type="date"
-            name="startDate"
+            name="start_date"
             onChange={handleInput}
             min={today.toISOString().substring(0, 10)}
             max={maxStartDate.toISOString().substring(0, 10)}
-            value={newCompData.startDate}
+            value={newCompData.start_date}
           />
-          <label htmlFor="endDate">End Date:</label>
+          <label htmlFor="end_date">End Date:</label>
           <input
             type="date"
-            name="endDate"
-            min={newCompData.startDate}
+            name="end_date"
+            min={newCompData.start_date}
             max={maxEndDate?.toISOString().substring(0, 10)}
 
             onChange={handleInput}
-            value={newCompData.endDate}
+            value={newCompData.end_date}
           />
           <div className="select-participants">
             <label>Select Participants:</label>

@@ -1,16 +1,20 @@
-import { useSelector } from 'react-redux';
-import { selectCompetitions } from '../../store/competition/competitionSlice';
+import { createSlice } from '@reduxjs/toolkit';
 
-const Competitions = () => {
-  const competitions = useSelector(selectCompetitions);
+const competitionSlice = createSlice({
+    name: "competitions",
+    initialState: { competitions: [] },
+    reducers: {
+        setCompetitions: (state, action) => {
+            state.competitions = action.payload;
+        },
+        addCompetition: (state, action) => {
+            state.competitions.push(action.payload);
+        },
+    },
+});
 
-  return (
-    <div>
-      {competitions.list.map((competition) => (
-        <div key={competition.id}>{competition.name}</div>
-      ))}
-    </div>
-  );
-};
+export const { setCompetitions, addCompetition } = competitionSlice.actions;
 
-export default Competitions;
+export default competitionSlice.reducer;
+
+export const selectCurrentCompetitions = (state) => state.competitions.competitions;
