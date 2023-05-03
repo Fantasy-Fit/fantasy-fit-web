@@ -5,7 +5,10 @@ export const friendApiSlice = apiSlice.injectEndpoints({
         getFriends: builder.query({
             query: () => "/friends",
         }),
+        searchFriends: builder.query({
+            query: (search) => `/friends?search=${search}`
+        }),
     }),
 });
 
-export const { useGetFriendsQuery } = friendApiSlice;
+export const { useGetFriendsQuery, useSearchFriendsQuery } = friendApiSlice;

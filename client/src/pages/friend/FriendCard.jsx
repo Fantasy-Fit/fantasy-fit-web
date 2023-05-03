@@ -5,7 +5,8 @@ const FriendCard = ({ friend }) => {
             <img src={friend.friend_avatar} alt="friendicon" />
             <p>Friend since ... {friend.created_at}</p>
             <p>In [X] competitions with this person</p>
-            <button>Status: {friend.status}</button>
+            <p>Status: {friend.status}</p>
+            <button>Remove Friend</button>
 
         </div>
     );

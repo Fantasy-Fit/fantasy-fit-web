@@ -3,7 +3,14 @@ class FriendshipsController < ApplicationController
 
     def index
         user = @current_user
-        render json: user.friendships
+        if params[:search]
+            find_users = User.where("lower(username) LIKE ? AND user_type = ?", "%#{params[:search].downcase}%", "player")
+            puts find_users
+            render json: find_users
+        else
+            render json: user.friendships
+        end
+        
     end
 
     def create

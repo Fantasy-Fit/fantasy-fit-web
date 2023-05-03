@@ -1,6 +1,29 @@
 div.friends_page__container {
-    /* display: flex; */
-    width: 40em;
-    justify-content: center;
+    width: 30em;
+}
 
+.friends_page__search {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 5px;
+    height: 28px;
+    width: 20em;
+    color: gray;
+    background-color: #eef3f8;
+}
+
+.friends_page__search>input {
+    outline: none;
+    border: none;
+    background: none;
+}
+
+.friends_page__search>button {
+    border: none;
+    height: 30px;
+}
+
+.friends_page__search>button>div.inputOption {
+    padding: 0;
 }
