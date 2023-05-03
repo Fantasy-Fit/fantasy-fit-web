@@ -3,7 +3,13 @@ import InputOption from '../account/InputOption';
 import FriendCard from './FriendCard';
 import PendingFriendCard from './PendingFriendCard';
 import SearchFriendResult from "./SearchFriendResult";
-import { useGetFriendsQuery, useSearchFriendsQuery } from '../../store/social/friendApiSlice';
+import {
+    useGetFriendsQuery,
+    useSearchFriendsQuery,
+    useAcceptFriendRequestMutation,
+    useDeleteFriendRequestMutation,
+    useSendFriendRequestMutation,
+} from '../../store/social/friendApiSlice';
 import { setFriends } from "../../store/social/friendSlice";
 import { useDispatch } from 'react-redux';
 import "./FriendsPage.css"
@@ -15,6 +21,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 const FriendsPage = () => {
     const { data: friends, isLoading } = useGetFriendsQuery();
     const dispatch = useDispatch();
+    const [acceptFriendRequest] = useAcceptFriendRequestMutation();
+    const [deleteFriend] = useDeleteFriendRequestMutation();
+    const [sendFriendRequest] = useSendFriendRequestMutation();
     // const [searchFriendQuery, setSearchFriendQuery] = useState(null);
     const [searchResultMessage, setSearchResultMessage] = useState("");
     const schema = yup.object().shape({
