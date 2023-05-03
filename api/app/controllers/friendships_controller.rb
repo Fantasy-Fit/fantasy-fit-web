@@ -1,4 +1,10 @@
 class FriendshipsController < ApplicationController
+    before_action :authenticate_request
+
+    def index
+        user = @current_user
+        render json: user.friendships
+    end
 
     def create
         friend = User.find_by(username: params[:friend_username])

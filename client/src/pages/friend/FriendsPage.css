@@ -1,0 +1,6 @@
+div.friends_page__container {
+    /* display: flex; */
+    width: 40em;
+    justify-content: center;
+
+}

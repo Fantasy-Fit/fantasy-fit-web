@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   get "/competition/leaderboard/:id", to: "competitions#leaderboard"
   get "/search_competitions", to: "competitions#search"
   delete "/like", to: "likes#destroy"
+  get "/friends", to: "friendships#index"
 
   match '/workouts', controller: 'application', action: 'cors_preflight_check', via: [:options]
   match '/workouts/:id', controller: 'application', action: 'cors_preflight_check', via: [:options]
@@ -39,6 +40,7 @@ Rails.application.routes.draw do
   match '/posts/:id', controller: 'application', action: 'cors_preflight_check', via: [:options]
   match '/likes', controller: 'application', action: 'cors_preflight_check', via: [:options]
   match '/like', controller: 'application', action: 'cors_preflight_check', via: [:options]
+  match '/friends', controller: 'application', action: 'cors_preflight_check', via: [:options]
 
   match '/search_competitions', controller: 'application', action: 'cors_preflight_check', via: [:options]
 
