@@ -24,7 +24,8 @@ Rails.application.routes.draw do
   get "/competition/leaderboard/:id", to: "competitions#leaderboard"
   get "/search_competitions", to: "competitions#search"
   delete "/like", to: "likes#destroy"
+  get "/friends", to: "friendships#index"
+  post "/friends", to: "friendships#create"
   
   options '*path', to: 'application#cors_preflight_check'
-  # match '*path', to: 'application#cors_preflight_check', via: [:options]
 end

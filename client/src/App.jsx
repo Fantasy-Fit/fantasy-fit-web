@@ -6,6 +6,7 @@ import Authorization from "./pages/auth/Authorization";
 import CreateCompetition from "./pages/newcompetition/CreateCompetition";
 import Profile from "./pages/account/Profile";
 import TournamentPage from "./pages/tournaments/TournamentPage";
+import FriendsPage from "./pages/friend/FriendsPage";
 import "./App.css";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <Route path="profile" element={<Profile />} />
             <Route path="tournament/:id" element={<TournamentPage />} />
             <Route path="new-competition" element={<CreateCompetition />} />
+            <Route path="friends" element={<FriendsPage />} />
           </Route>
         </Route>
       </Routes>
