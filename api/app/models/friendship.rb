@@ -11,7 +11,17 @@ class Friendship < ApplicationRecord
     errors.add(:friend, "Can't be equal to yourself") if user == friend
   end
 
+  # def not_duplicate
+  #   errors.add(:friend, "Already added") if user.friends.include?(friend)
+  # end
+
   def not_duplicate
-    errors.add(:friend, "Already added") if user.friends.include?(friend)
+    if status == "pending"
+      errors.add(:friend, "Already added") if user.friends.include?(friend)
+    else
+      errors.add(:friend, "Already added") if Friendship.exists?(user: user, friend: friend, status: "accepted")
+    end
   end
+  
+
 end
