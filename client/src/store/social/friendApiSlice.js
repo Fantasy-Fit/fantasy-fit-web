@@ -6,18 +6,18 @@ export const friendApiSlice = apiSlice.injectEndpoints({
             query: () => "/friends",
         }),
         searchFriends: builder.query({
-            query: (search) => `/friends?search=${search}`
+            query: (search) => `/searchfriends?query=${search}`
         }),
         acceptFriendRequest: builder.mutation({
             query: (friendship_id) => ({
-                url: `/friends${friendship_id}`,
+                url: `/accept_friend/${friendship_id}`,
                 method: "PATCH",
                 body: { status: "accepted" },
             }),
         }),
         deleteFriendRequest: builder.mutation({
             query: (friendship_id) => ({
-                url: `/friends/${friendship_id}`,
+                url: `/delete_friend/${friendship_id}`,
                 method: "DELETE",
             }),
         }),

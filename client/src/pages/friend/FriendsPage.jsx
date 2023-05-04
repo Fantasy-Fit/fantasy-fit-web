@@ -20,6 +20,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 const FriendsPage = () => {
     const { data: friends, isLoading } = useGetFriendsQuery();
+    console.log(friends)
     const dispatch = useDispatch();
     const [acceptFriendRequest] = useAcceptFriendRequestMutation();
     const [deleteFriend] = useDeleteFriendRequestMutation();
@@ -39,7 +40,14 @@ const FriendsPage = () => {
         resolver: yupResolver(schema),
     });
 
-    const { data: searchResults, isLoading: isSearchLoading, refetch: submitSearchRequest } = useSearchFriendsQuery(getValues("searchQuery"));
+    const {
+        data: searchResults,
+        isLoading: isSearchLoading,
+        refetch: submitSearchRequest
+    } = useSearchFriendsQuery(
+        getValues("searchQuery") ?? "",
+        { skip: !getValues("searchQuery") }
+    );
 
     const onSubmitSearch = async (data) => {
         setSearchResultMessage("")
@@ -68,9 +76,9 @@ const FriendsPage = () => {
         )
     });
 
-    const mapFriendRequests = friends?.filter(friend => friend.status === "pending").map(friend => {
+    const mapFriendRequests = friends?.filter(friend => friend.status === "requested").map(friendship => {
         return (
-            <PendingFriendCard key={friend.friend_username} friend={friend} />
+            <PendingFriendCard key={friendship.friend_username} friendship={friendship} />
         )
     });
 
