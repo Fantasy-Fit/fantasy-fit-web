@@ -144,7 +144,7 @@
     margin: 3px 0;
     text-align: center;
     font-size: 18px;
-    font-weight: 400;
+    font-weight: 700;
     line-height: 20px;
     opacity: 1;
     outline: 0 solid transparent;
@@ -155,7 +155,6 @@
     width: fit-content;
     word-break: break-word;
     border: 0;
-
 }
 
 .popup__content>button>div {

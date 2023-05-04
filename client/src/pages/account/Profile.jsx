@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { selectCurrentUser } from "../../store/auth/userSlice";
+import { useGetFriendsQuery } from "../../store/social/friendApiSlice";
 import { useGetCompetitionsQuery } from "../../store/game/competitionApiSlice";
 import { setCompetitions } from "../../store/game/competitionSlice";
 import Sidebar from "./Sidebar";
@@ -13,6 +14,7 @@ function Profile() {
   const user = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
   const { data: competitions, isLoading: isCompsLoading, refetch: refetchComps } = useGetCompetitionsQuery(user.id);
+  const { data: friends, isLoading } = useGetFriendsQuery();
 
   useEffect(() => {
     refetchComps();
@@ -49,6 +51,7 @@ function Profile() {
           email={user.email}
           gender={user.gender}
           location={user.location}
+          friends={friends}
         />
         <MainFeed
           current_competitions={mapComps}
