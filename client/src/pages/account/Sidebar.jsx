@@ -4,7 +4,7 @@ import { selectCurrentWorkouts } from '../../store/game/workoutSlice';
 import Avatar from '@mui/material/Avatar';
 import './Sidebar.css';
 
-function Sidebar({ handleLogout, image, username, email, gender, location }) {
+function Sidebar({ image, username, email, gender, location }) {
   const currentCompetitions = useSelector(selectCurrentCompetitions);
   const currentWorkouts = useSelector(selectCurrentWorkouts);
 
@@ -37,7 +37,6 @@ function Sidebar({ handleLogout, image, username, email, gender, location }) {
         <h4>{gender}</h4>
         <h4>{location}</h4>
         <button onClick={openEditProfileModal}>Edit Profile</button>
-        <button onClick={handleLogout}>Log out</button>
       </div>
 
       <div className="sidebar__stats">
