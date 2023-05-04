@@ -9,20 +9,27 @@ class FriendshipsController < ApplicationController
         else
             render json: user.friendships
         end
-        # render json: user.friendships
-        
     end
 
     def create
         user = @current_user
-        friend = User.find(params[:friend_id])
-        user.add_friend(friend)
-        # redirect_to root_path, notice: "Friend request sent."
-    end
-
-    def destroy
         friend = User.find_by(username: params[:friend_username])
-        current_user.remove_friend(friend)
-        redirect_to root_path, notice: "Friend removed."
+    
+        if user.add_friend(friend) && friend.add_friend(user)
+          redirect_to root_path, notice: "Friend request sent."
+        else
+          redirect_to root_path, alert: "Failed to send friend request."
+        end
+    end
+    
+    def destroy
+        user = @current_user
+        friend = User.find_by(username: params[:friend_username])
+        if user.remove_friend(friend) && friend.remove_friend(user)
+          redirect_to root_path, notice: "Friend removed."
+        else
+          redirect_to root_path, alert: "Failed to remove friend."
+        end
     end
 end
+

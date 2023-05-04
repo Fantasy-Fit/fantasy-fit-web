@@ -47,4 +47,7 @@ Rails.application.routes.draw do
 
   # match '/auth/login' || '/auth/signup' || '/logout' || '/users', controller: 'application', action: 'cors_preflight_check', via: [:options]
 
+  # a catch-all route added here\
+  
+  match '*path', to: 'application#cors_preflight_check', via: [:options]
 end
