@@ -3,13 +3,14 @@ import {
     useDeleteFriendRequestMutation,
 } from '../../store/social/friendApiSlice';
 
-const PendingFriendCard = ({ friend }) => {
+const PendingFriendCard = ({ friendship }) => {
+    console.log(friendship)
     const [acceptFriendRequest] = useAcceptFriendRequestMutation();
     const [deleteFriendRequest] = useDeleteFriendRequestMutation();
 
     const handleAcceptRequest = () => {
         try {
-            acceptFriendRequest(friend.id);
+            acceptFriendRequest(friendship.id);
         } catch (err) {
             console.error(err);
         };
@@ -17,7 +18,7 @@ const PendingFriendCard = ({ friend }) => {
 
     const handleIgnoreFriendRequest = () => {
         try {
-            deleteFriendRequest(friend.id);
+            deleteFriendRequest(friendship.id);
         } catch (err) {
             console.error(err);
         };
@@ -25,10 +26,10 @@ const PendingFriendCard = ({ friend }) => {
 
     return (
         <div>
-            <h2>{friend.friend_username}</h2>
-            <img src={friend.friend_avatar} alt="friendicon" />
-            <p>Request received: {friend.created_at}</p>
-            <p>Status: {friend.status}</p>
+            <h2>{friendship.friend_username}</h2>
+            <img src={friendship.friend_avatar} alt="friendicon" />
+            <p>Request received: {friendship.created_at}</p>
+            <p>Status: {friendship.status}</p>
             <button onClick={handleAcceptRequest}>Accept</button>
             <button onClick={handleIgnoreFriendRequest}>Ignore</button>
 

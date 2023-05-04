@@ -25,7 +25,10 @@ Rails.application.routes.draw do
   get "/search_competitions", to: "competitions#search"
   delete "/like", to: "likes#destroy"
   get "/friends", to: "friendships#index"
+  get "/searchfriends", to: "friendships#search"
   post "/friends", to: "friendships#create"
+  patch "/accept_friend/:friendship_id", to: "friendships#update"
+  delete "/delete_friend/:friendship_id", to: "friendships#destroy"
   
   options '*path', to: 'application#cors_preflight_check'
 end

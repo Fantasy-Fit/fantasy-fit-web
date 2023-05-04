@@ -19,8 +19,9 @@ class User < ApplicationRecord
     # validates :password, presence: true
 
     def add_friend(friend)
-        friendship = friendships.create(friend: friend, status: "pending")
+        friendship = friendships.create!(friend: friend, status: "pending")
         inverse_friendship = friend.friendships.create(friend: self, status: "requested")
+        friendship
     end
 
     def remove_friend(friend)
@@ -32,11 +33,16 @@ class User < ApplicationRecord
 
     def accept_friendship(friendship_id)
         friendship = Friendship.find_by(id: friendship_id)
+        
         if friendship
             Friendship.transaction do
                 friendship.update(status: "accepted")
-                inverse_friendship = friendship.friend.inverse_friendships.find_by(user: self)
+
+                inverse_friendship = Friendship.where(user: friendship.friend, friend: self)
+
                 inverse_friendship.update(status: "accepted") if inverse_friendship
+
+                friendship
             end
         else
             puts "Friendship not found"

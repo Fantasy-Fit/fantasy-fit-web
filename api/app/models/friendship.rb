@@ -16,7 +16,7 @@ class Friendship < ApplicationRecord
   # end
 
   def not_duplicate
-    if status == "pending"
+    if status == "pending" || status == "requested"
       errors.add(:friend, "Already added") if user.friends.include?(friend)
     else
       errors.add(:friend, "Already added") if Friendship.exists?(user: user, friend: friend, status: "accepted")
