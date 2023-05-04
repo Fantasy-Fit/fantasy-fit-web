@@ -1,32 +1,54 @@
 class FriendshipsController < ApplicationController
+    before_action :authenticate_request
+
+    def index
+        user = @current_user
+        # puts "In friendship controller index method:", user.friendships
+        render json: user.friendships
+    end
+
+    def search
+      user = @current_user
+      if params[:query]
+          find_users = User.where("lower(username) LIKE ? AND user_type = ?", "%#{params[:query].downcase}%", "player")
+          if find_users
+            find_users.map{|user| puts user}
+            render json: find_users
+          else
+            render json: {error: "no users found"}, status: :not_found
+          end
+      else
+          render json: {error: "no search query"}, status: :unprocessable_entity
+      end
+    end
+
     def create
-        friend = User.find_by(username: params[:friend_username])
-    
-        if current_user.add_friend(friend) && friend.add_friend(current_user)
-          redirect_to root_path, notice: "Friend request sent."
+        user = @current_user
+        friend = User.find(params[:friend_id])
+        friendship = user.add_friend(friend)
+        # if user.add_friend(friend) && friend.add_friend(user)
+        if friendship
+          # redirect_to root_path, notice: "Friend request sent."
+          render json: {created_friendship: friendship}
         else
           redirect_to root_path, alert: "Failed to send friend request."
         end
     end
     
     def destroy
-        friend = User.find_by(username: params[:friend_username])
-    
-        if current_user.remove_friend(friend) && friend.remove_friend(current_user)
-          redirect_to root_path, notice: "Friend removed."
-        else
-          redirect_to root_path, alert: "Failed to remove friend."
-        end
+        puts "In Friendships#destroy, params[:id]", params[:friendship_id]
+        user = @current_user
+        friend = Friendship.find(params[:friendship_id]).friend
+        # friend = User.find_by(username: params[:friend_username])
+        user.remove_friend(friend) && friend.remove_friend(user)
+        render json: {"message": "deleted!"}
+    end
+
+    def update
+        puts "In Friendship#update", params[:friendship_id] 
+        user = @current_user
+        accepted_friendship = user.accept_friendship(params[:friendship_id])
+        render json: {data: accepted_friendship}, status: :accepted
     end
 end
-# def create
-#     friend = User.find_by(username: params[:friend_username])
-#     current_user.add_friend(friend)
-#     redirect_to root_path, notice: "Friend request sent."
-# end
 
-# def destroy
-#     friend = User.find_by(username: params[:friend_username])
-#     current_user.remove_friend(friend)
-#     redirect_to root_path, notice: "Friend removed."
-# end

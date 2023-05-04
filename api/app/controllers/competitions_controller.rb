@@ -72,6 +72,7 @@ class CompetitionsController < ApplicationController
     def join
         competition = Competition.find_by(identifier: params[:identifier])
         user = User.find_by(username: params[:user][:username])
+        bot = competition.users.where(user_type: "bot")
 
         if competition.nil?
             render json: { error: "Competition not found"}, status: :not_found
@@ -87,6 +88,12 @@ class CompetitionsController < ApplicationController
               user_id: user.id,
               username: user.username,
               user_total_points: 0
+            )
+
+            new_participant_post = Post.create!(
+                user_id: bot[0].id,
+                competition_id: competition.id,
+                description: "#{user.username} just joined this competition, let's show them some love!"
             )
 
             render json: participant, status: :created

@@ -13,7 +13,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
       query: (credentials) => ({
         url: "http://localhost:3000/auth/signup",
         method: "POST",
-        body: { ...credentials },
+        body: { ...credentials, user_type: "player" },
       }),
     }),
     logout: builder.mutation({

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useGetParticipantsQuery } from "../../store/game/participantsApiSlice";
 import { useCreateCompetitionMutation } from "../../store/game/competitionApiSlice";
 import { setParticipantList } from "../../store/game/participantSlice";
+import { selectFriendships } from "../../store/social/friendSlice";
 import fitnessIcons from "../../data/fitnessIcons";
 import './NewCompetition.css'
 import { selectCurrentUser } from "../../store/auth/userSlice";
@@ -17,6 +18,8 @@ function Create() {
   const [newCompData, setNewCompData] = useState({
     name: "", public: false, participants: [currentUser.id], icon: "", start_date: "", end_date: ""
   });
+  const friends = useSelector(selectFriendships);
+
   const [selectedIcon, setSelectedIcon] = useState(null);
   const [validationMessages, setValidationMessages] = useState("");
   const today = new Date();

@@ -22,8 +22,6 @@ function Feed({ comp }) {
     <div className="feed">
       <div>
         <h2>Feed</h2>
-        <p>Notifications (new participant update/new workout)</p>
-        <p>Updates</p>
         <Posts posts={feed} comp={comp} />
       </div>
     </div>

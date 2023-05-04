@@ -24,27 +24,11 @@ Rails.application.routes.draw do
   get "/competition/leaderboard/:id", to: "competitions#leaderboard"
   get "/search_competitions", to: "competitions#search"
   delete "/like", to: "likes#destroy"
-
-  match '/workouts', controller: 'application', action: 'cors_preflight_check', via: [:options]
-  match '/workouts/:id', controller: 'application', action: 'cors_preflight_check', via: [:options]
-  match '/auth/login', controller: 'application', action: 'cors_preflight_check', via: [:options]
-  match '/auth/signup', controller: 'application', action: 'cors_preflight_check', via: [:options]
-  match '/auth/update_profile', controller: 'application', action: 'cors_preflight_check', via: [:options]
-  match '/logout', controller: 'application', action: 'cors_preflight_check', via: [:options]
-  match '/users', controller: 'application', action: 'cors_preflight_check', via: [:options]
-  match '/competition/leaderboard/:id', controller: 'application', action: 'cors_preflight_check', via: [:options]
-  match '/competitions', controller: 'application', action: 'cors_preflight_check', via: [:options]
-  match '/competition/join', controller: 'application', action: 'cors_preflight_check', via: [:options]
-  match '/posts', controller: 'application', action: 'cors_preflight_check', via: [:options]
-  match '/posts/:id', controller: 'application', action: 'cors_preflight_check', via: [:options]
-  match '/likes', controller: 'application', action: 'cors_preflight_check', via: [:options]
-  match '/like', controller: 'application', action: 'cors_preflight_check', via: [:options]
-
-  match '/search_competitions', controller: 'application', action: 'cors_preflight_check', via: [:options]
-
-  # match '/auth/login' || '/auth/signup' || '/logout' || '/users', controller: 'application', action: 'cors_preflight_check', via: [:options]
-
-  # a catch-all route added here\
+  get "/friends", to: "friendships#index"
+  get "/searchfriends", to: "friendships#search"
+  post "/friends", to: "friendships#create"
+  patch "/accept_friend/:friendship_id", to: "friendships#update"
+  delete "/delete_friend/:friendship_id", to: "friendships#destroy"
   
-  match '*path', to: 'application#cors_preflight_check', via: [:options]
+  options '*path', to: 'application#cors_preflight_check'
 end
