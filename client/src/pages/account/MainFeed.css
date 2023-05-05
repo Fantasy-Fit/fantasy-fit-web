@@ -49,7 +49,11 @@
 .feed__competitionOptions {
     display: flex;
     justify-content: right;
-    margin-right: 40px;
+    /* margin-right: 40px; */
+}
+
+.feed__competitionOptions>a {
+    text-decoration: none;
 }
 
 .current__competitions {

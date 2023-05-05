@@ -10,6 +10,7 @@ const EditProfileModal = () => {
     const [cookies] = useCookies(["token"])
     const { id, username, email, location, avatar, gender } = useSelector(selectCurrentUser);
     const [updateProfile, { isLoading }] = useUpdateProfileMutation();
+    const modal = document.getElementById("edit-profile-modal");
 
     const {
         register,
@@ -41,18 +42,16 @@ const EditProfileModal = () => {
     };
 
     const closeEditProfileModal = () => {
-        const modal = document.getElementById("edit-profile-modal");
         modal.style.display = "none";
     };
 
     useEffect(() => {
-        const modal = document.getElementById("edit-profile-modal");
         window.onclick = (e) => {
             if (e.target == modal) {
                 modal.style.display = 'none';
             }
         }
-    }, []);
+    }, [modal]);
 
     return (
         <div id="edit-profile-modal">

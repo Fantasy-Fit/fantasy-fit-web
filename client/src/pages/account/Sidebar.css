@@ -65,6 +65,12 @@
   object-fit: cover;
 }
 
+img#sidebar__top__avatar {
+  width: 7em;
+  height: 7em;
+}
+
+
 .sidebar__stat {
   margin-top: 10px;
   display: flex;
