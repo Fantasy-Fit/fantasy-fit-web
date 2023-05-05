@@ -1,0 +1,40 @@
+div.competition-card {
+    border: 1px solid rgb(218, 237, 249);
+    padding: 1em;
+    border-radius: 10px;
+    margin: 0.25em;
+}
+
+div.competition-card__top a {
+    width: 8em;
+    display: flex;
+    justify-content: center;
+}
+
+div.competition-card__top p {
+    width: 8em;
+    display: flex;
+    justify-content: center;
+    margin: 0.5em 0;
+    font-weight: 700;
+    background-color: #7b7be9;
+    color: white;
+    border: 1px solid lightgray;
+    height: 1.4em;
+    border-radius: 20px;
+    padding: 0.5em 0;
+}
+
+div.competition-card__top p:hover {
+    background-color: #9898cd;
+    color: azure
+}
+
+div.competition-card__top>a {
+    text-decoration: none;
+}
+
+div.competition-card__bottom>p {
+    display: flex;
+    justify-content: center;
+}

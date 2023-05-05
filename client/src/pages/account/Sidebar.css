@@ -65,6 +65,12 @@
   object-fit: cover;
 }
 
+img#sidebar__top__avatar {
+  width: 7em;
+  height: 7em;
+}
+
+
 .sidebar__stat {
   margin-top: 10px;
   display: flex;
@@ -113,6 +119,13 @@
 .sidebar__bottom>p {
   font-size: 13px;
   padding-bottom: 10px;
+}
+
+.sidebar__stat:hover {
+  background-color: whitesmoke;
+  border-radius: 10px;
+  cursor: pointer;
+  color: black;
 }
 
 .sidebar__recentItem:hover {
