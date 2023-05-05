@@ -2,13 +2,14 @@
     position: sticky;
     top: 0;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     border-bottom: 0.1px solid lightgray;
     padding-top: 10px;
     padding-bottom: 10px;
     width: 100%;
     z-index: 999;
-    background-color: rgb(251, 238, 228);
+    background-color: rgb(245, 228, 193);
+    background-image: linear-gradient(180deg, transparent, rgba(245, 228, 193, 0.5), rgba(244, 178, 46, 0.5))
 }
 
 .header__left {
@@ -41,4 +42,126 @@
 
 .header__right {
     display: flex;
+    margin-right: 0.75em;
+}
+
+.header__right>* {
+    width: 55px;
+}
+
+.header__right>a {
+    text-decoration: none;
+}
+
+.header__right>div {
+    height: 40px;
+    width: 40px;
+}
+
+.header__right>div>img {
+    position: absolute;
+    bottom: 16px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.MuiAvatar-root .MuiAvatar-circular .MuiAvatar-colorDefault .headerOption__icon {
+    width: 40px;
+    height: 40px;
+}
+
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    user-select: none;
+}
+
+.popup .popup__content {
+    visibility: hidden;
+    width: 10em;
+    background-color: #b2b2b2;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    left: -4em;
+    bottom: -9em;
+    z-index: 1;
+    margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popup__content::after {
+    content: "";
+    position: absolute;
+    top: -12%;
+    left: 78%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+    transform: rotate(180deg)
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.popup__content>button {
+    background: #7b7be9;
+    border-radius: 999px;
+    box-shadow: #5E5DF0 0 10px 20px -10px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    margin: 3px 0;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 20px;
+    opacity: 1;
+    outline: 0 solid transparent;
+    padding: 8px 10px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: fit-content;
+    word-break: break-word;
+    border: 0;
+}
+
+.popup__content>button>div {
+    display: flex;
+}
+
+.popup__content>button>div>svg {
+    width: 18px;
+    margin: 0 7px;
 }
