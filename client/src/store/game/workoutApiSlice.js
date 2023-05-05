@@ -4,12 +4,12 @@ export const workoutApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getWorkouts: builder.query({
       query: (user_id) => ({
-        url: `http://localhost:3000/workouts?user_id=${user_id}`,
+        url: `/workouts?user_id=${user_id}`,
       }),
     }),
     addWorkout: builder.mutation({
       query: (credentials) => ({
-        url: "http://localhost:3000/workouts",
+        url: "/workouts",
         method: "POST",
         body: { ...credentials },
       }),

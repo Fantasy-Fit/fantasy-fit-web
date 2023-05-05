@@ -4,27 +4,27 @@ export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (credentials) => ({
-        url: "http://localhost:3000/auth/login",
+        url: "/auth/login",
         method: "POST",
         body: { ...credentials },
       }),
     }),
     signup: builder.mutation({
       query: (credentials) => ({
-        url: "http://localhost:3000/auth/signup",
+        url: "/auth/signup",
         method: "POST",
         body: { ...credentials, user_type: "player" },
       }),
     }),
     logout: builder.mutation({
       query: () => ({
-        url: "http://localhost:3000/logout",
+        url: "/logout",
         method: "DELETE",
       })
     }),
     updateProfile: builder.mutation({
       query: (credentials) => ({
-        url: "http://localhost:3000/auth/update_profile",
+        url: "/auth/update_profile",
         // headers: { "Authorization": `Token ${credentials.authToken}` },
         method: "PATCH",
         body: { ...credentials },
