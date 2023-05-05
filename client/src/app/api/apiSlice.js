@@ -1,8 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { setUserInfo, logOut } from "../../store/auth/userSlice";
 
+const PRODUCTION_URL = "https://fantasyfit.herokuapp.com/";
+const DEVELOPMENT_URL = "http://localhost:3000";
+
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:3000",
+  baseUrl: PRODUCTION_URL,
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;

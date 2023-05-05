@@ -4,7 +4,7 @@ export const participantsApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getParticipants: builder.query({
             query: () => ({
-                url: "http://localhost:3000/users",
+                url: "/users",
                 method: "GET"
             })
         }),
