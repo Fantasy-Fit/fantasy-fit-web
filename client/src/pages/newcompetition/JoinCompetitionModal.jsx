@@ -3,21 +3,19 @@ import Join from "./Join";
 import "./NewCompetition.css";
 
 const JoinCompetitionModal = () => {
+    const modal = document.getElementById("join-comp-modal");
     const closeJoinCompModal = () => {
-        const modal = document.getElementById("join-comp-modal");
         modal.style.display = 'none';
     }
 
     useEffect(() => {
-        const modal = document.getElementById("join-comp-modal");
-
+        // const modal = document.getElementById("join-comp-modal");
         window.onclick = (e) => {
-            console.log(e.target)
             if (e.target == modal) {
                 modal.style.display = 'none';
             }
         }
-    }, []);
+    }, [modal]);
 
     return (
         <div id="join-comp-modal">

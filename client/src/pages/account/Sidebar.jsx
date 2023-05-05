@@ -29,8 +29,10 @@ function Sidebar({ image, username, email, gender, location, friends }) {
         />
         <Avatar
           onClick={openEditProfileModal}
-          className="sidebar__avatar">
-          <img src={image} alt={username} />
+          className="sidebar__avatar"
+          sx={{ width: "5em", height: "5em" }}
+        >
+          <img id="sidebar__top__avatar" src={image} alt={username} />
         </Avatar>
         <h2>{username}</h2>
         <h4>{email}</h4>

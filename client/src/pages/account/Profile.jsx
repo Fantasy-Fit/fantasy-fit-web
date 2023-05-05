@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { selectCurrentUser } from "../../store/auth/userSlice";
 import { useGetFriendsQuery } from "../../store/social/friendApiSlice";
@@ -8,6 +7,7 @@ import { setCompetitions } from "../../store/game/competitionSlice";
 import Sidebar from "./Sidebar";
 import MainFeed from "./MainFeed";
 import EditProfileModal from "./EditProfileModal";
+import CompetitionCard from "./CompetitionCard";
 import "./Profile.css";
 
 function Profile() {
@@ -32,12 +32,7 @@ function Profile() {
 
   const mapComps = competitions?.map((comp) => {
     return (
-      <div className="competition-card" key={comp.identifier}>
-        <Link to={`/tournament/${comp.id}`} state={comp}>
-          <img src={comp.icon} />
-          {comp.name}
-        </Link>
-      </div>
+      <CompetitionCard key={comp.id} comp={comp} />
     );
   });
 

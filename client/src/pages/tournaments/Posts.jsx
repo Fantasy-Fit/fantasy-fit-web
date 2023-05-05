@@ -54,6 +54,7 @@ function Posts({ posts, comp }) {
           <InputOption Icon={CreateIcon} />
           <form onSubmit={handleSubmit(onSubmit)}>
             <input type="text" {...register("description")}
+              placeholder="Write a comment..."
               autoComplete="off" />
             <button>
               <InputOption

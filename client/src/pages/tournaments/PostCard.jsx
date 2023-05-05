@@ -64,7 +64,7 @@ function PostCard({ post }) {
         </div>
         <div className="post_card__comment_container">
           <p>{post.description}</p>
-          <div>
+          <div className="post_card__likes">
             <span>{likeStatus.num_of_likes || null}</span>
             <ThumbUpIcon className="post_card__thumbsUpIcon"
               style={{

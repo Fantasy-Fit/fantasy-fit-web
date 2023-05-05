@@ -60,6 +60,7 @@ tr.table-row-3 {
 div.record-workout-container {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 div.record-workout-container div {
@@ -107,6 +108,7 @@ div.feed>div {
 
 div.tournament-page-top-content {
     display: flex;
+    align-items: center;
 }
 
 div.tournament-finished {
@@ -117,4 +119,48 @@ div.tournament-finished {
 div.tournament-finished img {
     width: 30em;
     height: 10em;
+}
+
+/* Mobile devices */
+
+@media (max-width: 600px) {
+    body {
+        height: 100vh;
+    }
+    div.tournament-page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0.5em;
+    }
+    div.tournament-page>div {
+        width: 100%;
+        margin: 0.5em 0;
+    }
+    
+    div.leaderboard-container {
+        margin: 0.5em;
+    }
+    div.record-workout-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+    }
+    form.record-workout-form * {
+        width: 100%;
+        margin: 0.5em 0;
+    }
+    form.record-workout-form * {
+        display: block;
+        width: 170px;
+        margin: 0.5em;
+    }
+    
+    form.record-workout-form select,
+    form.record-workout-form input,
+    form.record-workout-form label {
+        width: 170px;
+    }
 }

@@ -1,4 +1,3 @@
-import React from "react";
 import "./Header.css";
 import HeaderOption from "./HeaderOption";
 import SearchIcon from "@mui/icons-material/Search";
@@ -27,7 +26,7 @@ function Header() {
   const handlePopup = () => {
     const popup = document.getElementById("profile-popup");
     popup.classList.toggle("show");
-  }
+  };
 
   const handleLogout = async () => {
     try {

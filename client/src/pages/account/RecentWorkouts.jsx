@@ -10,7 +10,6 @@ import {
   setWorkouts,
   selectCurrentWorkouts,
 } from "../../store/game/workoutSlice";
-import { useGetLeaderboardQuery } from "../../store/game/leaderboardApiSlice";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
 const RecentWorkouts = () => {
@@ -22,7 +21,6 @@ const RecentWorkouts = () => {
     isLoading,
     refetch,
   } = useGetWorkoutsQuery(user.id);
-  const { refetch: refetchLeaderboard } = useGetLeaderboardQuery();
 
   const dispatch = useDispatch();
   const [deleteWorkout] = useDeleteWorkoutMutation();
