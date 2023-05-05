@@ -11,6 +11,7 @@ import {
   selectCurrentWorkouts,
 } from "../../store/game/workoutSlice";
 import { useGetLeaderboardQuery } from "../../store/game/leaderboardApiSlice";
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
 const RecentWorkouts = () => {
   const user = useSelector(selectCurrentUser);
@@ -42,23 +43,20 @@ const RecentWorkouts = () => {
         <td>{workout.activity}</td>
         <td>{workout.duration}</td>
         <td>{workout.intensity}</td>
-        <td>{workout.calories}</td>
         <td>{workout.points}</td>
-        <td>
+        <td className="delete_cell">
           {(Date.now() - new Date(workout.created_at).getTime()) /
             (60 * 60 * 24 * 1000) <
             2 && (
-            <button
-              onClick={() => {
-                deleteWorkout(workout.id);
-                dispatch(updateAfteDelete(workout.id));
-                refetch();
-                refetchLeaderboard(workout.competition.id);
-              }}
-            >
-              Delete
-            </button>
-          )}
+              <RemoveCircleIcon
+                onClick={() => {
+                  deleteWorkout(workout.id);
+                  dispatch(updateAfteDelete(workout.id));
+                  refetch();
+                  refetchLeaderboard(workout.competition.id);
+                }}
+              />
+            )}
         </td>
       </tr>
     );
@@ -72,7 +70,6 @@ const RecentWorkouts = () => {
           <th>Activity</th>
           <th>Duration</th>
           <th>Intensity</th>
-          <th>Calories</th>
           <th>Points</th>
         </tr>
       </thead>

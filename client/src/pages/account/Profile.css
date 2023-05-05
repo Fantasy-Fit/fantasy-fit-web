@@ -134,8 +134,30 @@
     color: black;
 }
 
+th {
+    border-bottom: 1px solid black;
+}
+
+td {
+    border: none;
+    /* border-bottom: 1px solid rgb(197, 197, 197); */
+}
+
+td.delete_cell {
+    border: none;
+}
+
+td>svg {
+    color: lightgray;
+}
+
+td>svg:hover {
+    color: red;
+}
+
 tr:hover {
     background-color: rgb(221, 221, 221);
+    border: none;
 }
 
 .profile div#edit-profile-modal {
