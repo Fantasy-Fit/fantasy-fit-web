@@ -1,6 +1,7 @@
 import {
     useDeleteFriendRequestMutation,
 } from '../../store/social/friendApiSlice';
+import "./FriendCard.css"
 
 const FriendCard = ({ friend }) => {
     const [deleteFriend] = useDeleteFriendRequestMutation();
@@ -14,7 +15,7 @@ const FriendCard = ({ friend }) => {
     };
 
     return (
-        <div>
+        <div className="friend_card__container">
             <h2>{friend.friend_username}</h2>
             <img src={friend.friend_avatar} alt="friendicon" />
             <p>Friend since ... {friend.created_at}</p>

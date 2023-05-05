@@ -26,10 +26,8 @@ const EditProfileModal = () => {
             gender: gender
         }
     });
-    // console.log(cookies.token)
 
     const onSubmit = async (data) => {
-        // const authToken = cookies.token
         const { id, username, email, location, avatar, gender } = data;
 
         const regData = await updateProfile({

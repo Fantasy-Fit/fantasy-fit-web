@@ -20,16 +20,16 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 const FriendsPage = () => {
     const { data: friends, isLoading } = useGetFriendsQuery();
-    console.log(friends)
     const dispatch = useDispatch();
     const [acceptFriendRequest] = useAcceptFriendRequestMutation();
     const [deleteFriend] = useDeleteFriendRequestMutation();
     const [sendFriendRequest] = useSendFriendRequestMutation();
-    // const [searchFriendQuery, setSearchFriendQuery] = useState(null);
     const [searchResultMessage, setSearchResultMessage] = useState("");
     const schema = yup.object().shape({
         searchQuery: yup.string().min(1).required("Need at least 1 character to search")
     });
+
+    console.log(friends)
 
     const {
         register,
@@ -51,7 +51,6 @@ const FriendsPage = () => {
 
     const onSubmitSearch = async (data) => {
         setSearchResultMessage("")
-        // setSearchFriendQuery(getValues("searchQuery"))
         try {
             let searchReq = await submitSearchRequest().unwrap();
             console.log(searchReq);
@@ -90,31 +89,35 @@ const FriendsPage = () => {
 
     return (
         <div className="friends_page__container">
-            <h1>Search</h1>
-
-            <form className="friends_page__search" onSubmit={handleSubmit(onSubmitSearch)}>
-                <input
-                    type="text"
-                    placeholder="search user.."
-                    autoComplete="false"
-                    {...register("searchQuery")}
-                />
-                <button>
-                    <InputOption
-                        Icon={SearchIcon}
-                        title="Find"
-                        type="submit"
-                        color="rgb(233, 33, 112)"
+            <div className="friends_page__search">
+                <h2>Search</h2>
+                <form className="friends_page__searchform" onSubmit={handleSubmit(onSubmitSearch)}>
+                    <input
+                        type="text"
+                        placeholder="search user.."
+                        autoComplete="off"
+                        {...register("searchQuery")}
                     />
-                </button>
-            </form>
+                    <button>
+                        <InputOption
+                            Icon={SearchIcon}
+                            title="Find"
+                            type="submit"
+                            color="rgb(233, 33, 112)"
+                        />
+                    </button>
+                </form>
+            </div>
             {searchResultMessage && <p style={{ color: "red" }}>{searchResultMessage}</p>}
             {getValues("searchQuery") && !isSearchLoading && mapSearchResults}
-
-            <h1>Pending Friend Requests</h1>
-            {mapFriendRequests}
-            <h1>Associated Atheletes</h1>
-            {mapFriends}
+            <div className="friends_page__pending">
+                <h2>Pending Friend Requests</h2>
+                {mapFriendRequests}
+            </div>
+            <div className="friends_page__friendscontainer">
+                <h2>Friends</h2>
+                {mapFriends}
+            </div>
         </div>
     );
 };
