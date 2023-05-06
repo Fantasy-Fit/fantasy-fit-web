@@ -5,28 +5,6 @@ class ApplicationController < ActionController::API
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
     @@current_user = nil
 
-
-    before_action :cors_set_access_control_headers
-    # skip_before_action :authenticate_request, only: [:cors_preflight_check]
-
-
-    def cors_preflight_check
-        if request.method == 'OPTIONS'
-          cors_set_access_control_headers
-          render text: '', content_type: 'text/plain'
-        end
-    end
-
-    protected
-      
-    def cors_set_access_control_headers
-        response.headers['Access-Control-Allow-Origin'] = check_origin
-        response.headers['Access-Control-Allow-Credentials'] = "true"
-        response.headers['Access-Control-Allow-Methods'] = 'POST, GET, PUT, PATCH, DELETE, OPTIONS'
-        response.headers['Access-Control-Allow-Headers'] = 'Origin, Content-Type, Accept, Authorization, Token, Auth-Token, Email, X-User-Token, X-User-Email'
-        response.headers['Access-Control-Max-Age'] = '1728000'
-    end
-
     private
 
     def authenticate_request
@@ -35,7 +13,7 @@ class ApplicationController < ActionController::API
         if header[0...6] == "token="
             header = header[6...]
         end
-        # puts "in auth req, header is: ", header
+        
         begin
             decoded = jwt_decode(header)
             @current_user = User.find(decoded[:user_id])
@@ -54,22 +32,6 @@ class ApplicationController < ActionController::API
 
     def render_unprocessable_entity(invalid)
         render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
-    end
-
-    def check_origin
-        permitted_origins = Set[
-            "http://localhost:4000", 
-            "http://127.0.0.1:4000",
-            nil #for postman
-        ]
-
-        origin = request.origin
-
-        if permitted_origins.include?(origin)
-            origin
-        else
-            render json: { error: "Origin not permitted" }
-        end
     end
 
 end

@@ -2,7 +2,7 @@ class UsersController < ApplicationController
     before_action :authenticate_request, only: [:update]
 
     def index
-        non_bot_users = User.where(user_type: "player")
+        non_bot_users = User.where.not(user_type: "bot")
         render json: non_bot_users, status: :ok
     end
 
