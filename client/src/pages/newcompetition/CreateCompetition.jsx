@@ -1,14 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useGetParticipantsQuery } from "../../store/game/participantsApiSlice";
 import { useCreateCompetitionMutation } from "../../store/game/competitionApiSlice";
 import { setParticipantList } from "../../store/game/participantSlice";
-import { selectFriendships } from "../../store/social/friendSlice";
 import fitnessIcons from "../../data/fitnessIcons";
 import './NewCompetition.css'
 import { selectCurrentUser } from "../../store/auth/userSlice";
 import { addCompetition } from "../../store/game/competitionSlice";
+import { useGetFriendsQuery } from "../../store/social/friendApiSlice";
 
 function Create() {
   const dispatch = useDispatch();
@@ -18,7 +17,6 @@ function Create() {
   const [newCompData, setNewCompData] = useState({
     name: "", public: false, participants: [currentUser.id], icon: "", start_date: "", end_date: ""
   });
-  const friends = useSelector(selectFriendships);
 
   const [selectedIcon, setSelectedIcon] = useState(null);
   const [validationMessages, setValidationMessages] = useState("");
@@ -109,36 +107,41 @@ function Create() {
     }
   };
 
-  const { data: participants, isError, isLoading } = useGetParticipantsQuery();
+  const { data: friends, isLoading } = useGetFriendsQuery();
 
   useEffect(() => {
     if (isLoading) {
-      return
+      return;
     } else {
-      dispatch(setParticipantList([...participants]))
+      dispatch(setParticipantList([...friends]));
     }
-  }, [participants]);
+  }, [friends]);
 
-  // console.log(currentUser)
-  const mapParticipants = participants?.map(participant => {
-    // console.log(participant)
-    if (participant.id === currentUser.id) {
-      return (<div key={participant.id}>
-        <div>
-          <input name="participants" type="checkbox" value={participant.id} checked disabled />
-          <label htmlFor="participants">{participant.username}</label>
-        </div>
-      </div>)
+  const acceptedFriends = friends?.filter(friend => friend.status === "accepted")
+
+  const mapParticipants = () => {
+    if (acceptedFriends) {
+      return [currentUser, ...acceptedFriends].map(participant => {
+        if (participant.id === currentUser.id) {
+          return (<div key={participant.id}>
+            <div>
+              <input name="participants" type="checkbox" value={participant.id} checked disabled></input>
+              <label htmlFor="participants">{currentUser.username}</label>
+              <img src={currentUser.avatar} style={{ width: "40px", height: "40px" }} />
+            </div>
+          </div>);
+        } else {
+          return (<div key={participant.id}>
+            <div>
+              <input name="participants" type="checkbox" onChange={handleInput} value={participant.id}></input>
+              <label htmlFor="participants">{participant.friend_username}</label>
+              <img src={participant.friend_avatar} style={{ width: "40px", height: "40px" }} />
+            </div>
+          </div>);
+        };
+      });
     }
-
-
-    return (<div key={participant.id}>
-      <div>
-        <input name="participants" type="checkbox" onChange={handleInput} value={participant.id}></input>
-        <label htmlFor="participants">{participant.username}</label>
-      </div>
-    </div>)
-  })
+  }
 
   return (
     <div className="create-competition-container">
@@ -195,7 +198,7 @@ function Create() {
           />
           <div className="select-participants">
             <label>Select Participants:</label>
-            {mapParticipants}
+            {mapParticipants()}
           </div>
           <input
             type="submit"
