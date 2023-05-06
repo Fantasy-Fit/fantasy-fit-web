@@ -3,7 +3,6 @@ class FriendshipsController < ApplicationController
 
     def index
         user = @current_user
-        # puts "In friendship controller index method:", user.friendships
         render json: user.friendships
     end
 
@@ -26,9 +25,8 @@ class FriendshipsController < ApplicationController
         user = @current_user
         friend = User.find(params[:friend_id])
         friendship = user.add_friend(friend)
-        # if user.add_friend(friend) && friend.add_friend(user)
+        
         if friendship
-          # redirect_to root_path, notice: "Friend request sent."
           render json: {created_friendship: friendship}
         else
           redirect_to root_path, alert: "Failed to send friend request."
@@ -39,7 +37,6 @@ class FriendshipsController < ApplicationController
         puts "In Friendships#destroy, params[:id]", params[:friendship_id]
         user = @current_user
         friend = Friendship.find(params[:friendship_id]).friend
-        # friend = User.find_by(username: params[:friend_username])
         user.remove_friend(friend) && friend.remove_friend(user)
         render json: {"message": "deleted!"}
     end
