@@ -3,6 +3,7 @@ div.competition-card {
     padding: 1em;
     border-radius: 10px;
     margin: 0.25em;
+    width: 25%;
 }
 
 div.competition-card__top a {

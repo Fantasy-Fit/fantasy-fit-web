@@ -56,9 +56,10 @@
     text-decoration: none;
 }
 
-.current__competitions {
+div.feed__inputContainer>div.current__competitions {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 div#join-comp-modal {
