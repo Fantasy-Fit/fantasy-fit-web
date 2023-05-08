@@ -185,3 +185,58 @@ tr:hover {
     height: 2em;
     margin-bottom: 10px;
 }
+
+/* Mobile devices */
+
+@media only screen and (max-width: 600px) {
+    .profile__main {
+        background-color: #f3f2ef;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        width: 100%;
+        max-width: 600px;
+        box-sizing: border-box;
+    }
+    .profile__body {
+      flex-direction: column;
+      margin-top: 15px;
+      margin-left: 5px;
+      margin-right: 5px;
+      overflow-y: hidden;
+      width: 100%;
+    }
+  
+    .profile div.new-competition-container {
+      padding: 0 1em;
+    }
+  
+    .profile div.new-competition-container div.new-competition {
+      width: 100%;
+      padding: 1em;
+      margin: 0.5em 0;
+    }
+  
+    .profile div.current-competition-container div {
+      margin: 2em 1em;
+    }
+  
+    .profile div.current-competition-container div.current-competition-container-inner div {
+      width: 100%;
+    }
+  
+    .profile div.current-competition-container div div.competition-card {
+      width: 8em;
+    }
+  
+    .modal-content {
+      margin: 25% auto;
+      width: 80%;
+    }
+  
+    .modal-content form input {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }

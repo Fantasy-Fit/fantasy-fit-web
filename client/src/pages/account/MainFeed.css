@@ -83,3 +83,38 @@ div#join-comp-modal div.modal-content {
     height: 60%;
     overflow-y: scroll;
 }
+
+/* mobile devices */
+
+@media only screen and (max-width: 600px) {
+    .main__feed {
+        /* flex: 1; */
+        margin: 0;
+        width: 100%;
+    }
+
+    .feed__inputContainer {
+        width: 100%;
+        padding: 10px;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+    }
+
+    .feed__input {
+        flex-direction: column;
+    }
+
+    .feed__input>form>input {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    .feed__competitionOptions {
+        justify-content: center;
+    }
+
+    div#join-comp-modal div.modal-content {
+        width: 90%;
+        margin: 10% auto;
+    }
+}
