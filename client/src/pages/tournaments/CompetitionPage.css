@@ -123,16 +123,18 @@ div.tournament-finished img {
 
 /* Mobile devices */
 
-@media (max-width: 600px) {
+@media only screen and (max-width: 600px) {
     body {
         height: 100vh;
     }
+
     div.tournament-page {
         display: flex;
         flex-direction: column;
         align-items: center;
         margin: 0.5em;
     }
+
     div.tournament-page>div {
         width: 100%;
         margin: 0.5em 0;
@@ -141,6 +143,7 @@ div.tournament-finished img {
     div.leaderboard-container {
         margin: 0.5em;
     }
+
     div.record-workout-container {
         display: flex;
         justify-content: center;
@@ -148,10 +151,12 @@ div.tournament-finished img {
         flex-direction: column;
         width: 100%;
     }
+
     form.record-workout-form * {
         width: 100%;
         margin: 0.5em 0;
     }
+    
     form.record-workout-form * {
         display: block;
         width: 170px;
