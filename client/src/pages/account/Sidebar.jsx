@@ -56,14 +56,14 @@ function Sidebar({ image, username, email, gender, location, friends }) {
         </div>
       </div>
 
-      <div className="sidebar__bottom">
+      {/* <div className="sidebar__bottom">
         <p>Recent</p>
         {recentItem("mycompetitions")}
         {recentItem("running")}
         {recentItem("gymlife")}
         {recentItem("compwars")}
         {recentItem("musclemania")}
-      </div>
+      </div> */}
     </div>
   );
 };

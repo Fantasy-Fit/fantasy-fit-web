@@ -5,8 +5,12 @@ export const friendApiSlice = apiSlice.injectEndpoints({
         getFriends: builder.query({
             query: () => "/friends",
         }),
-        searchFriends: builder.query({
-            query: (search) => `/searchfriends?query=${search}`
+        searchFriends: builder.mutation({
+            query: (search) => ({
+                url: "/searchfriends",
+                method: "POST",
+                body: { query: search }
+            }),
         }),
         acceptFriendRequest: builder.mutation({
             query: (friendship_id) => ({
@@ -33,7 +37,7 @@ export const friendApiSlice = apiSlice.injectEndpoints({
 
 export const {
     useGetFriendsQuery,
-    useSearchFriendsQuery,
+    useSearchFriendsMutation,
     useAcceptFriendRequestMutation,
     useDeleteFriendRequestMutation,
     useSendFriendRequestMutation,

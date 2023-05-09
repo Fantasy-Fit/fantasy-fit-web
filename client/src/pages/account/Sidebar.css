@@ -5,6 +5,7 @@
   border-radius: 10px;
   text-align: center;
   height: fit-content;
+  min-width: 10em;
 }
 
 .sidebar__avatar {
@@ -174,7 +175,7 @@ img#sidebar__top__avatar {
     width: 100%;
     position: static;
   }
-  
+
   .sidebar__stat {
     margin-top: 10px;
     display: flex;
@@ -184,7 +185,8 @@ img#sidebar__top__avatar {
     max-width: 600px;
     margin: 0 auto;
     text-align: left;
-    padding: 5px;;
+    padding: 5px;
+    ;
   }
 
   .sidebar__stat>p {

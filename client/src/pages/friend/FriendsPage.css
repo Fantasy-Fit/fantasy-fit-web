@@ -1,9 +1,8 @@
 div.friends_page__container {
-    width: 30em;
-    margin: 2em;
+    /* width: 50vw; */
+    padding: 2em;
     background-color: rgb(243, 243, 243);
-    /* display: flex; */
-    /* flex-direction: column; */
+
 }
 
 
@@ -41,13 +40,20 @@ div.friends_page__container {
     padding: 1em;
 }
 
-.friends_page__friendscontainer {
+.friends_page__friendscontainer,
+.friends_page__pending,
+.friends_page__searchresults {
     margin: 1em 0;
     border-radius: 10px;
     border: 1px solid lightgray;
+    background-color: lightgray;
     padding: 0.5em 1em;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .friends_page__friendscontainer>h2 {
     margin: 0.5em 0;
 }
+
+.friends_page__searchresults {}

@@ -66,11 +66,11 @@ function Posts({ posts, comp }) {
             </button>
           </form>
         </div>
-        <div className="feed__inputOptions">
+        {/* <div className="feed__inputOptions">
           <InputOption Icon={ImageIcon} title="Photo" color="#70B5F9" />
           <InputOption Icon={SubscriptionsIcon} title="Video" color="#E7A33E" />
           <InputOption Icon={EventNoteIcon} title="Event" color="#C0CBCD" />
-        </div>
+        </div> */}
       </div>
       {renderedPosts}
     </div>

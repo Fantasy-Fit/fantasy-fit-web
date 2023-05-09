@@ -5,13 +5,13 @@ import PendingFriendCard from './PendingFriendCard';
 import SearchFriendResult from "./SearchFriendResult";
 import {
     useGetFriendsQuery,
-    useSearchFriendsQuery,
+    useSearchFriendsMutation,
     useAcceptFriendRequestMutation,
     useDeleteFriendRequestMutation,
     useSendFriendRequestMutation,
 } from '../../store/social/friendApiSlice';
-import { setFriends } from "../../store/social/friendSlice";
-import { useDispatch } from 'react-redux';
+import { setFriends, selectFriendships } from "../../store/social/friendSlice";
+import { useDispatch, useSelector } from 'react-redux';
 import "./FriendsPage.css"
 import { useEffect, useState } from "react";
 import { useForm } from 'react-hook-form';
@@ -19,17 +19,15 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 const FriendsPage = () => {
-    const { data: friends, isLoading } = useGetFriendsQuery();
+    const { data: friends, isLoading, refetch: refetchFriends } = useGetFriendsQuery();
     const dispatch = useDispatch();
-    const [acceptFriendRequest] = useAcceptFriendRequestMutation();
-    const [deleteFriend] = useDeleteFriendRequestMutation();
-    const [sendFriendRequest] = useSendFriendRequestMutation();
+    const allFriends = useSelector(selectFriendships);
+    const [searchFriends] = useSearchFriendsMutation();
+    const [searchResults, setSearchResults] = useState([]);
     const [searchResultMessage, setSearchResultMessage] = useState("");
     const schema = yup.object().shape({
         searchQuery: yup.string().min(1).required("Need at least 1 character to search")
     });
-
-    console.log(friends)
 
     const {
         register,
@@ -40,20 +38,12 @@ const FriendsPage = () => {
         resolver: yupResolver(schema),
     });
 
-    const {
-        data: searchResults,
-        isLoading: isSearchLoading,
-        refetch: submitSearchRequest
-    } = useSearchFriendsQuery(
-        getValues("searchQuery") ?? "",
-        { skip: !getValues("searchQuery") }
-    );
 
     const onSubmitSearch = async (data) => {
         setSearchResultMessage("")
         try {
-            let searchReq = await submitSearchRequest().unwrap();
-            console.log(searchReq);
+            let searchReq = await searchFriends(getValues("searchQuery")).unwrap();
+            setSearchResults(searchReq);
             if (searchReq.length === 0) {
                 setSearchResultMessage("No Users Found...");
             }
@@ -66,26 +56,26 @@ const FriendsPage = () => {
         if (isLoading) {
             return;
         }
-        dispatch(setFriends([...friends]))
-    }, [friends])
+        dispatch(setFriends([...friends]));
+    }, [friends, refetchFriends])
 
-    const mapFriends = friends?.filter(friend => friend.status === "accepted").map(friend => {
+    const mapFriends = allFriends?.filter(friend => friend.status === "accepted").map(friend => {
         return (
-            <FriendCard key={friend.friend_username} friend={friend} />
-        )
+            <FriendCard key={friend.friend_username} friend={friend} refetchFriends={refetchFriends} />
+        );
     });
 
     const mapFriendRequests = friends?.filter(friend => friend.status === "requested").map(friendship => {
         return (
-            <PendingFriendCard key={friendship.friend_username} friendship={friendship} />
-        )
+            <PendingFriendCard key={friendship.friend_username} friendship={friendship} refetchFriends={refetchFriends} />
+        );
     });
 
     const mapSearchResults = searchResults?.map(result => {
         return (
-            <SearchFriendResult key={result.username} result={result} />
-        )
-    })
+            <SearchFriendResult key={result.username} friends={friends} result={result} refetchFriends={refetchFriends} />
+        );
+    });
 
     return (
         <div className="friends_page__container">
@@ -108,15 +98,21 @@ const FriendsPage = () => {
                     </button>
                 </form>
             </div>
-            {searchResultMessage && <p style={{ color: "red" }}>{searchResultMessage}</p>}
-            {getValues("searchQuery") && !isSearchLoading && mapSearchResults}
-            <div className="friends_page__pending">
-                <h2>Pending Friend Requests</h2>
-                {mapFriendRequests}
+            <div className="friends_page__searchresults">
+                {searchResultMessage && <p style={{ color: "red" }}>{searchResultMessage}</p>}
+                {getValues("searchQuery") && mapSearchResults}
             </div>
-            <div className="friends_page__friendscontainer">
+            <div >
+                <h2>Pending Friend Requests</h2>
+                <div className="friends_page__pending">
+                    {mapFriendRequests}
+                </div>
+            </div>
+            <div >
                 <h2>Friends</h2>
-                {mapFriends}
+                <div className="friends_page__friendscontainer">
+                    {mapFriends}
+                </div>
             </div>
         </div>
     );

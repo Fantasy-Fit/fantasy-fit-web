@@ -33,8 +33,6 @@ const Join = () => {
         user: user,
       });
 
-      // console.log(req.error.data.error)
-      console.log(req);
       if (!!req.error) {
         throw new Error(String(req.error.data.error));
       } else if (!!req.data) {
@@ -73,7 +71,7 @@ const Join = () => {
       <form onSubmit={handleSearchComp}>
         <input
           name="identifier"
-          placeholder="Competition Identifier"
+          placeholder="Search by name or identifier..."
           onChange={handleIdentifierInput}
           value={identifier}
         />
