@@ -3,12 +3,13 @@ import {
 } from '../../store/social/friendApiSlice';
 import "./FriendCard.css"
 
-const FriendCard = ({ friend }) => {
+const FriendCard = ({ friend, refetchFriends }) => {
     const [deleteFriend] = useDeleteFriendRequestMutation();
 
-    const handleRemoveFriend = () => {
+    const handleRemoveFriend = async () => {
         try {
-            deleteFriend(friend.id);
+            await deleteFriend(friend.id);
+            refetchFriends();
         } catch (err) {
             console.error(err);
         };
@@ -18,8 +19,7 @@ const FriendCard = ({ friend }) => {
         <div className="friend_card__container">
             <h2>{friend.friend_username}</h2>
             <img src={friend.friend_avatar} alt="friendicon" />
-            <p>Friend since ... {friend.created_at}</p>
-            <p>In [X] competitions with this person</p>
+            <p>Friend since {friend.created_at.slice(0, 10)}</p>
             <p>Status: {friend.status}</p>
             <button onClick={handleRemoveFriend}>Remove Friend</button>
         </div>

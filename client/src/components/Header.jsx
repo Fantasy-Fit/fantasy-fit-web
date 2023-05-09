@@ -44,11 +44,11 @@ function Header() {
     <div className="popup">
       <div id="profile-popup" className="popup__content">
         <h2>Hi, {user.username}! 👋</h2>
-        <button>
+        {/* <button>
           <div>
             <EditIcon />Profile
           </div>
-        </button>
+        </button> */}
         <button onClick={handleLogout}>
           <div>
             <LogoutIcon />Logout
@@ -66,10 +66,10 @@ function Header() {
           alt=""
         />
 
-        <div className="header__search">
+        {/* <div className="header__search">
           <SearchIcon />
           <input type="text" />
-        </div>
+        </div> */}
       </div>
       <div className="header__right">
         <Link to="profile">

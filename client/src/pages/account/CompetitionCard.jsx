@@ -17,7 +17,7 @@ const CompetitionCard = ({ comp }) => {
                 </Link>
             </div>
             <div className="competition-card__bottom">
-                <p># Players: {comp.users.length}</p>
+                <p># Players: {comp.users.length - 1}</p>
                 <p>Days left: {daysRemaining}</p>
             </div>
         </div>

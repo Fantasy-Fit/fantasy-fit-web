@@ -1,24 +1,27 @@
+import { ref } from 'yup';
 import {
     useAcceptFriendRequestMutation,
     useDeleteFriendRequestMutation,
 } from '../../store/social/friendApiSlice';
 
-const PendingFriendCard = ({ friendship }) => {
+const PendingFriendCard = ({ friendship, refetchFriends }) => {
     console.log(friendship)
     const [acceptFriendRequest] = useAcceptFriendRequestMutation();
     const [deleteFriendRequest] = useDeleteFriendRequestMutation();
 
-    const handleAcceptRequest = () => {
+    const handleAcceptRequest = async () => {
         try {
-            acceptFriendRequest(friendship.id);
+            await acceptFriendRequest(friendship.id);
+            refetchFriends();
         } catch (err) {
             console.error(err);
         };
     };
 
-    const handleIgnoreFriendRequest = () => {
+    const handleIgnoreFriendRequest = async () => {
         try {
-            deleteFriendRequest(friendship.id);
+            await deleteFriendRequest(friendship.id);
+            refetchFriends();
         } catch (err) {
             console.error(err);
         };

@@ -1,3 +1,7 @@
 .error-message {
     color: red;
 }
+
+div.modal-content div>form>input {
+    width: 20em;
+}

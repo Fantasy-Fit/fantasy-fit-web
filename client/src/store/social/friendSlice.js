@@ -14,4 +14,4 @@ export const { setFriends } = friendSlice.actions;
 
 export default friendSlice.reducer;
 
-export const selectFriendships = (state) => state.friendships;
+export const selectFriendships = (state) => state.friends.friends;
