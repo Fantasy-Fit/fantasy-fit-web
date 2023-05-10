@@ -19,12 +19,12 @@ function TournamentPage() {
       <div>
         <div className="tournament-page-header">
           <img src={comp.icon} alt={comp.name} />
+          <h1> {location?.state.name} </h1>
           <div className="tournament-details">
-            <h1> {location?.state.name} </h1>
             <p>ID: {comp.identifier}</p>
             <p>{comp.public ? "Public ✅" : "Private 🔒"}</p>
-            <p>Days remaining: {daysRemaining > 0 && daysRemaining || 0}</p>
-            <p>End Date: {compEndDate.toUTCString().slice(0, 16)}</p>
+            <p>{daysRemaining > 0 && daysRemaining || 0} days to go!</p>
+            <p>Ends: {compEndDate.toUTCString().slice(0, 16)}</p>
           </div>
         </div>
         {daysRemaining <= 0 &&
