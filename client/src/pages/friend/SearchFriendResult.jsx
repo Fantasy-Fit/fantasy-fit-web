@@ -40,7 +40,7 @@ const SearchFriendResult = ({ result, friends, refetchFriends }) => {
     return (
         <div className="friend_card__container">
             <h2>{result.username}</h2>
-            <img src={result.avatar} alt="friendicon" />
+            <img src={result.avatar || "https://static.vecteezy.com/system/resources/previews/009/734/564/original/default-avatar-profile-icon-of-social-media-user-vector.jpg"} alt="friendicon" />
             {renderFriendStatusButton(friendStatus)}
         </div>
     );

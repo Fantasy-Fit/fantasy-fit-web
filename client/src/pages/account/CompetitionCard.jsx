@@ -13,7 +13,7 @@ const CompetitionCard = ({ comp }) => {
                     <img src={comp.icon} />
                 </Link>
                 <Link to={`/tournament/${comp.id}`} state={comp}>
-                    <p>{comp.name}</p>
+                    <p>{comp.name.length > 15 ? comp.name.slice(0, 9) + "..." : comp.name}</p>
                 </Link>
             </div>
             <div className="competition-card__bottom">

@@ -88,7 +88,7 @@
     padding: 8px 0;
     position: absolute;
     left: -4em;
-    bottom: -9em;
+    bottom: -6em;
     z-index: 1;
     margin-left: -80px;
 }
@@ -170,55 +170,59 @@
 
 @media (max-width: 768px) {
     .header {
-      flex-direction: column;
-      align-items: center;
-      padding: 10px;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
     }
-  
+
     .header__left {
-      margin-bottom: 10px;
+        margin-bottom: 10px;
     }
-  
-    .header__left > img {
-      height: 30px;
+
+    .header__left>img {
+        height: 30px;
     }
-  
+
     .header__search {
-      width: 100%;
-      max-width: 300px;
-      margin-bottom: 10px;
-      padding: 5px;
-      height: 30px;
-      font-size: 14px;
+        width: 100%;
+        max-width: 300px;
+        margin-bottom: 10px;
+        padding: 5px;
+        height: 30px;
+        font-size: 14px;
     }
-  
+
     .header__right {
-      justify-content: center;
-      margin-right: 0;
-      width: 100%;
+        justify-content: center;
+        margin-right: 0;
+        width: 100%;
     }
-  
-    .header__right > * {
-      width: auto;
+
+    .header__right>* {
+        width: auto;
     }
-  
-    .header__right > a {
-      margin-right: 15px;
+
+    .header__right>a {
+        margin-right: 15px;
     }
-  
-    .header__right > div {
-      margin-right: 15px;
+
+    .header__right>div {
+        margin-right: 15px;
     }
-  
-    .header__right > div > img {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
+
+    .header__right>div>img {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
     }
-  
+
     .headerOption__icon {
-      width: 30px;
-      height: 30px;
+        width: 30px;
+        height: 30px;
+    }
+
+    .popup .popup__content {
+        left: -5.25em;
+        bottom: -6em;
     }
 }
-  

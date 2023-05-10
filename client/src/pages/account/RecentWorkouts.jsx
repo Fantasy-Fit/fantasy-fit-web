@@ -37,10 +37,10 @@ const RecentWorkouts = () => {
     const workoutDate = new Date(workout.date);
     return (
       <tr key={workout.id}>
-        <td>{workoutDate.toUTCString().slice(5, 12)}</td>
+        <td className="date_column">{workoutDate.toUTCString().slice(5, 12)}</td>
         <td>{workout.activity}</td>
         <td>{workout.duration}</td>
-        <td>{workout.intensity}</td>
+        <td className="intensity">{workout.intensity}</td>
         <td>{workout.points}</td>
         <td className="delete_cell">
           {(Date.now() - new Date(workout.created_at).getTime()) /
@@ -64,10 +64,10 @@ const RecentWorkouts = () => {
     <table>
       <thead>
         <tr>
-          <th>Date</th>
+          <th className="date_column">Date</th>
           <th>Activity</th>
           <th>Duration</th>
-          <th>Intensity</th>
+          <th className="intensity">Intensity</th>
           <th>Points</th>
         </tr>
       </thead>

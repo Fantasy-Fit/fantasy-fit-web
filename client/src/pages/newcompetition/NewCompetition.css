@@ -84,3 +84,12 @@ div.select-participants div div input {
 div.select-participants div input {
     display: block;
 }
+
+/* Mobile devices */
+
+@media (max-width: 600px) {
+    div#modal-content {
+        position: absolute;
+        top: 7em;
+    }
+}

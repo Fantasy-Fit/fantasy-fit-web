@@ -55,7 +55,14 @@ function Posts({ posts, comp }) {
           <form onSubmit={handleSubmit(onSubmit)}>
             <input type="text" {...register("description")}
               placeholder="Write a comment..."
-              autoComplete="off" />
+              autoComplete="off"
+            />
+            {/* <textarea
+              {...register("description")}
+              placeholder="Write a comment..."
+              wrap="hard"
+            >
+            </textarea> */}
             <button>
               <InputOption
                 Icon={InsertCommentIcon}

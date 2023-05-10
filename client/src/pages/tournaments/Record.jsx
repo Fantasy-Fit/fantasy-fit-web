@@ -68,7 +68,11 @@ function Record({ comp }) {
   const [addWorkout, { isLoading }] = useAddWorkoutMutation();
 
   const handleInput = (e) => {
-    setWorkoutData({ ...workoutData, [e.target.name]: e.target.value });
+    if (e.target.name === "duration") {
+      setWorkoutData({ ...workoutData, duration: parseInt(e.target.value) });
+    } else {
+      setWorkoutData({ ...workoutData, [e.target.name]: e.target.value });
+    }
   };
   const today = new Date();
   const comp_created = comp.created_at.substring(0, 10);
@@ -83,12 +87,6 @@ function Record({ comp }) {
       const updatedLeaderboard = [...req.data.leaderboard];
       dispatch(setLeaderboard([...updatedLeaderboard]));
       setMessage("Workout successfully added!");
-      // setWorkoutData({
-      //   activity: "",
-      //   duration: 0,
-      //   intensity: "",
-      //   date: "",
-      // });
       refetchLeaderboard();
       refetchPosts();
       refetchWorkouts();
@@ -128,7 +126,9 @@ function Record({ comp }) {
             type="number"
             placeholder="Duration in minutes"
             name="duration"
-            value={workoutData.duration}
+            min={1}
+            max={60 * 24}
+            value={Number(workoutData.duration)}
             onChange={handleInput}
           />
           <select
