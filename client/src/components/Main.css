@@ -3,6 +3,9 @@
   height: 100vh;
   color: white;
   object-fit: contain;
+  background-size: cover;
+  background-image: url('https://media.istockphoto.com/id/1151850199/photo/sports-equipment-and-accessories-shoes-dumbbells-on-green-background.jpg?s=612x612&w=0&k=20&c=OStHn9MFqxyvOPVbo8qr_MHaivayxrs1mnL2APzRAis=');
+  background-position: center center;
 }
 
 .banner__contents {
@@ -27,7 +30,7 @@
 }
 
 .banner--fadeBottom {
-  height: 68vh;
+  height: 62vh;
   background-image: linear-gradient(180deg,
       transparent,
       rgba(37, 37, 37, 0.61),
@@ -53,4 +56,12 @@
   color: #000;
   background-color: #e6e6e6;
   transition: all 0.2s;
+}
+
+/* Mobile devices */
+
+@media (max-width: 800px) {
+  .banner {
+    background-position: revert;
+  }
 }

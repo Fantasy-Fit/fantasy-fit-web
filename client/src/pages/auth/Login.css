@@ -10,20 +10,9 @@
   margin-bottom: 20px;
 }
 
-/* .loginScreen__body > h2 {
-    font-size: 2rem;
-    font-weight: 400;
-    margin-bottom: 30px;
-  }
-   */
-/* .loginScreen__body > h3 {
-    font-size: 1.3rem;
-    font-weight: 400;
-  } */
-
 .loginScreen__body {
   position: absolute;
-  top: 24%;
+  top: 7%;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
