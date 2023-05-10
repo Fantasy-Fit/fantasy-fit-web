@@ -49,11 +49,11 @@ function Signup({ setSignIn }) {
     <div className="signupScreen">
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1>Sign Up</h1>
-        <input placeholder="username" type="text" {...register("username")} />
-        <input placeholder="email" type="email" {...register("email")} />
-        <input placeholder="location" type="text" {...register("location")} />
-        <input placeholder="avatar" type="text" {...register("avatar")} />
-        <input placeholder="gender" type="text" {...register("gender")} />
+        <input placeholder="username" type="text" autoComplete="off" {...register("username")} />
+        <input placeholder="email" type="email" autoComplete="off" {...register("email")} />
+        <input placeholder="location" type="text" autoComplete="off" {...register("location")} />
+        <input placeholder="avatar" type="text" autoComplete="off" {...register("avatar")} />
+        <input placeholder="gender" type="text" autoComplete="off" {...register("gender")} />
         <input
           placeholder="password"
           type="password"
