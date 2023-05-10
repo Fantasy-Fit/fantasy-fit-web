@@ -68,8 +68,9 @@ const Join = () => {
 
   return (
     <div>
-      <form onSubmit={handleSearchComp}>
+      <form className="join-form" onSubmit={handleSearchComp}>
         <input
+          className="join-form-search-input"
           name="identifier"
           placeholder="Search by name or identifier..."
           onChange={handleIdentifierInput}
@@ -82,7 +83,9 @@ const Join = () => {
         />
       </form>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
-      {mapSearchResults}
+      <div className="search-results">
+        {mapSearchResults}
+      </div>
     </div>
   );
 };

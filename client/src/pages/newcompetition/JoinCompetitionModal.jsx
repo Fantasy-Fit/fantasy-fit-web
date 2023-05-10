@@ -21,7 +21,7 @@ const JoinCompetitionModal = () => {
             <div className="modal-content">
                 <h2>Join a Competition</h2>
                 <Join />
-                <button onClick={closeJoinCompModal}>Cancel</button>
+                <button className="join-comp-button" onClick={closeJoinCompModal}>Cancel</button>
             </div>
         </div>
     )
