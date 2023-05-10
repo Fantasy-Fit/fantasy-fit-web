@@ -140,7 +140,6 @@ th {
 
 td {
     border: none;
-    /* border-bottom: 1px solid rgb(197, 197, 197); */
 }
 
 td.delete_cell {
@@ -199,44 +198,67 @@ tr:hover {
         max-width: 600px;
         box-sizing: border-box;
     }
+
     .profile__body {
-      flex-direction: column;
-      margin-top: 15px;
-      margin-left: 5px;
-      margin-right: 5px;
-      overflow-y: hidden;
-      width: 100%;
+        flex-direction: column;
+        margin-top: 15px;
+        margin-left: 5px;
+        margin-right: 5px;
+        overflow-y: hidden;
+        width: 100%;
     }
-  
+
     .profile div.new-competition-container {
-      padding: 0 1em;
+        padding: 0 1em;
     }
-  
+
     .profile div.new-competition-container div.new-competition {
-      width: 100%;
-      padding: 1em;
-      margin: 0.5em 0;
+        width: 100%;
+        padding: 1em;
+        margin: 0.5em 0;
     }
-  
+
     .profile div.current-competition-container div {
-      margin: 2em 1em;
+        margin: 2em 1em;
     }
-  
+
     .profile div.current-competition-container div.current-competition-container-inner div {
-      width: 100%;
+        width: 100%;
     }
-  
+
     .profile div.current-competition-container div div.competition-card {
-      width: 8em;
+        width: 8em;
     }
-  
+
     .modal-content {
-      margin: 25% auto;
-      width: 80%;
+        margin: 25% auto;
+        width: 80%;
     }
-  
+
     .modal-content form input {
-      width: 100%;
-      margin-bottom: 10px;
+        width: 92%;
+        margin-bottom: 10px;
     }
-  }
+
+    /* td {
+        max-width: 10vw;
+    } */
+
+    td.intensity,
+    th.intensity {
+        display: none;
+    }
+
+    table * {
+        font-size: 0.9em;
+    }
+
+    td>svg {
+        max-height: 0.5em;
+    }
+
+    td.date_column,
+    th.date_column {
+        min-width: 42px;
+    }
+}

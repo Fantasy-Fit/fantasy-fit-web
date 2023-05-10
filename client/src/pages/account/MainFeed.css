@@ -89,13 +89,12 @@ div#join-comp-modal div.modal-content {
 
 @media only screen and (max-width: 600px) {
     .main__feed {
-        /* flex: 1; */
         margin: 0;
         width: 100%;
     }
 
     .feed__inputContainer {
-        width: 100%;
+        width: 95%;
         padding: 10px;
         padding-bottom: 20px;
         margin-bottom: 20px;

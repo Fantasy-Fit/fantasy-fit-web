@@ -64,7 +64,7 @@ div.record-workout-container {
 }
 
 div.record-workout-container div {
-    border: 1px solid lightgray;
+    border: 0.5px solid lightgray;
     padding: 1.25em;
     margin: 0.5em;
     border-radius: 8px;
@@ -90,7 +90,7 @@ form.record-workout-form label {
 input.add-workout-submit {
     height: 30px;
     background-color: beige;
-    border: 1px solid gray;
+    border: 1px solid lightgray;
     border-radius: 8px;
 }
 
@@ -121,6 +121,8 @@ div.tournament-finished img {
     height: 10em;
 }
 
+
+
 /* Mobile devices */
 
 @media only screen and (max-width: 600px) {
@@ -135,13 +137,18 @@ div.tournament-finished img {
         margin: 0.5em;
     }
 
+    div.tournament-page-top-content {
+        display: block;
+    }
+
     div.tournament-page>div {
         width: 100%;
         margin: 0.5em 0;
     }
-    
+
     div.leaderboard-container {
         margin: 0.5em;
+        width: 95%;
     }
 
     div.record-workout-container {
@@ -156,16 +163,36 @@ div.tournament-finished img {
         width: 100%;
         margin: 0.5em 0;
     }
-    
+
     form.record-workout-form * {
         display: block;
         width: 170px;
         margin: 0.5em;
     }
-    
+
     form.record-workout-form select,
     form.record-workout-form input,
     form.record-workout-form label {
         width: 170px;
+    }
+
+    div.feed__input {
+        border: 0.5px solid lightgray;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: row;
+
+    }
+
+    div.feed__input>div {
+        width: 2em;
+    }
+
+    div.feed__input>form {
+        min-width: 14em;
+    }
+
+    div.feed__input>form>input {
+        margin: 0;
     }
 }

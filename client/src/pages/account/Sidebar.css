@@ -172,17 +172,14 @@ img#sidebar__top__avatar {
 
 @media (max-width: 600px) {
   .sidebar {
-    width: 100%;
+    width: 99.5%;
     position: static;
   }
 
   .sidebar__stat {
     margin-top: 10px;
     display: flex;
-    flex-direction: column;
-    /* align-items: center; */
-    width: 100%;
-    max-width: 600px;
+    max-width: 95%;
     margin: 0 auto;
     text-align: left;
     padding: 5px;

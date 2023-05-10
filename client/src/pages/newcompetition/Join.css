@@ -5,3 +5,12 @@
 div.modal-content div>form>input {
     width: 20em;
 }
+
+/* Mobile devices */
+
+@media (max-width: 600px) {
+    div.modal-content {
+        position: absolute;
+        top: 7em;
+    }
+}
