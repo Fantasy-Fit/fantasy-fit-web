@@ -4,4 +4,38 @@ div.friend_card__container {
     margin: 0.5em;
     border-radius: 12px;
     width: 10em;
+    padding: 1em;
+    margin: 0.5em;
+}
+
+div.friend_card__container:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.friend_card__container h2 {
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+}
+
+.friend_card__container p {
+    font-size: 0.9em;
+    margin-bottom: 0.3em;
+}
+
+.friend_card__container button {
+    padding: 0.5em 1em;
+    background-color: #70b5f9;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.friend_card__container button:hover {
+    background-color: #4487cc;
+}
+
+.friend_card__container button:focus {
+    outline: none;
 }
