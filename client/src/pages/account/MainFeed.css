@@ -62,6 +62,11 @@ div.feed__inputContainer>div.current__competitions {
     flex-wrap: wrap;
 }
 
+div#join-comp-modal div.modal-content {
+    width: 90%;
+    margin-top: 30% auto;
+}
+
 div#join-comp-modal {
     display: none;
     position: fixed;
@@ -76,12 +81,13 @@ div#join-comp-modal {
 
 div#join-comp-modal div.modal-content {
     background-color: #adddbe;
-    margin: 15% auto;
+    /* margin-top: 30% auto; */
     padding: 20px;
     border: 1px solid #888;
-    width: 35%;
+    width: 25%;
+    max-width: 600px;
     border-radius: 0;
-    height: 60%;
+    height: 60vh;
     overflow-y: scroll;
 }
 
