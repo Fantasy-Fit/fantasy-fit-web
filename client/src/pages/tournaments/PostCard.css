@@ -107,4 +107,19 @@ div.post_card__likes span:first-child {
         max-width: 15em;
     }
 
+    div.post_card__likes {
+        display: flex;
+        align-items: center;
+        color: rgb(114, 114, 114);
+        font-size: 12px;
+    }
+    
+    div.post_card__likes:hover {
+        color: rgb(114, 179, 249);
+    }
+    
+    div.post_card__likes span:first-child {
+        margin-right: 5px;
+    }
+
 }
