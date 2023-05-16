@@ -19,7 +19,7 @@ export const workoutApiSlice = apiSlice.injectEndpoints({
         url: `/workouts/${id}`,
         method: "DELETE",
       }),
-    }),
+    })
   }),
 });
 
@@ -27,4 +27,5 @@ export const {
   useGetWorkoutsQuery,
   useAddWorkoutMutation,
   useDeleteWorkoutMutation,
+  useGetCompWorkoutsQuery,
 } = workoutApiSlice;
