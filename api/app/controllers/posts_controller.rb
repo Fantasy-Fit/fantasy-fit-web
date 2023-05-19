@@ -11,6 +11,7 @@ class PostsController < ApplicationController
         user = @current_user
         competition = Competition.find(params[:competition_id])
         post = Post.create!(user_id: user.id, competition_id: competition.id, description: params[:description])
+        ActionCable.server.broadcast 'NotificationsChannel', "New Post in #{competition.name} competition by #{user.username}: #{post.description} "
         render json: post, status: :created
     end
 

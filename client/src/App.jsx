@@ -8,9 +8,9 @@ import Profile from "./pages/account/Profile";
 import TournamentPage from "./pages/tournaments/TournamentPage";
 import FriendsPage from "./pages/friend/FriendsPage";
 import "./App.css";
+import Notifications from "./pages/notifications/Notifications";
 
 function App() {
-
   return (
     <div>
       <Routes>
@@ -25,6 +25,7 @@ function App() {
             <Route path="tournament/:id" element={<TournamentPage />} />
             <Route path="new-competition" element={<CreateCompetition />} />
             <Route path="friends" element={<FriendsPage />} />
+            <Route path="notifications" element={<Notifications />} />
           </Route>
         </Route>
       </Routes>
