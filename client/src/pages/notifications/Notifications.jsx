@@ -1,13 +1,13 @@
-import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectNotifications,
   setNotifications,
 } from "../../store/notifications/notificationsSlice";
+import { v4 as uuidv4 } from "uuid";
 
 function Notifications() {
   const notifications = useSelector(selectNotifications);
-  console.log(notifications)
+  console.log(notifications);
 
   const dispatch = useDispatch();
 
@@ -22,7 +22,7 @@ function Notifications() {
     const msg = {
       command: "subscribe",
       identifier: JSON.stringify({
-        id: 1,
+        id: uuidv4(),
         channel: "NotificationsChannel",
       }),
     };
@@ -35,8 +35,11 @@ function Notifications() {
       return;
     }
     if (data.message) {
-      console.log(data.message);
-      dispatch(setNotifications([...notifications, data.message]));
+      const msgObj = {
+        id: uuidv4(),
+        text: data.message,
+      };
+      dispatch(setNotifications([...notifications, msgObj]));
     }
   };
 
@@ -51,7 +54,11 @@ function Notifications() {
   return (
     <div>
       <h1>Notifications</h1>
-      {notifications}
+      <ul>
+        {notifications.map((notification) => {
+          return <li key={notification.id}>{notification.text}</li>;
+        })}
+      </ul>
     </div>
   );
 }
