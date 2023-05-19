@@ -2,7 +2,7 @@ import "./Header.css";
 import HeaderOption from "./HeaderOption";
 import SearchIcon from "@mui/icons-material/Search";
 import HomeIcon from "@mui/icons-material/Home";
-import GroupsIcon from '@mui/icons-material/Groups';
+import GroupsIcon from "@mui/icons-material/Groups";
 import ChatIcon from "@mui/icons-material/Chat";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useDispatch } from "react-redux";
@@ -12,8 +12,8 @@ import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../store/auth/userSlice";
 import { useLogoutMutation } from "../store/auth/authApiSlice";
 import { logOut } from "../store/auth/userSlice";
-import EditIcon from '@mui/icons-material/Edit';
-import LogoutIcon from '@mui/icons-material/Logout';
+import EditIcon from "@mui/icons-material/Edit";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 function Header() {
   const dispatch = useDispatch();
@@ -38,7 +38,7 @@ function Header() {
     } catch (error) {
       console.error("Error logging out", error);
     }
-  }
+  };
 
   const profilePopup = (
     <div className="popup">
@@ -51,7 +51,8 @@ function Header() {
         </button> */}
         <button onClick={handleLogout}>
           <div>
-            <LogoutIcon />Logout
+            <LogoutIcon />
+            Logout
           </div>
         </button>
       </div>
@@ -81,12 +82,13 @@ function Header() {
         <Link>
           <HeaderOption Icon={ChatIcon} title="Chat" />
         </Link>
-        <Link>
-          <HeaderOption Icon={NotificationsIcon} title="Alerts" />
+        <Link to="notifications">
+          <HeaderOption Icon={NotificationsIcon} title="Notifications" />
         </Link>
         <div onClick={handlePopup}>
-          {user.avatar && <img src={user.avatar} alt="avatar" /> || <HeaderOption
-            avatar="https://imageio.forbes.com/specials-images/imageserve/5ed00f17d4a99d0006d2e738/0x0.jpg?format=jpg&crop=4666,4663,x154,y651,safe&height=416&width=416&fit=bounds" />}
+          {(user.avatar && <img src={user.avatar} alt="avatar" />) || (
+            <HeaderOption avatar="https://imageio.forbes.com/specials-images/imageserve/5ed00f17d4a99d0006d2e738/0x0.jpg?format=jpg&crop=4666,4663,x154,y651,safe&height=416&width=416&fit=bounds" />
+          )}
         </div>
         {profilePopup}
       </div>
