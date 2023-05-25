@@ -4,11 +4,11 @@ const userSlice = createSlice({
   name: "user",
   initialState: {
     user: JSON.parse(localStorage.getItem("user")) || null,
-    token: document.cookie.slice(6) || null,
+    token: document.cookie.split(" ")[0].slice(6, -1) || null,
+    refresh: document.cookie.split(" ")[1].slice(7, -1) || null,
   },
   reducers: {
     setUserInfo: (state, action) => {
-      // console.log("set user info run")
       Object.keys(action.payload).forEach(key => {
         state[key] = action.payload[key];
       });

@@ -1,18 +1,10 @@
-import { useLocation, useNavigate, Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
-import {
-  selectCurrentToken,
-  selectCurrentUser,
-} from "../../store/auth/userSlice";
+import { useNavigate, Outlet } from "react-router-dom";
 import Header from "../../components/Header";
 import { useCookies } from "react-cookie";
 import { useAutoLoginMutation } from "../../store/auth/authApiSlice";
 import { useEffect } from "react";
 
 function RequireAuth() {
-  // const token = useSelector(selectCurrentToken);
-  const user = useSelector(selectCurrentUser);
-  const location = useLocation();
   const [autoLogin] = useAutoLoginMutation();
   const [cookies, setCookie] = useCookies(null);
   const navigate = useNavigate();
@@ -28,13 +20,8 @@ function RequireAuth() {
       let request = await autoLogin({ token: token, refresh: refresh }).unwrap();
       console.log(request);
       if (request.token && request.refresh) {
-        console.log("auto login successful")
-        return (
-          <div>
-            <Header />
-            <Outlet />
-          </div>
-        )
+        // console.log("auto login successful")
+        // navigate('/profile')
       } else {
         navigate("/auth");
       }
@@ -44,6 +31,12 @@ function RequireAuth() {
     }
 
   }
+  return (
+    <div>
+      <Header />
+      <Outlet />
+    </div>
+  )
 }
 
 export default RequireAuth;
