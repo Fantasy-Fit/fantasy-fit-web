@@ -1,11 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const getJWTCookie = (key) => {
+  const cookies = document.cookie.split(" ");
+  const token = cookies.find(string => string.startsWith(key));
+  return token.replace(`${key}=`, "");
+};
+
 const userSlice = createSlice({
   name: "user",
   initialState: {
     user: JSON.parse(localStorage.getItem("user")) || null,
-    token: document.cookie.split(" ")[0].slice(6, -1) || null,
-    refresh: document.cookie.split(" ")[1].slice(7, -1) || null,
+    token: getJWTCookie("token") || null,
+    refresh: getJWTCookie("refresh") || null,
   },
   reducers: {
     setUserInfo: (state, action) => {

@@ -10,18 +10,19 @@ function Authorization() {
   const navigate = useNavigate();
   const user = useSelector(selectCurrentUser);
   const [autoLogin] = useAutoLoginMutation();
-  const [cookies] = useCookies(null);
+  const [cookies, setCookie] = useCookies(null);
 
   useEffect(() => {
     const tryAutoLogin = async () => {
+
       try {
         const token = cookies.token
         const refresh = cookies.refresh
         let request = await autoLogin({ token: token, refresh: refresh }).unwrap();
-        console.log(request);
         if (request.token && request.refresh) {
+          setCookie("token", request.token);
+          setCookie("refresh", request.refresh)
           navigate("/profile")
-          console.log("auto login success")
         } else if (request.error) {
           navigate("/auth")
         }
