@@ -53,13 +53,50 @@ class AuthenticationController < ApplicationController
     end
 
     def autologin
-        if authenticate_request == nil 
-            render json: {
-                "success": "auto login successful"
-            }
+        # try to authenticate with token
+        header = request.headers["Authorization"]
+        header = header.split(" ").last if header
+        if header[0...6] == "token="
+            header = header[6...]
         end
 
-        puts "on line 62", authenticate_request
+        refresh = params[:refresh]
+        puts "on line 64:", refresh
+
+        begin
+            decoded = jwt_decode(header)
+            @current_user = User.find(decoded[:user_id])
+            blacklisted_token = BlacklistedToken.find_by(token: header, user_id: decoded[:user_id])
+            if blacklisted_token 
+                # puts "line 22", (blacklisted_token.expires_at < Time.current)
+                render json: { error: "Token has been blacklisted" }, status: :unauthorized
+            else
+                render json: {
+                    token: header,
+                    refresh: refresh
+                }
+            end
+
+        rescue JWT::DecodeError, ActiveRecord::RecordNotFound
+            # token is not valid because it has expired?
+
+            decoded = jwt_decode(refresh)
+            @current_user = User.find(decoded[:user_id])
+            blacklisted_token = BlacklistedToken.find_by(token: refresh, user_id: decoded[:user_id])
+            if blacklisted_token
+                render json: {error: "Refresh Token has been blacklisted"}, status: :unauthorized
+            end
+
+            # refresh token is valid, has not expired, and has not been blacklisted:
+            new_token = jwt_encode(user_id: @current_user.id)
+            new_refresh = jwt_refresh(user_id: @current_user.id)
+            render json: {
+                token: new_token, 
+                refresh: new_refresh,
+            },  status: :ok
+            
+        end
+
     end
 
     private 
