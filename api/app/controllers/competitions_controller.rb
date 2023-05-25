@@ -1,4 +1,5 @@
 class CompetitionsController < ApplicationController
+    before_action :authenticate_request
 
     def leaderboard
         competition = Competition.find(params[:id])

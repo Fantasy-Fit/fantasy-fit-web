@@ -5,8 +5,10 @@ class AuthenticationController < ApplicationController
         user = User.find_by_email(params[:email])
         if user&.authenticate(params[:password])
             token = jwt_encode(user_id: user.id)
+            refresh = jwt_refresh(user_id: user.id)
             render json: {
                 token: token, 
+                refresh: refresh,
                 user: UserSerializer.new(user),
                 workouts: user.workouts,
                 competitions: user.competitions,    
@@ -17,12 +19,14 @@ class AuthenticationController < ApplicationController
     end
 
     def logout
-        token = request.headers["Authorization"]
-        token = token.split(" ").last if token.present?
+        token = params[:token]
+        refresh = params[:refresh]
+
         begin
             decoded = jwt_decode(token)
             if decoded.is_a?(Hash)
                 BlacklistedToken.create!(token: token, user_id: decoded[:user_id], expires_at: Time.current)
+                BlacklistedToken.create!(token: refresh, user_id: decoded[:user_id], expires_at: Time.current)
                 render json: { message: "Logged out successfully"}, status: :ok
             else
                 render json: {error: "Invalid token"}, status: :unprocessable_entity
@@ -37,10 +41,25 @@ class AuthenticationController < ApplicationController
         user = User.create!(user_params)
         if user
             token = jwt_encode(user_id: user.id)
-            render json: {token: token, user: user}, status: :created
+            refresh = jwt_refresh(user_id: user.id)
+            render json: {
+                token: token, 
+                user: user, 
+                refresh: refresh
+            }, status: :created
         else
             render json: {error: "invalid"}, status: :unprocessable_entity
         end
+    end
+
+    def autologin
+        if authenticate_request == nil 
+            render json: {
+                "success": "auto login successful"
+            }
+        end
+
+        puts "on line 62", authenticate_request
     end
 
     private 
