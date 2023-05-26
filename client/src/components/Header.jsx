@@ -79,7 +79,7 @@ function Header() {
         <Link to="friends">
           <HeaderOption Icon={GroupsIcon} title="Friends" />
         </Link>
-        <Link>
+        <Link to="chat">
           <HeaderOption Icon={ChatIcon} title="Chat" />
         </Link>
         <Link to="notifications">
