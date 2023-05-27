@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 import "./Messages.css";
 
-const ws = new WebSocket("ws://localhost:3000/cable");
+const ws = new WebSocket("ws://fantasyfit.herokuapp.com/cable");
 
 function Messages() {
   const [messages, setMessages] = useState([]);
