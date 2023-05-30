@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const getJWTCookie = (key) => {
   const cookies = document.cookie.split(" ");
   const token = cookies.find(string => string.startsWith(key));
-  return token.replace(`${key}=`, "");
+  return token?.replace(`${key}=`, "").replace(";", "");
 };
 
 const userSlice = createSlice({

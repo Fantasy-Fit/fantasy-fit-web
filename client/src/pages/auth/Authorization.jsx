@@ -21,8 +21,8 @@ function Authorization() {
         let request = await autoLogin({ token: token, refresh: refresh }).unwrap();
         if (request.token && request.refresh) {
           setCookie("token", request.token);
-          setCookie("refresh", request.refresh)
-          navigate("/profile")
+          setCookie("refresh", request.refresh);
+          navigate("/profile");
         } else if (request.error) {
           navigate("/auth")
         }
