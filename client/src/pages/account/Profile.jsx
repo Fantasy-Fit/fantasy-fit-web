@@ -9,6 +9,9 @@ import MainFeed from "./MainFeed";
 import EditProfileModal from "./EditProfileModal";
 import CompetitionCard from "./CompetitionCard";
 import "./Profile.css";
+import { apiSlice } from "../../app/api/apiSlice";
+
+console.log(apiSlice)
 
 function Profile() {
   const user = useSelector(selectCurrentUser);
@@ -24,7 +27,6 @@ function Profile() {
     if (isCompsLoading) {
       return;
     } else {
-      console.log()
       dispatch(setCompetitions([...competitions]));
     }
   }, [competitions])

@@ -13,6 +13,8 @@ class ApplicationController < ActionController::API
         if header[0...6] == "token="
             header = header[6...]
         end
+
+        puts "on line 17 in app_controller:", header
         
         begin
             decoded = jwt_decode(header)

@@ -17,6 +17,9 @@ function RequireAuth() {
     try {
       const token = cookies.token
       const refresh = cookies.refresh
+      if (!token || !refresh) {
+        return;
+      }
       let request = await autoLogin({ token: token, refresh: refresh }).unwrap();
       // console.log(request);
       if (request.token && request.refresh) {
