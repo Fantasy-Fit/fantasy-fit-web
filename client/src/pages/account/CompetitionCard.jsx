@@ -4,7 +4,7 @@ import "./CompetitionCard.css";
 const CompetitionCard = ({ comp }) => {
     const compEndDate = new Date(comp.end_date);
     const today = new Date();
-    const daysRemaining = Math.ceil((compEndDate - today) / (3_600_000 * 24));
+    const daysRemaining = Math.max(0, Math.ceil((compEndDate - today) / (3_600_000 * 24)));
 
     return (
         <div className="competition-card" key={comp.identifier}>

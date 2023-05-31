@@ -50,7 +50,7 @@ const activities = [
   "American Football",
   "Golf",
   "Crossfit",
-];
+]
 
 function Record({ comp }) {
   const dispatch = useDispatch();
@@ -117,7 +117,7 @@ function Record({ comp }) {
             <option value="activity" disabled hidden>
               Select Activity
             </option>
-            {activities.map((activity) => {
+            {activities.sort().map((activity) => {
               return <option key={activity}>{activity}</option>;
             })}
           </select>
