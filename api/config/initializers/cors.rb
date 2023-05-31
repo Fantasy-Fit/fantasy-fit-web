@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "https://fantasyfit.netlify.app", "http://localhost:4000", "https://deploy-preview-*--fantasyfit.netlify.app/"
+    origins "https://fantasyfit.netlify.app", "http://localhost:4000", "https://main--fantasyfit.netlify.app", /\Ahttps:\/\/deploy-preview-\d{1,4}--fantasyfit\.netlify\.app\z/
 
     resource "*",
       headers: :any,
