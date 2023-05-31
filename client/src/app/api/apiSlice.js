@@ -8,7 +8,8 @@ const env_URL = {
 }
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: env_URL[process.env.NODE_ENV],
+  // baseUrl: env_URL[process.env.NODE_ENV],
+  baseUrl: env_URL["production"],
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;
