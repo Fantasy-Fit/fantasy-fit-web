@@ -55,7 +55,7 @@ function Messages() {
     const body = e.target.message.value;
     e.target.message.value = "";
 
-    await fetch("http://localhost:3000/messages", {
+    await fetch("https://fantasyfit.herokuapp.com/messages", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -65,7 +65,7 @@ function Messages() {
   };
 
   const fetchMessages = async () => {
-    const response = await fetch("http://localhost:3000/messages");
+    const response = await fetch("https://fantasyfit.herokuapp.com/messages");
     const data = await response.json();
     setMessagesAndScrollDown(data);
   };
