@@ -35,8 +35,7 @@ function Login() {
       const userData = await login({ email, password }).unwrap();
       dispatch(setUserInfo({ ...userData }));
       setCookie("token", userData.token);
-      // localStorage.setItem("workouts", JSON.stringify(userData.workouts));
-      // localStorage.setItem("competitions", JSON.stringify(userData.competitions));
+      setCookie("refresh", userData.refresh)
       localStorage.setItem("user", JSON.stringify(userData.user));
       setEmail("");
       setPassword("");

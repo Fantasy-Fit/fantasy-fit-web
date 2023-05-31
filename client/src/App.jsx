@@ -9,7 +9,9 @@ import TournamentPage from "./pages/tournaments/TournamentPage";
 import FriendsPage from "./pages/friend/FriendsPage";
 import "./App.css";
 import Notifications from "./pages/notifications/Notifications";
+import PageNotFound from "./components/PageNotFound";
 import Messages from "./pages/chat/Messages";
+
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
           {/* public routes */}
           <Route index element={<Main />} />
           <Route path="auth" element={<Authorization />} />
+          <Route path="*" element={<PageNotFound />} />
 
           {/* protected routes */}
           <Route element={<RequireAuth />}>

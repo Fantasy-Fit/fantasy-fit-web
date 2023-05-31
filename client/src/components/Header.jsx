@@ -33,6 +33,7 @@ function Header() {
       await logout({ headers: { Authorization: `Bearer  ${token}` } });
       dispatch(logOut());
       removeCookie("token");
+      removeCookie("refresh");
       localStorage.clear();
       navigate("/");
     } catch (error) {
