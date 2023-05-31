@@ -96,7 +96,12 @@ function Messages() {
       </div>
       <div className="messageForm">
         <form onSubmit={handleSubmit}>
-          <input className="messageInput" type="text" name="message" />
+          <input
+            className="messageInput"
+            type="text"
+            name="message"
+            autoComplete="off"
+          />
           <button className="messageButton" type="submit">
             Send
           </button>
