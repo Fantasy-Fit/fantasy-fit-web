@@ -52,6 +52,33 @@ class AuthenticationController < ApplicationController
         end
     end
 
+    def refresh
+        header = request.headers["Authorization"]
+        header = header.split(" ").last if header
+        if header[0...6] == "token="
+            header = header[6...]
+        end
+
+        begin
+            decoded = jwt_decode(header)
+            @current_user = User.find(decoded[:user_id])
+            blacklisted_token = BlacklistedToken.find_by(token: header, user_id: decoded[:user_id])
+            if blacklisted_token 
+                # puts "line 22", (blacklisted_token.expires_at < Time.current)
+                render json: { error: "Token has been blacklisted" }, status: :unauthorized
+            else
+                token = jwt_encode(user_id: @current_user.id)
+                refresh = jwt_refresh(user_id: @current_user.id)
+                render json: {
+                    token: token, 
+                    refresh: refresh,
+                },  status: :ok
+            end
+        rescue JWT::DecodeError, ActiveRecord::RecordNotFound
+            render json: { error: "Unauthorized" }, status: :unauthorized
+        end
+    end
+
     def autologin
         # try to authenticate with token
         header = request.headers["Authorization"]

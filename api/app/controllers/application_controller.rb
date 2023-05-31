@@ -13,15 +13,12 @@ class ApplicationController < ActionController::API
         if header[0...6] == "token="
             header = header[6...]
         end
-
-        puts "on line 17 in app_controller:", header
         
         begin
             decoded = jwt_decode(header)
             @current_user = User.find(decoded[:user_id])
             blacklisted_token = BlacklistedToken.find_by(token: header, user_id: decoded[:user_id])
             if blacklisted_token 
-                # puts "line 22", (blacklisted_token.expires_at < Time.current)
                 render json: { error: "Token has been blacklisted" }, status: :unauthorized
             end
         rescue JWT::DecodeError, ActiveRecord::RecordNotFound

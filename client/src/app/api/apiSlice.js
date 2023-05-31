@@ -12,7 +12,6 @@ const baseQuery = fetchBaseQuery({
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;
-
     if (token) {
       headers.set("Authorization", `Bearer ${token}`);
     }
@@ -20,18 +19,28 @@ const baseQuery = fetchBaseQuery({
   },
 });
 
+const refreshQuery = fetchBaseQuery({
+  baseUrl: env_URL[process.env.NODE_ENV],
+  credentials: "include",
+  prepareHeaders: (headers, { getState }) => {
+    const refreshToken = getState().auth.refresh;
+    if (refreshToken) {
+      headers.set("Authorization", `Bearer ${refreshToken}`);
+    }
+    return headers;
+  },
+});
+
 const baseQueryWithReauth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
-  console.log(result?.error?.status)
+
   if (result?.error?.status === 401) {
-    console.log("sending refresh token");
     // send refresh token to get new access token
-    const refreshResult = await baseQuery("/auth/refresh", api, extraOptions);
-    console.log(refreshResult);
+    const refreshResult = await refreshQuery("/auth/refresh", api, extraOptions);
     if (refreshResult?.data) {
       const user = api.getState().auth.user;
       // store the new token
-      api.dispatch(setCredentials({ ...refreshResult.data, user }));
+      api.dispatch(setUserInfo({ ...refreshResult.data, user }));
       // retry the original query with new access token
       result = await baseQuery(args, api, extraOptions);
     } else {
