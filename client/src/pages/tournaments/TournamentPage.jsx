@@ -5,6 +5,7 @@ import Record from "./Record";
 import { useLocation } from "react-router-dom";
 import { selectLeaderboard } from "../../store/game/leaderboardSlice";
 import "./CompetitionPage.css";
+import finishLine from "../../../public/finishline.png";
 
 function TournamentPage() {
   const location = useLocation();
@@ -34,7 +35,8 @@ function TournamentPage() {
               🥈 {leaderboard[1]?.username}, and
               🥉 {leaderboard[2]?.username}!
             </h3>
-            <img src="../../../public/finishline.png" />
+            {/* <img src="../../../public/finishline.png" alt="finish-line" /> */}
+            <img src={finishLine} alt="finish-line" />
           </div>
         }
         <div className="tournament-page-top-content">
