@@ -20,8 +20,7 @@ function Header() {
   const navigate = useNavigate();
   const user = useSelector(selectCurrentUser);
   const [logout] = useLogoutMutation();
-  const [, removeCookie] = useCookies(["token"]);
-  const token = user.token;
+  const [cookies, removeCookie] = useCookies(["token"]);
 
   const handlePopup = () => {
     const popup = document.getElementById("profile-popup");
@@ -30,12 +29,11 @@ function Header() {
 
   const handleLogout = async () => {
     try {
-      await logout({ headers: { Authorization: `Bearer  ${token}` } });
+      await logout({ token: cookies.token, refresh: cookies.refresh });
       dispatch(logOut());
       removeCookie("token");
       removeCookie("refresh");
-      localStorage.clear();
-      navigate("/");
+      navigate("/auth");
     } catch (error) {
       console.error("Error logging out", error);
     }
@@ -44,7 +42,7 @@ function Header() {
   const profilePopup = (
     <div className="popup">
       <div id="profile-popup" className="popup__content">
-        <h2>Hi, {user.username}! 👋</h2>
+        <h2>Hi, {user?.username}! 👋</h2>
         {/* <button>
           <div>
             <EditIcon />Profile
@@ -87,7 +85,7 @@ function Header() {
           <HeaderOption Icon={NotificationsIcon} title="Notifications" />
         </Link>
         <div onClick={handlePopup}>
-          {(user.avatar && <img src={user.avatar} alt="avatar" />) || (
+          {(user?.avatar && <img src={user?.avatar} alt="avatar" />) || (
             <HeaderOption avatar="https://imageio.forbes.com/specials-images/imageserve/5ed00f17d4a99d0006d2e738/0x0.jpg?format=jpg&crop=4666,4663,x154,y651,safe&height=416&width=416&fit=bounds" />
           )}
         </div>

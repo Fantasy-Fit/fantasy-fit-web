@@ -13,27 +13,30 @@ function Authorization() {
   const [cookies, setCookie] = useCookies(null);
 
   useEffect(() => {
-    const tryAutoLogin = async () => {
+    tryAutoLogin();
+  }, []);
 
-      try {
-        const token = cookies.token
-        const refresh = cookies.refresh
+  const tryAutoLogin = async () => {
+    const token = cookies.token;
+    const refresh = cookies.refresh;
+    try {
+      if (!token || !refresh ||
+        token === "undefined" || refresh === "undefined") {
+        throw new Error("No Credentials to Auto-Login");
+      } else {
         let request = await autoLogin({ token: token, refresh: refresh }).unwrap();
         if (request.token && request.refresh) {
+          // console.log("Auto Login Successful");
           setCookie("token", request.token);
           setCookie("refresh", request.refresh);
           navigate("/profile");
-        } else if (request.error) {
-          navigate("/auth")
         }
-
-      } catch (err) {
-        console.error(err)
       }
-    }
-    tryAutoLogin();
-
-  }, []);
+    } catch (err) {
+      console.warn(err);
+      navigate("/auth");
+    };
+  };
 
   return (
     <div className="auth-login">

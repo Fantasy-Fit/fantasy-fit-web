@@ -20,7 +20,7 @@ const RecentWorkouts = () => {
     data: userWorkouts,
     isLoading,
     refetch,
-  } = useGetWorkoutsQuery(user.id);
+  } = useGetWorkoutsQuery(user?.id);
 
   const dispatch = useDispatch();
   const [deleteWorkout] = useDeleteWorkoutMutation();
