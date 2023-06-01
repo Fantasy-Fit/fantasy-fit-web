@@ -5,7 +5,7 @@ import Record from "./Record";
 import { useLocation } from "react-router-dom";
 import { selectLeaderboard } from "../../store/game/leaderboardSlice";
 import "./CompetitionPage.css";
-import finishLine from "../../../public/finishline.png";
+import finishLine from "../../assets/finishline.png";
 
 function TournamentPage() {
   const location = useLocation();
