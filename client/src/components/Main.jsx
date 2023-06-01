@@ -16,7 +16,7 @@ function Main() {
       >
         <div className="banner__contents">
           <h1 className="banner__title">
-            FitLeague
+            FantasyFit
           </h1>
           {/* <h1 className="banner__description">
           Information about the app
