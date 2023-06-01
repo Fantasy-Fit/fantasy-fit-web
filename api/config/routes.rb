@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   patch "/auth/update_profile", to: "users#update"
   post "/auth/autologin", to: "authentication#autologin"
   get "/auth/refresh", to: "authentication#refresh"
-  delete "/logout", to: "authentication#logout"
+  post "/logout", to: "authentication#logout"
   post "/competition/join", to: "competitions#join"
   get "/competition/leaderboard/:id", to: "competitions#leaderboard"
   get "/search_competitions", to: "competitions#search"

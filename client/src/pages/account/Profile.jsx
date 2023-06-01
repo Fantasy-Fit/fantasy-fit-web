@@ -14,7 +14,7 @@ import "./Profile.css";
 function Profile() {
   const user = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
-  const { data: competitions, isLoading: isCompsLoading, refetch: refetchComps } = useGetCompetitionsQuery(user.id);
+  const { data: competitions, isLoading: isCompsLoading, refetch: refetchComps } = useGetCompetitionsQuery(user?.id);
   const { data: friends } = useGetFriendsQuery();
 
   useEffect(() => {
@@ -41,11 +41,11 @@ function Profile() {
       {/* <Header /> */}
       <div className="profile__body">
         <Sidebar
-          image={user.avatar}
-          username={user.username}
-          email={user.email}
-          gender={user.gender}
-          location={user.location}
+          image={user?.avatar}
+          username={user?.username}
+          email={user?.email}
+          gender={user?.gender}
+          location={user?.location}
           friends={friends}
         />
         <MainFeed

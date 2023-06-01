@@ -14,26 +14,24 @@ function RequireAuth() {
   }, [])
 
   const tryAutoLogin = async () => {
+    const token = cookies.token;
+    const refresh = cookies.refresh;
     try {
-      const token = cookies.token
-      const refresh = cookies.refresh
-      if (!token || !refresh) {
-        return;
-      }
-      let request = await autoLogin({ token: token, refresh: refresh }).unwrap();
-      // console.log(request);
-      if (request.token && request.refresh) {
-        setCookie("token", request.token);
-        setCookie("refresh", request.refresh)
-        // navigate('/profile')
+      if (!token || !refresh || token === "undefined" || refresh === "undefined") {
+        throw new Error("No Credentials to Auto-Login");
       } else {
-        navigate("/auth");
+        let request = await autoLogin({ token: token, refresh: refresh }).unwrap();
+        if (request.token && request.refresh) {
+          // console.log("Auto Login Successful");
+          setCookie("token", request.token);
+          setCookie("refresh", request.refresh);
+          navigate("/profile");
+        }
       }
-
     } catch (err) {
-      console.error(err)
+      console.warn(err);
+      navigate("/auth");
     }
-
   }
   return (
     <div>

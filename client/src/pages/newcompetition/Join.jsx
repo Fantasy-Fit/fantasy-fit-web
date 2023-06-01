@@ -15,7 +15,7 @@ const Join = () => {
   const user = useSelector(selectCurrentUser);
   const [joinCompetition, { isLoading }] = useJoinCompetitionMutation();
   const { data, refetch } = useSearchCompetitionsQuery(searchQuery);
-  const { refetch: refetchCompetitions } = useGetCompetitionsQuery(user.id);
+  const { refetch: refetchCompetitions } = useGetCompetitionsQuery(user?.id);
 
   const handleIdentifierInput = (e) => {
     setIdentifier(e.target.value);
