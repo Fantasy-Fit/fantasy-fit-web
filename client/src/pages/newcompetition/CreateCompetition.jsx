@@ -117,31 +117,21 @@ function Create() {
     }
   }, [friends]);
 
-  const acceptedFriends = friends?.filter(friend => friend.status === "accepted")
+  const acceptedFriends = friends?.filter(friend => friend.status === "accepted");
 
   const mapParticipants = () => {
     if (acceptedFriends) {
-      return [currentUser, ...acceptedFriends].map(participant => {
-        if (participant.id === currentUser.id) {
-          return (<div key={participant.id}>
-            <div>
-              <input name="participants" type="checkbox" value={participant.id} checked disabled></input>
-              <label htmlFor="participants">{currentUser.username}</label>
-              <img src={currentUser.avatar} style={{ width: "40px", height: "40px" }} />
-            </div>
-          </div>);
-        } else {
-          return (<div key={participant.id}>
-            <div>
-              <input name="participants" type="checkbox" onChange={handleInput} value={participant.id}></input>
-              <label htmlFor="participants">{participant.friend_username}</label>
-              <img src={participant.friend_avatar} style={{ width: "40px", height: "40px" }} />
-            </div>
-          </div>);
-        };
+      return acceptedFriends.map(participant => {
+        return (<div key={participant.id}>
+          <div>
+            <input name="participants" type="checkbox" onChange={handleInput} value={participant.id}></input>
+            <label htmlFor="participants">{participant.friend_username}</label>
+            <img src={participant.friend_avatar} style={{ width: "40px", height: "40px" }} />
+          </div>
+        </div>);
       });
-    }
-  }
+    };
+  };
 
   return (
     <div className="create-competition-container">
@@ -198,6 +188,13 @@ function Create() {
           />
           <div className="select-participants">
             <label>Select Participants:</label>
+            <div key="current-user">
+              <div>
+                <input name="participants" type="checkbox" value={currentUser.id} checked disabled></input>
+                <label htmlFor="participants">{currentUser.username}</label>
+                <img src={currentUser.avatar} style={{ width: "40px", height: "40px" }} />
+              </div>
+            </div>
             {mapParticipants()}
           </div>
           <input
