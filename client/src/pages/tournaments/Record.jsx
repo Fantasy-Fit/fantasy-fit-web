@@ -67,6 +67,9 @@ function Record({ comp }) {
   });
   const [addWorkout, { isLoading }] = useAddWorkoutMutation();
 
+  const [search, setSearch] = useState('')
+  const filteredActivities = activities.filter(activity => activity.toLowerCase().includes(search.toLowerCase()))
+  
   const handleInput = (e) => {
     if (e.target.name === "duration") {
       setWorkoutData({ ...workoutData, duration: parseInt(e.target.value) });
@@ -109,18 +112,23 @@ function Record({ comp }) {
       <div>
         <h2>Record Workout</h2>
         <form onSubmit={createWorkout} className="record-workout-form">
-          <select
-            onChange={handleInput}
-            name="activity"
-            defaultValue="activity"
+          <input
+            type="text"
+            id="combobox"
+            placeholder="Type a name to search..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            list="options"
+            autoComplete="off"
+          />
+          <datalist
+            id="options"
           >
-            <option value="activity" disabled hidden>
-              Select Activity
-            </option>
             {activities.sort().map((activity) => {
-              return <option key={activity}>{activity}</option>;
+              return <option key={activity} value={activity}></option>;
             })}
-          </select>
+          </datalist>
+
           <label htmlFor="duration">Duration (mins):</label>
           <input
             type="number"

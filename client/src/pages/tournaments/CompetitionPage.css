@@ -90,7 +90,9 @@ form.record-workout-form label {
     width: 170px;
 }
 
-
+form.record-workout-form datalist option {
+    display:none;
+}
 input.add-workout-submit {
     height: 30px;
     background-color: beige;
