@@ -1,0 +1,17 @@
+ol.post-page-number-list {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5em;
+}
+
+li.post-page-number {
+    list-style: none;
+    padding: 0 0.5em;
+    font-size: large;
+}
+
+li.post-page-number:hover {
+    color: green;
+    text-decoration-line: underline;
+    cursor: pointer;
+}
