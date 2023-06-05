@@ -67,9 +67,6 @@ function Record({ comp }) {
   });
   const [addWorkout, { isLoading }] = useAddWorkoutMutation();
 
-  const [search, setSearch] = useState('')
-  const filteredActivities = activities.filter(activity => activity.toLowerCase().includes(search.toLowerCase()))
-  
   const handleInput = (e) => {
     if (e.target.name === "duration") {
       setWorkoutData({ ...workoutData, duration: parseInt(e.target.value) });
@@ -116,8 +113,6 @@ function Record({ comp }) {
             type="text"
             id="combobox"
             placeholder="Type a name to search..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
             list="options"
             autoComplete="off"
           />
