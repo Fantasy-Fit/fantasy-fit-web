@@ -23,7 +23,7 @@ class WorkoutsController < ApplicationController
             description: "#{user.username} just posted a workout! #{params[:activity]} for #{params[:duration]} mins, earning #{workout_points} points!"
         )
 
-        ActionCable.server.broadcast 'NotificationsChannel', "#{user.username} just posted a workout in #{new_workout_post.competition.name} competition! #{params[:activity]} for #{params[:duration]} mins, earning #{workout_points} points!"
+        # ActionCable.server.broadcast 'NotificationsChannel', "#{user.username} just posted a workout in #{new_workout_post.competition.name} competition! #{params[:activity]} for #{params[:duration]} mins, earning #{workout_points} points!"
 
         render json: {
             workout: workout,

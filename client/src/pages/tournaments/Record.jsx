@@ -115,6 +115,8 @@ function Record({ comp }) {
             placeholder="Type a name to search..."
             list="options"
             autoComplete="off"
+            onChange={handleInput}
+            name="activity"
           />
           <datalist
             id="options"
