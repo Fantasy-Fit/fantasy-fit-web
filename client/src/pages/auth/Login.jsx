@@ -40,15 +40,13 @@ function Login() {
       setEmail("");
       setPassword("");
       navigate("/profile");
-    } catch (err) {
-      if (!err?.response) {
-        setErrMsg("No Server Response");
-      } else if (err.response?.status === 400) {
-        setErrMsg("Missing Email or Password");
-      } else if (err.response?.status === 'Unauthorized') {
+    } catch (error) {
+      if (error.status === 401) {
         setErrMsg("Unauthorized");
+      } else if (error.status === 500) {
+        setErrMsg("Server Error");
       } else {
-        setErrMsg("Login Failed");
+        setErrMsg("No Server Response");
       }
       errRef.current.focus();
     }
