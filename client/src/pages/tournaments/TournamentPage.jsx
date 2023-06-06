@@ -5,6 +5,7 @@ import Record from "./Record";
 import { useLocation } from "react-router-dom";
 import { selectLeaderboard } from "../../store/game/leaderboardSlice";
 import "./CompetitionPage.css";
+import finishLine from "../../assets/finishline.png";
 
 function TournamentPage() {
   const location = useLocation();
@@ -19,10 +20,12 @@ function TournamentPage() {
       <div>
         <div className="tournament-page-header">
           <img src={comp.icon} alt={comp.name} />
-          <div>
-            <h1> {location?.state.name} </h1>
-            <p>Days remaining: {daysRemaining > 0 && daysRemaining || 0}</p>
-            <p>End Date: {compEndDate.toUTCString().slice(0, 16)}</p>
+          <h1> {location?.state.name} </h1>
+          <div className="tournament-details">
+            <p>ID: {comp.identifier}</p>
+            <p>{comp.public ? "Public ✅" : "Private 🔒"}</p>
+            <p>{daysRemaining > 0 && daysRemaining || 0} days to go!</p>
+            <p>Ends: {compEndDate.toUTCString().slice(0, 16)}</p>
           </div>
         </div>
         {daysRemaining <= 0 &&
@@ -32,7 +35,8 @@ function TournamentPage() {
               🥈 {leaderboard[1]?.username}, and
               🥉 {leaderboard[2]?.username}!
             </h3>
-            <img src="../../../public/finishline.png" />
+            {/* <img src="../../../public/finishline.png" alt="finish-line" /> */}
+            <img src={finishLine} alt="finish-line" />
           </div>
         }
         <div className="tournament-page-top-content">

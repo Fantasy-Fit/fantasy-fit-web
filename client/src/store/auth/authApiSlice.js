@@ -17,9 +17,10 @@ export const authApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     logout: builder.mutation({
-      query: () => ({
+      query: (payload) => ({
         url: "/logout",
-        method: "DELETE",
+        method: "POST",
+        body: { ...payload }
       })
     }),
     updateProfile: builder.mutation({
@@ -29,8 +30,21 @@ export const authApiSlice = apiSlice.injectEndpoints({
         method: "PATCH",
         body: { ...credentials },
       })
+    }),
+    autoLogin: builder.mutation({
+      query: (credentials) => ({
+        url: "auth/autologin",
+        method: "POST",
+        body: { ...credentials },
+      }),
     })
   }),
 });
 
-export const { useLoginMutation, useSignupMutation, useLogoutMutation, useUpdateProfileMutation } = authApiSlice;
+export const {
+  useLoginMutation,
+  useSignupMutation,
+  useLogoutMutation,
+  useUpdateProfileMutation,
+  useAutoLoginMutation,
+} = authApiSlice;

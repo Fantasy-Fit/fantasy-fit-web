@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  #action cable server
+  mount ActionCable.server => "/cable"
+
+  resources :messages
   resources :likes, only: [:create, :destroy]
   resources :posts
   resources :participants
@@ -19,7 +24,9 @@ Rails.application.routes.draw do
   post "/auth/login", to: "authentication#login"
   post "/auth/signup", to: "authentication#signup"
   patch "/auth/update_profile", to: "users#update"
-  delete "/logout", to: "authentication#logout"
+  post "/auth/autologin", to: "authentication#autologin"
+  get "/auth/refresh", to: "authentication#refresh"
+  post "/logout", to: "authentication#logout"
   post "/competition/join", to: "competitions#join"
   get "/competition/leaderboard/:id", to: "competitions#leaderboard"
   get "/search_competitions", to: "competitions#search"

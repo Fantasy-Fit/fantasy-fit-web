@@ -1,10 +1,12 @@
 import PostCard from "./PostCard";
 import CreateIcon from '@mui/icons-material/Create';
 import InputOption from '../account/InputOption';
+import PostPageNums from "./PostPageNums";
 import ImageIcon from '@mui/icons-material/Image';
 import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import InsertCommentIcon from '@mui/icons-material/InsertComment';
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -17,13 +19,11 @@ import { useGetPostsQuery } from "../../store/game/feedApiSlice";
 
 function Posts({ posts, comp }) {
   const { refetch } = useGetPostsQuery(comp.id);
-  const renderedPosts = posts?.map((post) => {
-    return <PostCard key={post.id} post={post} />;
-  });
-
   const dispatch = useDispatch();
   const user = useSelector(selectCurrentUser);
   const [addPost, { isLoading }] = useAddPostMutation();
+  const NUM_OF_POSTS_PER_PAGE = 5;
+  const [pageNum, setPageNum] = useState(0);
 
   const schema = yup.object().shape({
     description: yup.string().required(),
@@ -46,6 +46,12 @@ function Posts({ posts, comp }) {
     dispatch(setPosts([...posts, newPost]));
     setValue("description", "");
   };
+
+  const renderedPosts = posts?.slice(pageNum * NUM_OF_POSTS_PER_PAGE, (pageNum + 1) * NUM_OF_POSTS_PER_PAGE).map((post) => {
+    return <PostCard key={post.id} post={post} />;
+  });
+
+  const numOfPages = Math.ceil(posts?.length / NUM_OF_POSTS_PER_PAGE);
 
   return (
     <div className="posts">
@@ -80,6 +86,7 @@ function Posts({ posts, comp }) {
         </div> */}
       </div>
       {renderedPosts}
+      {posts.length > 0 && <PostPageNums numOfPages={numOfPages} pageNum={pageNum} setPageNum={setPageNum} />}
     </div>
   );
 }

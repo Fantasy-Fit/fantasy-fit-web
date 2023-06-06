@@ -50,7 +50,7 @@ const activities = [
   "American Football",
   "Golf",
   "Crossfit",
-];
+]
 
 function Record({ comp }) {
   const dispatch = useDispatch();
@@ -109,18 +109,23 @@ function Record({ comp }) {
       <div>
         <h2>Record Workout</h2>
         <form onSubmit={createWorkout} className="record-workout-form">
-          <select
+          <input
+            type="text"
+            id="combobox"
+            placeholder="Type a name to search..."
+            list="options"
+            autoComplete="off"
             onChange={handleInput}
             name="activity"
-            defaultValue="activity"
+          />
+          <datalist
+            id="options"
           >
-            <option value="activity" disabled hidden>
-              Select Activity
-            </option>
-            {activities.map((activity) => {
-              return <option key={activity}>{activity}</option>;
+            {activities.sort().map((activity) => {
+              return <option key={activity} value={activity}></option>;
             })}
-          </select>
+          </datalist>
+
           <label htmlFor="duration">Duration (mins):</label>
           <input
             type="number"

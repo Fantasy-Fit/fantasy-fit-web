@@ -10,11 +10,12 @@ import EditProfileModal from "./EditProfileModal";
 import CompetitionCard from "./CompetitionCard";
 import "./Profile.css";
 
+
 function Profile() {
   const user = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
-  const { data: competitions, isLoading: isCompsLoading, refetch: refetchComps } = useGetCompetitionsQuery(user.id);
-  const { data: friends, isLoading } = useGetFriendsQuery();
+  const { data: competitions, isLoading: isCompsLoading, refetch: refetchComps } = useGetCompetitionsQuery(user?.id);
+  const { data: friends } = useGetFriendsQuery();
 
   useEffect(() => {
     refetchComps();
@@ -24,7 +25,6 @@ function Profile() {
     if (isCompsLoading) {
       return;
     } else {
-      console.log()
       dispatch(setCompetitions([...competitions]));
     }
   }, [competitions])
@@ -41,11 +41,11 @@ function Profile() {
       {/* <Header /> */}
       <div className="profile__body">
         <Sidebar
-          image={user.avatar}
-          username={user.username}
-          email={user.email}
-          gender={user.gender}
-          location={user.location}
+          image={user?.avatar}
+          username={user?.username}
+          email={user?.email}
+          gender={user?.gender}
+          location={user?.location}
           friends={friends}
         />
         <MainFeed

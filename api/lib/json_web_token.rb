@@ -4,7 +4,14 @@ module JsonWebToken
     
     def jwt_encode(payload, exp = 3.days.from_now)
         raise ArgumentError, "Payload must be a hash" unless payload.is_a?(Hash)
-    raise ArgumentError, "Expiration time must be a valid time object" unless exp.respond_to?(:to_i)
+        raise ArgumentError, "Expiration time must be a valid time object" unless exp.respond_to?(:to_i)
+        payload[:exp] = exp.to_i
+        JWT.encode(payload, SECRET_KEY)
+    end
+
+    def jwt_refresh(payload, exp = 30.days.from_now)
+        raise ArgumentError, "Payload must be a hash" unless payload.is_a?(Hash)
+        raise ArgumentError, "Expiration time must be a valid time object" unless exp.respond_to?(:to_i)
         payload[:exp] = exp.to_i
         JWT.encode(payload, SECRET_KEY)
     end

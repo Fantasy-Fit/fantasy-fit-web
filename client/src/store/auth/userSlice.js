@@ -1,14 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const getJWTCookie = (key) => {
+  const cookies = document.cookie.split(" ");
+  const token = cookies.find(string => string.startsWith(key));
+  return token?.replace(`${key}=`, "").replace(";", "");
+};
+
 const userSlice = createSlice({
   name: "user",
   initialState: {
     user: JSON.parse(localStorage.getItem("user")) || null,
-    token: document.cookie.slice(6) || null,
+    token: getJWTCookie("token") || null,
+    refresh: getJWTCookie("refresh") || null,
   },
   reducers: {
     setUserInfo: (state, action) => {
-      // console.log("set user info run")
       Object.keys(action.payload).forEach(key => {
         state[key] = action.payload[key];
       });

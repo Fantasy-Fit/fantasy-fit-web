@@ -15,11 +15,15 @@ div.tournament-page div h1 {
 
 div.tournament-page-header {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     margin: 0.5em;
     padding: 0.5em;
     background-color: burlywood;
     background-image: linear-gradient(to bottom, beige, rgb(220, 220, 215))
+}
+
+div.tournament-details p {
+    font-size: 15px;
 }
 
 div.leaderboard-container {
@@ -86,7 +90,9 @@ form.record-workout-form label {
     width: 170px;
 }
 
-
+form.record-workout-form datalist option {
+    display:none;
+}
 input.add-workout-submit {
     height: 30px;
     background-color: beige;
