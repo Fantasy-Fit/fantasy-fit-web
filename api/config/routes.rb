@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   #action cable server
   # mount ActionCable.server => "/cable"
-  mount Sidekiq::Web => '/sidekiq'
+  # mount Sidekiq::Web => '/sidekiq'
 
   resources :messages
   resources :likes, only: [:create, :destroy]
