@@ -3,7 +3,7 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
 
   #action cable server
-  mount ActionCable.server => "/cable"
+  # mount ActionCable.server => "/cable"
   mount Sidekiq::Web => '/sidekiq'
 
   resources :messages
