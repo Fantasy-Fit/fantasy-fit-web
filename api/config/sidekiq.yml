@@ -1,0 +1,11 @@
+
+:concurrency: 10
+:pidfile: ./tmp/pids/sidekiq.pid
+:logfile: ./log/sidekiq.log
+:queues:
+  - default
+
+:redis:
+  :url: redis://redis:6379
+  :driver: redis
+  :dir: ./api/db/redis

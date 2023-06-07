@@ -80,12 +80,18 @@ GEM
       activesupport
     chronic (0.10.2)
     concurrent-ruby (1.2.2)
+    connection_pool (2.4.1)
     crass (1.0.6)
     date (3.3.3)
     debug (1.7.1)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
     erubi (1.12.0)
+    et-orbi (1.2.7)
+      tzinfo
+    fugit (1.8.1)
+      et-orbi (~> 1, >= 1.2.7)
+      raabro (~> 1.4)
     globalid (1.1.0)
       activesupport (>= 5.0)
     i18n (1.12.0)
@@ -129,6 +135,7 @@ GEM
     pg (1.4.6)
     puma (5.6.5)
       nio4r (~> 2.0)
+    raabro (1.4.0)
     racc (1.6.2)
     rack (2.2.6.3)
     rack-cors (2.0.1)
@@ -162,8 +169,19 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
+    redis-client (0.14.1)
+      connection_pool
     reline (0.3.2)
       io-console (~> 0.5)
+    sidekiq (7.1.1)
+      concurrent-ruby (< 2)
+      connection_pool (>= 2.3.0)
+      rack (>= 2.2.4)
+      redis-client (>= 0.14.0)
+    sidekiq-cron (1.10.1)
+      fugit (~> 1.8)
+      globalid (>= 1.0.1)
+      sidekiq (>= 6)
     thor (1.2.1)
     timeout (0.3.2)
     tzinfo (2.0.6)
@@ -191,6 +209,8 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-cors
   rails (~> 7.0.4, >= 7.0.4.2)
+  sidekiq (~> 7.1)
+  sidekiq-cron
   tzinfo-data
   whenever
 
