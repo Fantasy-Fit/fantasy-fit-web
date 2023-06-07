@@ -1,19 +1,19 @@
-FROM node
+FROM node:18-alpine AS build
+
+# STAGE 1
+WORKDIR /client
+COPY package.json .
+RUN yarn install
+COPY . /client
+RUN npm run build
+
+# STAGE 2
+FROM node:18-alpine
 
 WORKDIR /client
-# # Copy app files
-COPY package.json .
+RUN npm install -g webserver.local
+COPY --from=build /client/dist ./build
 
-# add `/app/node_modules/.bin` to $PATH
-# ENV PATH /client/node_modules/.bin:$PATH
-
-# install app dependencies
-COPY package.json ./client/package.json
-COPY package-lock.json ./client/package-lock.json
-RUN npm install
-
-# add app
-COPY . ./
 ENV NODE_ENV development
 EXPOSE 4000
 
