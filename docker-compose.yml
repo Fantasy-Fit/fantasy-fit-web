@@ -1,4 +1,5 @@
 services:
+
   db:
     image: postgres
     volumes:
@@ -6,6 +7,18 @@ services:
     environment:
       POSTGRES_PASSWORD: password
     working_dir: /api
+
+  redis:
+    image: 'redis:7-alpine'
+    command: redis-server
+    ports:
+      - '6379:6379'
+
+  helper:
+    image: alpine
+    command: sh -c "echo never > /sys/kernel/mm/transparent_hugepage/enabled"
+    privileged: true
+
   api:
     image: rails-api-backend
     build: api
@@ -19,6 +32,8 @@ services:
     working_dir: /api
     depends_on:
       - db
+      - redis
+
   client:
     build: client
     image: react-client-frontend

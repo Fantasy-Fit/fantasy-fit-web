@@ -1,5 +1,11 @@
-FROM ruby:2.7.4
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+FROM ruby:3.2.2-slim-bullseye
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends build-essential curl git libpq-dev \
+    && apt-get update && apt-get install -y --no-install-recommends nodejs yarn \
+    && rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man \
+    && apt-get clean
+
 WORKDIR /api
 COPY . .
 COPY Gemfile /api/Gemfile
