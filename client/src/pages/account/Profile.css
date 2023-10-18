@@ -1,4 +1,4 @@
-.profile__main {
+/* .profile__main {
     background-color: #f3f2ef;
     display: flex;
     flex-direction: column;
@@ -18,16 +18,16 @@
 
 .profile div div.profile-row div.profile-label {
     width: 10em;
-}
+} */
 
-.profile div.new-competition-container img:hover {
+/* .profile div.new-competition-container img:hover {
     filter: invert(0.4);
     transition-duration: 0.5s;
     border-radius: 10%;
     cursor: pointer;
-}
+} */
 
-.profile div.new-competition-container {
+/* .profile div.new-competition-container {
     display: flex;
     justify-content: center;
     padding: 0 3em;
@@ -116,20 +116,20 @@
 
 .profile div.current-competition-container div div.competition-card:hover {
     background-color: rgb(209, 249, 235);
-}
+} */
 
-.profile div.current-competition-container div div.competition-card img {
+/* .profile div.current-competition-container div div.competition-card img {
     width: 5em;
     height: 5em;
     padding: 0 0.5em;
-}
+} */
 
-.profile div.current-competition-container div div.competition-card img:hover {
+/* .profile div.current-competition-container div div.competition-card img:hover {
     filter: invert(0.3);
     transition-duration: 0.5s;
     cursor: pointer;
-}
-
+} */
+/* 
 .profile div.current-competition-container div div.competition-card a {
     text-decoration: none;
 
@@ -185,10 +185,10 @@ tr:hover {
 .modal-content form input {
     height: 2em;
     margin-bottom: 10px;
-}
+} */
 
 /* Mobile devices */
-
+/* 
 @media only screen and (max-width: 600px) {
     .profile__main {
         background-color: #f3f2ef;
@@ -239,12 +239,12 @@ tr:hover {
     .modal-content form input {
         width: 92%;
         margin-bottom: 10px;
-    }
+    } */
 
     /* td {
         max-width: 10vw;
     } */
-
+/* 
     td.intensity,
     th.intensity {
         display: none;
@@ -262,4 +262,4 @@ tr:hover {
     th.date_column {
         min-width: 42px;
     }
-}
+} */

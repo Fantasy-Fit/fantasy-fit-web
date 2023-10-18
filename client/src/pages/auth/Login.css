@@ -62,11 +62,11 @@
   object-fit: contain;
   padding-left: 20px;
 }
-
+/* 
 img {
   filter: invert(100%);
   -webkit-filter: invert(100%)
-}
+} */
 
 .loginScreen__body {
   max-width: 300px;

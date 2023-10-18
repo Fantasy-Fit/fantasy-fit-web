@@ -148,12 +148,12 @@ div.modal-content div>form>input {
         border-radius: 4px;
     }
       
-    .search-results ul img {
+    /* .search-results ul img {
         width: 40px;
         height: 40px;
         margin-right: 1em;
     }
-      
+       */
     .search-results ul p {
         margin: 0;
     }

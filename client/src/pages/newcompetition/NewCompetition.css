@@ -3,15 +3,15 @@ div.choose-icon {
     width: 20em;
 }
 
-img {
+/* img {
     width: 5em;
     height: 5em;
     filter: invert(0);
-}
+} */
 
-img:hover {
+/* img:hover {
     filter: invert(0.4);
-}
+} */
 
 div.create-competition-container {
     display: flex;
@@ -38,11 +38,11 @@ div.choose-icon {
 
 }
 
-div.choose-icon img {
+/* div.choose-icon img {
     padding: 0.5em;
     border: 1px solid white;
     border-radius: 10px;
-}
+} */
 
 div.create-competition-container-inner form input {
     background-color: rgb(208, 196, 196);
