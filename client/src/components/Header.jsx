@@ -59,18 +59,11 @@ function Header() {
   );
 
   return (
-    <div className="header">
-      <div className="header__left">
-        <img
-          src="https://www.kadencewp.com/wp-content/uploads/2020/10/alogo-1.png"
-          alt=""
-        />
-
         {/* <div className="header__search">
           <SearchIcon />
           <input type="text" />
         </div> */}
-      </div>
+      <div>
       <div className="header__right">
         <Link to="profile">
           <HeaderOption Icon={HomeIcon} title="Home" />
@@ -91,7 +84,7 @@ function Header() {
         </div>
         {profilePopup}
       </div>
-    </div>
+      
   );
 }
 

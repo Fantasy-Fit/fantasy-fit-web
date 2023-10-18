@@ -1,4 +1,4 @@
-.header {
+/* .header {
     position: sticky;
     top: 0;
     display: flex;
@@ -93,7 +93,6 @@
     margin-left: -80px;
 }
 
-/* Popup arrow */
 .popup .popup__content::after {
     content: "";
     position: absolute;
@@ -106,14 +105,12 @@
     transform: rotate(180deg)
 }
 
-/* Toggle this class - hide and show the popup */
 .popup .show {
     visibility: visible;
     -webkit-animation: fadeIn 1s;
     animation: fadeIn 1s;
 }
 
-/* Add animation (fade in the popup) */
 @-webkit-keyframes fadeIn {
     from {
         opacity: 0;
@@ -165,8 +162,6 @@
     width: 18px;
     margin: 0 7px;
 }
-
-/* Mobile devices */
 
 @media (max-width: 768px) {
     .header {
@@ -225,4 +220,4 @@
         left: -5.25em;
         bottom: -6em;
     }
-}
+} */
