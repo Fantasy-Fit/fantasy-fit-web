@@ -35,7 +35,7 @@ function RequireAuth() {
   }
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <Outlet />
     </div>
   )

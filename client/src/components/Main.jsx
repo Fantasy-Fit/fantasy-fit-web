@@ -15,7 +15,7 @@ function Main() {
   }
   return (
     <div>
-      <div className="container-fluid">
+      <div className="container-fluid" style={{ 'padding': "0" }}>
         <NavBar />
       </div>
       <div className="row">
