@@ -1,8 +1,11 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../store/auth/userSlice";
 
 function NavBar() {
     const navigate = useNavigate();
+    const user = useSelector(selectCurrentUser);
 
     function getStarted() {
         navigate("/auth");
@@ -21,6 +24,8 @@ function NavBar() {
                             <li><a href="/" className="nav-link px-2 text-secondary">Home</a></li>
                             <li><a href="#" className="nav-link px-2 text-white">About</a></li>
                             <li><a href="#" className="nav-link px-2 text-white">Features</a></li>
+                            {user && <><li><a href="#" className="nav-link px-2 text-white">Friends</a></li><li><a href="#" className="nav-link px-2 text-white">Chat</a></li></>}
+
                         </ul>
                         <form className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" data-dashlane-rid="09ff1a6b08cc2083" data-form-type="">
                             <input type="search" className="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search" data-dashlane-rid="1c0fff4ef4502874" data-form-type="" />
