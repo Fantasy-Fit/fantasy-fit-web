@@ -59,11 +59,12 @@ function Header() {
   );
 
   return (
-        {/* <div className="header__search">
+
+    <div>
+      {/* <div className="header__search">
           <SearchIcon />
           <input type="text" />
         </div> */}
-      <div>
       <div className="header__right">
         <Link to="profile">
           <HeaderOption Icon={HomeIcon} title="Home" />
@@ -84,7 +85,7 @@ function Header() {
         </div>
         {profilePopup}
       </div>
-      
+    </div>
   );
 }
 

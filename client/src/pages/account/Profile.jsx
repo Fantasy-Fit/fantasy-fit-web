@@ -9,6 +9,7 @@ import MainFeed from "./MainFeed";
 import EditProfileModal from "./EditProfileModal";
 import CompetitionCard from "./CompetitionCard";
 import "./Profile.css";
+import NavBar from "../../components/NavBar";
 
 
 function Profile() {
@@ -39,6 +40,7 @@ function Profile() {
   const content =
     (<div className="profile__main">
       {/* <Header /> */}
+      <NavBar />
       <div className="profile__body">
         <Sidebar
           image={user?.avatar}
