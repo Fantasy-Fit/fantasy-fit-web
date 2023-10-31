@@ -61,11 +61,11 @@ function Login() {
   ) : (
     <div className="loginScreen">
       <div className="loginScreen__background">
-        <img
+        {/* <img
           className="loginScreen__logo"
           src="https://www.kadencewp.com/wp-content/uploads/2020/10/alogo-1.png"
           alt="logo"
-        />
+        /> */}
         <button onClick={() => setSignIn(state => !state)} className="loginScreen__button">
           {signIn ? "Login" : "Sign Up"}
         </button>
@@ -83,7 +83,7 @@ function Login() {
             >
               {errMsg}
             </p>
-            <h1>Login</h1>
+            <h1>Log In</h1>
             <form onSubmit={handleSubmit}>
               <input
                 placeholder="Email Address"
